@@ -1,4 +1,4 @@
-package praktikum.AIFB.RISP.controller;
+package praktikum.AIFB.PRIS.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

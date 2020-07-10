@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * This class handles the https requests of the admin
+ * This class handles the https requests of the sales
  * @author merti
  *
  */
 @Controller
-@RequestMapping("admin")
-public class AdminController {
-	
-	@GetMapping("index")
-	public String index() { 
-		return "admin/index";
+@RequestMapping("shopID")
+public class SalesController {
+
+	@GetMapping ("index")
+	public String index() {
+		return "management/index";
 	}
 	
 }

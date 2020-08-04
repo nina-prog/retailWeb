@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -19,8 +20,8 @@ import javax.persistence.OneToOne;
 public class User {
 
 	@Id
-	@GeneratedValue
-	private Integer user_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long user_id;
 	
     @Column(unique = true)
 	private String username;
@@ -57,7 +58,7 @@ public class User {
 	 * Getter
 	 * @return id of user account
 	 */
-	public Integer getId() {
+	public Long getId() {
 		return user_id;
 	}
 
@@ -95,7 +96,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + user_id + ", password=" + password + ", username=" + username + ", role=" + role + "]";
+		return "User [user_id=" + user_id + ", username=" + username + ", password=" + password + ", role=" + role
+				+ ", retailStore=" + retailStore + "]";
 	}
 
 }

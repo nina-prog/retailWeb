@@ -1,12 +1,12 @@
 package praktikum.AIFB.PRIS.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.entity.Role;
@@ -19,7 +19,7 @@ import praktikum.AIFB.PRIS.repositories.UserRepository;
  * @author merti
  *
  */
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 	
@@ -29,7 +29,7 @@ public class AdminController {
 	@Autowired // This means to get the bean called retailRepository
 	private RetailStoreRepository retailStoreRepository;
 	
-	@GetMapping("admin/index")
+	@GetMapping("/index")
 	public String index() { 
 		return "admin/index";
 	}

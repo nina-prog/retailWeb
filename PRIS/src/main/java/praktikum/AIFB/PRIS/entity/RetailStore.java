@@ -3,6 +3,7 @@ package praktikum.AIFB.PRIS.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -22,8 +23,8 @@ public class RetailStore {
 	private User user;
 	
 	@Id
-	@GeneratedValue
-	private Integer store_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long store_id;
 	
 	private String name;
 	
@@ -71,7 +72,93 @@ public class RetailStore {
 		this.email = email;
 	}
 
-	//Getter & Setter if needed
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Long getStore_id() {
+		return store_id;
+	}
+
+	public void setStore_id(Long store_id) {
+		this.store_id = store_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public String getOpening_hours() {
+		return opening_hours;
+	}
+
+	public void setOpening_hours(String opening_hours) {
+		this.opening_hours = opening_hours;
+	}
+
+	public String getCustomer_service() {
+		return customer_service;
+	}
+
+	public void setCustomer_service(String customer_service) {
+		this.customer_service = customer_service;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getImportant_notifications() {
+		return important_notifications;
+	}
+
+	public void setImportant_notifications(String important_notifications) {
+		this.important_notifications = important_notifications;
+	}
+
+	public String getLimitations() {
+		return limitations;
+	}
+
+	public void setLimitations(String limitations) {
+		this.limitations = limitations;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 	@Override
 	public String toString() {

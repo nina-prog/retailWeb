@@ -1,50 +1,66 @@
 package praktikum.AIFB.PRIS.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import praktikum.AIFB.PRIS.entity.Product;
+import praktikum.AIFB.PRIS.repositories.ProductRepository;
+import praktikum.AIFB.PRIS.repositories.UserRepository;
 
 /**
  * This class handles the https requests of visitors who are not logged in
  * @author merti
  *
  */
-@Controller
+// Order: category, user, address, retail store, product // Left: OneProduct, LogIn, Filters(Category, Price, Address)
+@RestController
 public class MainController {
 
+	@Autowired
+	private ProductRepository productRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
 	/**
 	 * Start page for not logged-in Users
 	 * @return html page
 	 */
-	@GetMapping ("/")
+	@GetMapping ("/welcome")
 	public String start() {
 		return "index";
 	}
 	
 	/**
 	 * View all products 
-	 * @return html page
+	 * @return list of products
 	 */
 	@GetMapping ("/products")
-	public String viewAllProducts() {
-		return "index";
+	public List<Product> viewAllProducts() {
+		return productRepository.findAll();
+		
 	}
 	
 	/**
 	 * View all products of a retail store
-	 * @return html page
+	 * @return list of products
 	 */
-	@GetMapping ("/products/{retailStore_id}/products")
-	public String viewSomeProducts() {
-		return "index";
+	@GetMapping ("/products/{retailStore_id}")
+	public List<Product> viewSomeProducts(@PathVariable String retailStore_id) {
+		return productRepository.findByStore_id(Long.parseLong(retailStore_id));
 	}
 	
 	/**
 	 * View all informations of a retail store
 	 * @return html page
 	 */
-	@GetMapping ("/products/{retailStore_id}/info")
+	@GetMapping ("/{retailStore_id}/info")
 	public String viewInfo() {
-		return "index";
+		return "retail store info";
 	}
 	
 }

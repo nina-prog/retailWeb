@@ -2,6 +2,7 @@ package praktikum.AIFB.PRIS.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -14,8 +15,9 @@ import javax.persistence.OneToOne;
 public class Address {
 
 	@Id
-	@GeneratedValue
-	private Integer address_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//Long mapps to mySQL BigInteger
+	private Long address_id;
 	
 	private String street_name;
 	
@@ -140,7 +142,7 @@ public class Address {
 	 * Getter
 	 * @return id of address
 	 */
-	public Integer getAddress_id() {
+	public Long getAddress_id() {
 		return address_id;
 	}
 	

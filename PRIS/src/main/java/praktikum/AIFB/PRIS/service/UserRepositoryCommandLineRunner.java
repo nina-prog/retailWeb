@@ -30,10 +30,10 @@ public class UserRepositoryCommandLineRunner implements CommandLineRunner{
 	 */
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User("Max","Mueller",Role.ADMIN);
-		//New User is generated: User [id=1, firstname=Max, lastname=Mueller, role=Admin]
-		userRepository.save(user);
-		log.info("New User is created: "+user);
+		//User user = new User("maxinum", "2453dfh89", Role.ADMIN);
+		//New User is generated: User [id=1, username=Max, password=Mueller, role=Admin, retail_store]
+		//userRepository.save(user);
+		//log.info("New User is created: "+user);
 	}
 
 }

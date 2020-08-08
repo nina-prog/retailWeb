@@ -1,11 +1,16 @@
 package praktikum.AIFB.PRIS.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -19,12 +24,13 @@ public class RetailStore {
 	//defines foreign key column user_id and indicates the owner of the OneToOne relationship
 	//unique = true ensures that retail store can have only one account (see practial course paper D.....)
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", unique = true)
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long store_id;
+	@Column(name = "store_id")
+	private Long storeId;
 	
 	private String name;
 	
@@ -33,23 +39,27 @@ public class RetailStore {
 	@JoinColumn(name = "address_id", unique = true)
 	private Address address;
 	
-	private String opening_hours;
+	@Column(name = "opening_hours")
+	private String openingHours;
 	
 	//phone number of customer service
-	private String customer_service;
+	@Column(name = "customer_service")
+	private String customerService;
 	
-	private String phone_number;
+	@Column(name = "phone_number")
+	private String phoneNumber;
 	
 	private String email;
 	
-	private String important_notifications;
+	@Column(name = "important_notifications")
+	private String importantNotifications;
 	
 	private String limitations;
 	
-	//non-Owning (address) side of the OneToOne relationship
-	@OneToOne(mappedBy = "retailStore")
-	private Product product;
-
+	//non-Owning side of the ManyToOne relationship
+	@OneToMany(targetEntity=Product.class,cascade = CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "retailStore")
+	private List<Product> products;
+	
 	/**
 	 * Constructor
 	 */
@@ -61,14 +71,14 @@ public class RetailStore {
 	 * Constructor
 	 * @param user
 	 * @param name
-	 * @param phone_number
+	 * @param phoneNumber
 	 * @param email
 	 */
-	public RetailStore(User user, String name, String phone_number, String email) {
+	public RetailStore(User user, String name, String phoneNumber, String email) {
 		super();
 		this.user = user;
 		this.name = name;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
 
@@ -80,12 +90,12 @@ public class RetailStore {
 		this.user = user;
 	}
 
-	public Long getStore_id() {
-		return store_id;
+	public Long getStoreId() {
+		return storeId;
 	}
 
-	public void setStore_id(Long store_id) {
-		this.store_id = store_id;
+	public void setStoreId(Long storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getName() {
@@ -105,27 +115,27 @@ public class RetailStore {
 	}
 
 	public String getOpening_hours() {
-		return opening_hours;
+		return openingHours;
 	}
 
-	public void setOpening_hours(String opening_hours) {
-		this.opening_hours = opening_hours;
+	public void setOpeningHours(String openingHours) {
+		this.openingHours = openingHours;
 	}
 
-	public String getCustomer_service() {
-		return customer_service;
+	public String getCustomerService() {
+		return customerService;
 	}
 
-	public void setCustomer_service(String customer_service) {
-		this.customer_service = customer_service;
+	public void setCustomerService(String customerService) {
+		this.customerService = customerService;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {
@@ -136,12 +146,12 @@ public class RetailStore {
 		this.email = email;
 	}
 
-	public String getImportant_notifications() {
-		return important_notifications;
+	public String getImportantNotifications() {
+		return importantNotifications;
 	}
 
-	public void setImportant_notifications(String important_notifications) {
-		this.important_notifications = important_notifications;
+	public void setImportantNotifications(String importantNotifications) {
+		this.importantNotifications = importantNotifications;
 	}
 
 	public String getLimitations() {
@@ -152,19 +162,11 @@ public class RetailStore {
 		this.limitations = limitations;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	@Override
 	public String toString() {
-		return "RetailStore [user=" + user + ", store_id=" + store_id + ", name=" + name + ", address=" + address
-				+ ", opening_hours=" + opening_hours + ", customer_service=" + customer_service + ", phone_number="
-				+ phone_number + ", email=" + email + ", important_notifications=" + important_notifications
+		return "RetailStore [user=" + user + ", storeId=" + storeId + ", name=" + name + ", address=" + address
+				+ ", openingHours=" + openingHours + ", customerService=" + customerService + ", phoneNumber="
+				+ phoneNumber + ", email=" + email + ", importantNotifications=" + importantNotifications
 				+ ", limitations=" + limitations + "]";
 	}
 

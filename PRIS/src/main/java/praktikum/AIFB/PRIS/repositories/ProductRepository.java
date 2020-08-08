@@ -20,8 +20,12 @@ public interface ProductRepository extends JpaRepository<Product, Object>{
 
 	/**
 	 * Return all products of a specific store (same store_id)
-	 * @param store_id
+	 * @param storeId
 	 * @return List of products of a specific store
 	 */
-	List<Product> findByStore_id(Long store_id);
+	List<Product> findByRetailStore_storeId(Long storeId);
+	
+	List<Product> findAll();
+	
+	
 }

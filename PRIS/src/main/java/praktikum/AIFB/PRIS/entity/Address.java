@@ -1,5 +1,6 @@
 package praktikum.AIFB.PRIS.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,20 +17,23 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//Long mapps to mySQL BigInteger
-	private Long address_id;
+	@Column(name = "address_id")
+	private Long addressId;
 	
-	private String street_name;
+	@Column(name = "street_name")
+	private String streetName;
 	
-	private String house_number;
+	@Column(name = "house_number")
+	private String houseNumber;
 	
 	private String district;
 	
-	private String postal_code;
+	@Column(name = "postal_code")
+	private String postalCode;
 	
 	private String country;
 	
-	//non-Owning (address) side of the OneToOne relationship
+	//non-Owning side of the OneToOne relationship
 	@OneToOne(mappedBy = "address")
 	private RetailStore retailStore;
 	
@@ -42,52 +46,52 @@ public class Address {
 	
 	/**
 	 * Constructor
-	 * @param street_name
-	 * @param house_number
+	 * @param streetName
+	 * @param houseNumber
 	 * @param district
-	 * @param postal_code
+	 * @param postalCode
 	 * @param country
 	 */
-	public Address(String street_name, String house_number, String district, String postal_code,
+	public Address(String streetName, String houseNumber, String district, String postalCode,
 			String country) {
 		super();
-		this.street_name = street_name;
-		this.house_number = house_number;
+		this.streetName = streetName;
+		this.houseNumber = houseNumber;
 		this.district = district;
-		this.postal_code = postal_code;
+		this.postalCode = postalCode;
 		this.country = country;
 	}
 	
 	/**
 	 * Getter
-	 * @return street_name of address
+	 * @return street name of address
 	 */
-	public String getStreet_name() {
-		return street_name;
+	public String getStreetName() {
+		return streetName;
 	}
 	
 	/**
 	 * Setter
-	 * @param street_name of address
+	 * @param streetName of address
 	 */
-	public void setStreet_name(String street_name) {
-		this.street_name = street_name;
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 	
 	/**
 	 * Getter
-	 * @return house number of address
+	 * @return houseNumber of address
 	 */
-	public String getHouse_number() {
-		return house_number;
+	public String getHouseNumber() {
+		return houseNumber;
 	}
 	
 	/**
 	 * Setter
-	 * @param house_number of address
+	 * @param houseNumber of address
 	 */
-	public void setHouse_number(String house_number) {
-		this.house_number = house_number;
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
 	}
 	
 	/**
@@ -110,16 +114,16 @@ public class Address {
 	 * Getter
 	 * @return postal code of address
 	 */
-	public String getPostal_code() {
-		return postal_code;
+	public String getPostalCode() {
+		return postalCode;
 	}
 	
 	/**
 	 * Setter
 	 * @param postal_code of address
 	 */
-	public void setPostal_code(String postal_code) {
-		this.postal_code = postal_code;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 	
 	/**
@@ -142,14 +146,14 @@ public class Address {
 	 * Getter
 	 * @return id of address
 	 */
-	public Long getAddress_id() {
-		return address_id;
+	public Long getAddressId() {
+		return addressId;
 	}
 	
 	@Override
 	public String toString() {
-		return "address [address_id=" + address_id + ", street_name=" + street_name + ", house_number=" + house_number
-				+ ", district=" + district + ", postal_code=" + postal_code + ", country=" + country + "]";
+		return "address [addressId=" + addressId + ", streetName=" + streetName + ", houseNumber=" + houseNumber
+				+ ", district=" + district + ", postalCode=" + postalCode + ", country=" + country + "]";
 	}
 	
 }

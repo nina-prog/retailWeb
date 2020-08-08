@@ -21,7 +21,8 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long user_id;
+	@Column(name="user_id")
+	private Long userId;
 	
     @Column(unique = true)
 	private String username;
@@ -31,7 +32,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
     private Role role;
 	
-	//non-Owning (address) side of the OneToOne relationship
+	//non-Owning side of the OneToOne relationship
 	@OneToOne(mappedBy = "user")
     private RetailStore retailStore;
 
@@ -59,7 +60,7 @@ public class User {
 	 * @return id of user account
 	 */
 	public Long getId() {
-		return user_id;
+		return userId;
 	}
 
 	/**
@@ -96,7 +97,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", password=" + password + ", role=" + role
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role
 				+ ", retailStore=" + retailStore + "]";
 	}
 

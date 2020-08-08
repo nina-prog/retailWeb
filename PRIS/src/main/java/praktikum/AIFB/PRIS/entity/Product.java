@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -25,10 +26,11 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long product_id;
+	@Column(name = "product_id")
+	private Long productId;
 	
-	//defines foreign key column category_id and indicates the owner of the OneToOne relationship
-	@OneToOne
+	//defines foreign key column category_id and indicates the owner of the ManyToOne relationship
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="category_id")
 	private Category category;
 	
@@ -40,16 +42,17 @@ public class Product {
 	
 	private BigDecimal price;
 	
-	//defines foreign key column store_id and indicates the owner of the OneToOne relationship
-	@OneToOne
-	@JoinColumn(name="store_id", unique = true)
+	//defines foreign key column store_id and indicates the owner of the ManyToOne relationship
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="store_id")
 	private RetailStore retailStore;
 	
 	private String description;
 	
 	private String limitations;
 	
-	private Integer remaining_stock;
+	@Column(name = "remaining_stock")
+	private Integer remainingStock;
 
 	/**
 	 * Constructor
@@ -83,8 +86,8 @@ public class Product {
 	        this.price.setScale(2, RoundingMode.HALF_UP);
 	    }
 
-	public Long getProduct_id() {
-		return product_id;
+	public Long getProductId() {
+		return productId;
 	}
 
 	public Category getCategory() {
@@ -115,15 +118,15 @@ public class Product {
 		return limitations;
 	}
 
-	public Integer getRemaining_stock() {
-		return remaining_stock;
+	public Integer getRemainingStock() {
+		return remainingStock;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [product_id=" + product_id + ", category=" + category + ", name=" + name + ", price=" + price
+		return "Product [productId=" + productId + ", category=" + category + ", name=" + name + ", price=" + price
 				+ ", retailStore=" + retailStore + ", description=" + description + ", limitations=" + limitations
-				+ ", remaining_stock=" + remaining_stock + "]";
+				+ ", remainingStock=" + remainingStock + "]";
 	}
 	
 }

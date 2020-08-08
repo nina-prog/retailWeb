@@ -1,10 +1,15 @@
 package praktikum.AIFB.PRIS.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 /**
  * This class represents the category table in the database
@@ -16,13 +21,14 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer category_id;
+	@Column(name = "category_id")
+	private Integer categoryId;
 	
 	private String name;
 	
-	//non-Owning (address) side of the OneToOne relationship
-	@OneToOne(mappedBy = "category")
-	private Product product;
+	//non-Owning side of the ManyToOne relationship
+	@OneToMany(targetEntity=Product.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "category")
+	private List<Product> products;
 	
 	/**
 	 * Constructor
@@ -40,8 +46,8 @@ public class Category {
 		this.name = name;
 	}
 
-	public Integer getCategory_id() {
-		return category_id;
+	public Integer getCategoryId() {
+		return categoryId;
 	}
 
 	public String getName() {
@@ -52,21 +58,13 @@ public class Category {
 		this.name = name;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public void setCategory_id(Integer category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [category_id=" + category_id + ", name=" + name + "]";
+		return "Category [categoryId=" + categoryId + ", name=" + name + "]";
 	}
 	
 }

@@ -16,4 +16,5 @@ import praktikum.AIFB.PRIS.entity.RetailStore;
 @Transactional
 public interface RetailStoreRepository extends JpaRepository<RetailStore, Long> {
 	
+	RetailStore findByStoreId(Long storeId);
 }

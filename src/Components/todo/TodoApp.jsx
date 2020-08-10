@@ -10,6 +10,7 @@ import ProductComponent from './ProductComponent'
 import EditProductComponent from './EditProductComponent'
 import FooterComponent from './FooterComponent'
 import ErrorComponent from './ErrorComponent'
+import WishListComponent from './WishListComponent.jsx'
 
 
 class TodoApp extends Component {
@@ -21,6 +22,7 @@ class TodoApp extends Component {
                     <Switch>
                         <Route path="/" exact component={LoginComponent}/>
                         <Route path="/login" component={LoginComponent}/>
+                        <Route path="/wishlist" component={WishListComponent}/>
                         <Route path="/product/:name" exact component={ProductComponent}/>
                         <AuthenticatedRoute path="/product/edit/:name" component={EditProductComponent}/>
                         <AuthenticatedRoute path="/store/:name" component={WelcomeComponent}/>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 //enable requests from frontend, an other server
-@CrossOrigin(origins="http://localhost4200")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 //first path part, easy way to define Prefix for ALL Request URIs in this class 
 @RequestMapping("/{user_id}")

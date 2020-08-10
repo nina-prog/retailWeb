@@ -21,7 +21,7 @@ import praktikum.AIFB.PRIS.repositories.UserRepository;
  *
  */
 //enable requests from frontend, an other server
-@CrossOrigin(origins="http://localhost4200")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

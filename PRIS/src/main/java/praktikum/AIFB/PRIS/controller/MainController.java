@@ -31,9 +31,9 @@ import praktikum.AIFB.PRIS.service.RetailStoreService;
  *required - tells whether the path variable is required
  *value - alias for name
  */
-// Order: category, user, address, retail store, product // Left: OneProduct, LogIn, Filters(Category, Price, Address)
+// Order: category, user, address, retail store, product
 //enable requests from frontend (other server) via @CrossOrigin
-@CrossOrigin(origins="http://localhost4200")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 public class MainController {
 

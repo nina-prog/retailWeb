@@ -6,7 +6,7 @@ import ListTodosComponent from './ListTodosComponent.jsx'
 import HeaderComponent from './HeaderComponent.jsx'
 import LogoutComponent from './LogoutComponent.jsx'
 import WelcomeComponent from './WelcomeComponent'
-import ProductComponent from './WelcomeComponent'
+import ProductComponent from './ProductComponent'
 import FooterComponent from './FooterComponent'
 import ErrorComponent from './ErrorComponent'
 

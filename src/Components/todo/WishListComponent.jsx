@@ -2,42 +2,49 @@ import React, {Component } from 'react'
 import Tomatos from '../../img/Tomatos.jpeg'
 
 class WishListComponent extends Component {
-    render(){
-        return (
-
-            <div className="container">
-                <div className="col ">
-                    <div className="row-sm">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm">
-                                <img src={Tomatos} width='250' heigt='250' />
-                                </div>
-                                <div className="col-sm align-self-center">
-                                
-                                    <div >Price: </div>
-                                    <p> <button type="button" class="btn btn-primary mu-1">Add to wish list</button></p>
-                                    <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
-                                    
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div className ="row-sm">
-                        <h1>Product Description</h1>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
-                    </div>    
-                    
-                    
-                </div>
-            </div>
-          
-                
-            
-        )
-    }
-}
+    constructor(props) {
+        super(props)
+        this.state = {
+            todos : 
+              [
+                {id: 1, description: 'Tomatos', done:false, targetDate: new Date()},
+                {id: 2, description: 'Carrots', done:false, targetDate: new Date()},
+                {id: 3, description: 'Bananas', done:false, targetDate: new Date()}
+              ]
+        }
+      }    
+      
+      render () {
+          return (
+              <div> 
+                  <h1>List Todos</h1>
+                  <div className="container">
+                      <table className="table table-bordered">
+                          <thead>
+                              <tr>
+                                  <th>description</th>
+                                  <th>Is competed?</th>
+                                  <th>Target Date</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {
+                                  this.state.todos.map(
+                                  todo =>
+                                      <tr key={todo.id}>
+                                          <td>{todo.description}</td>
+                                          <td>{todo.done.toString()}</td>
+                                          <td>{todo.targetDate.toString()}</td>
+                                      </tr>
+                                  )
+                              }
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          )
+      }
+  }
 
 
 

@@ -1,6 +1,8 @@
 import React, {Component } from 'react'
 import Tomatos from '../../img/Tomatos.jpeg'
 
+// more Information: https://getbootstrap.com/docs/4.0/components/input-group/
+
 class EditProductComponent extends Component {
     constructor(props) {
         super (props)

@@ -27,7 +27,7 @@ class LoginComponent extends Component {
         //in28minutes,dummy
         if(this.state.username==='in28minutes' && this.state.password==='dummy'){
             AuthentificationService.registerSuccessfulLogin(this.state.username, this.state.password)
-            this.props.history.push(`/welcome/${this.state.username}`)
+            this.props.history.push(`/store/${this.state.username}`)
             this.setState({showSuccessMessage:true})
             this.setState({hasLoginFailed:false})
         } else {

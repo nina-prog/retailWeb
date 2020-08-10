@@ -18,9 +18,10 @@ class HeaderComponent extends Component {
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>}
-
+                        
                         {isUserLoggedIn && <li><Link className="nav-link" to="/store/in28minutes">StoreNameMussHierStehen</Link></li>}
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
+                        <li><Link className="nav-link" to="/product/Tomatos">Tomatos</Link></li>
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/product/edit/Tomatos">EditTomatos</Link></li>}
                     </ul>
                         
                     <ul className="navbar-nav navbar-collapse justify-content-end">

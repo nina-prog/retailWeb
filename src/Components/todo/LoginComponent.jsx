@@ -40,7 +40,7 @@ class LoginComponent extends Component {
         return(
             <div>
                 <h1>Login</h1>
-                    <div className="container">
+                <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
                     {this.state.showSuccessMessage && <div>Login succsessful</div>}
                     User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>

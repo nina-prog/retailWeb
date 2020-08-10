@@ -19,7 +19,7 @@ class ListTodosComponent extends Component {
             <div> 
                 <h1>List Todos</h1>
                 <div className="container">
-                    <table className="table">
+                    <table className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>description</th>

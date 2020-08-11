@@ -48,6 +48,7 @@ class EditProductComponent extends Component {
                                 <div className="row-sm mb-2 text-left">Title: </div>
                                 <div className="row-sm mb-2 text-left">Price: </div>
                                 <div className="row-sm mb-2 text-left">Stock: </div>
+                                <div className="row-sm mb-2 text-left"> Product Description:</div>
                             </div>
                         </div>
                         <div className="col-sm">
@@ -55,6 +56,7 @@ class EditProductComponent extends Component {
                                 <div className="row-sm mb-2 text-left"> <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/></div>
                                 <div className="row-sm mb-2 text-left"> <input type="text" name="price" value={this.state.price} onChange={this.handleChange}/></div>
                                 <div className="row-sm mb-2 text-left"> <input type="text" name="stock" value={this.state.stock} onChange={this.handleChange}/></div>
+                                <div className="row-sm mb-2 text-left"> <input type="text" name="stock" value={this.state.description} onChange={this.handleChange}/></div>
                             </div>
                         </div>
                         <div className="col-sm">
@@ -71,7 +73,8 @@ class EditProductComponent extends Component {
                     <button className="btn btn-success mr-2"onClick={this.loginClicked}> Speichern </button>
                     <button className="btn btn-secondary"onClick={this.loginClicked}> Speichern </button>
                 </div> 
-                
+
+             
 
 
 

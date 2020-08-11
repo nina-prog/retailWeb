@@ -11,6 +11,7 @@ import EditProductComponent from './EditProductComponent'
 import FooterComponent from './FooterComponent'
 import ErrorComponent from './ErrorComponent'
 import WishListComponent from './WishListComponent.jsx'
+import AdminComponent from './AdminComponent.jsx'
 
 
 class TodoApp extends Component {
@@ -24,6 +25,7 @@ class TodoApp extends Component {
                         <Route path="/login" component={LoginComponent}/>
                         <Route path="/wishlist" component={WishListComponent}/>
                         <Route path="/product/:name" exact component={ProductComponent}/>
+                        <Route path="/admin" exact component={AdminComponent}/>
                         <AuthenticatedRoute path="/product/edit/:name" component={EditProductComponent}/>
                         <AuthenticatedRoute path="/store/:name" component={WelcomeComponent}/>
                         <AuthenticatedRoute path="/todos" component={ListTodosComponent}/>

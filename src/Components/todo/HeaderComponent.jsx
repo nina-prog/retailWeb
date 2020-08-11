@@ -12,7 +12,7 @@ class HeaderComponent extends Component {
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     
                     <ul className="navbar-nav"> 
-                        <li><Link className="nav-link" to="/home">Home</Link></li>
+                        <li><Link className="nav-link" to="/">Home</Link></li>
                         {!isUserLoggedIn &&
                         <form class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>

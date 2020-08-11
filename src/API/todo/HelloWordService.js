@@ -3,7 +3,7 @@ import Axios from "axios";
 
 class HelloWorldService {
     executeHelloWorldService(){
-        return Axios.get('http://localhost:8080/hello-world')
+        return Axios.get('http://localhost:8082')
         //console.log('execuse')
     }
 }

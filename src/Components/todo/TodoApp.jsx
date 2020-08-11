@@ -12,6 +12,8 @@ import FooterComponent from './FooterComponent'
 import ErrorComponent from './ErrorComponent'
 import WishListComponent from './WishListComponent.jsx'
 import AdminComponent from './AdminComponent.jsx'
+import EditStoreInformation from './EditStoreInformation.jsx'
+import EditStoreInformationUpdate from './EditStoreInformationUpdate.jsx'
 
 
 class TodoApp extends Component {
@@ -30,6 +32,8 @@ class TodoApp extends Component {
                         <AuthenticatedRoute path="/store/:name" component={WelcomeComponent}/>
                         <AuthenticatedRoute path="/todos" component={ListTodosComponent}/>
                         <AuthenticatedRoute path="/logout" component={LogoutComponent}/>
+                        <AuthenticatedRoute path="/EditStoreInformationUpdate" component={EditStoreInformationUpdate}/>
+                        <AuthenticatedRoute path="/EditStoreInformation" component={EditStoreInformation}/> 
                         <Route component={ErrorComponent}/>
                     </Switch>
                     <FooterComponent/>

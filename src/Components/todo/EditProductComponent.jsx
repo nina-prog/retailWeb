@@ -1,5 +1,6 @@
 import React, {Component } from 'react'
-import Tomatos from '../../img/Tomatos.jpeg'
+import TomatoTestComponent from './TomatoTestComponent.jsx'
+import HelloWorldService from '../../API/todo/HelloWordService.js'
 
 // more Information: https://getbootstrap.com/docs/4.0/components/input-group/
 
@@ -7,17 +8,18 @@ class EditProductComponent extends Component {
     constructor(props) {
         super (props)
         this.state = {
+            product_id: '1',
+            store_id: '1',
             title: 'Tomaten',
-            price: '5,90',
+            price: '5.90',
             stock: '2',
-            imgScr: '../../img/Tomatos.jpeg',
-            description: "Hier steht die Beschreibung :-)"
+            description: "Hier steht die Beschreibung :-)",
+            imgSrc: 'Hi'
         }
 
-        this.handleChange = this.handleChange.bind(this)
-        this.chooseImageClicked = this.chooseImageClicked.bind(this)
-        this.handleFilePathChange = this.handleFilePathChange.bind(this)
-        
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.encodeImageFileAsURL = this.encodeImageFileAsURL.bind(this);
     }
     handleChange(event) {
         this.setState({
@@ -25,15 +27,52 @@ class EditProductComponent extends Component {
                 :event.target.value
         })
     }
-    chooseImageClicked() {
+    
+    handleSave(event) {
+        this.setState({imgSrc: document.getElementById("imgTest").innerHTML}, function () {
+            //console.log(this.state.imgSrc);
+            HelloWorldService.updateProductInformation(JSON.stringify(this.state), this.state.product_id)
+            .then(response => alert("Successfully saved!"))
+            //.catch()
+        });
+
         
         
+        
+
+
+        /* const fd = new FormData();
+        fd.append('image', this.state.selectedFile, this.selectedFile.name);
+        axios.post('http://localhost:8082/fileUpload') */
     }
-    handleFilePathChange(event){
-        var files = event.target.files;
-        console.log(files);
-        this.setState({imgScr:files});
-    }
+
+    encodeImageFileAsURL() {
+        
+        var filesSelected = document.getElementById("inputFileToLoad").files;
+	    console.log(filesSelected);
+        
+        if (filesSelected.length > 0) {
+          var fileToLoad = filesSelected[0];
+    
+          var fileReader = new FileReader();
+    
+          fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            
+
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+    
+            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            
+            //console.log(this.state.imgSrc);
+            //console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+          }
+          fileReader.readAsDataURL(fileToLoad);
+        }
+      }
+
+    
 
     render(){
         return (
@@ -59,9 +98,12 @@ class EditProductComponent extends Component {
                                 <div className="row-sm mb-2 text-left"> <input type="text" name="stock" value={this.state.description} onChange={this.handleChange}/></div>
                             </div>
                         </div>
-                        <div className="col-sm">
-                            <img src={Tomatos} alt="Produktbild" width='100' heigt='100' />
-                            <input type="file" id="real-file" onChange={this.handleFilePathChange}/>
+                        <div className="col-sm" >
+                            <div id="imgTest" >
+                                <TomatoTestComponent />
+                            </div>
+                            <input id="inputFileToLoad" type="file" onChange={this.encodeImageFileAsURL}/>
+                            
                         </div>
                     </div>
                     
@@ -70,8 +112,8 @@ class EditProductComponent extends Component {
                 </div>
                 <div className="container">
                     
-                    <button className="btn btn-success mr-2"onClick={this.loginClicked}> Speichern </button>
-                    <button className="btn btn-secondary"onClick={this.loginClicked}> Speichern </button>
+                    <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
+                    <button className="btn btn-secondary"onClick={this.loginClicked}> Cancel </button>
                 </div> 
 
              

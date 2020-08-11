@@ -31,6 +31,7 @@ class WelcomeComponent extends Component {
         
     }
     retriveWelcomeMessage(){
+        console.log("Sucessfillll!");
         HelloWorldService.executeHelloWorldService()
         .then(response => this.handleSuccessfulResponse(response))
        //.catch()

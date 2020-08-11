@@ -4,7 +4,11 @@ import Axios from "axios";
 class HelloWorldService {
     executeHelloWorldService(){
         return Axios.get('http://localhost:8082')
-        //console.log('execuse')
+        
+    }
+    updateProductInformation(data, product_id){
+        console.log('execute PUT')
+        return Axios.put(`http://localhost:8082/updateProduct/${product_id}`, data)
     }
 }
 

@@ -3,11 +3,7 @@ import Axios from "axios";
 
 class HelloWorldService {
     executeHelloWorldService(){
-<<<<<<< HEAD
         return Axios.get('https://localhost:8443/products')
-=======
-        return Axios.get('https://localhost:84433')
->>>>>>> 059b501da1043a80fbe251bb192a506768bd0435
         
     }
     updateProductInformation(data, product_id){

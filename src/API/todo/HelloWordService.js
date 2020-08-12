@@ -14,7 +14,7 @@ class HelloWorldService {
             price: '3.90',
             stock: '4',
             description: "Hier steht die Beschreibung :-)",
-            imgSrc: 'Hallo'
+            imgSrc: 'Hier müssen die Daten des Bildes sein'
         }
         return JSON.stringify(jsonData); // DELETE IF Server gives Information
         return Axios.get(`https://localhost:8443/product/${product_id}`)

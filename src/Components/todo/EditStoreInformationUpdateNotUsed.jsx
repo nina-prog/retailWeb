@@ -2,23 +2,40 @@ import React, {Component} from 'react'
 import {Formik, Form, Field, ErrorMessage, prepareDataForValidation} from 'formik';
 import RetailDataService from '../../API/todo/RetailDataService.js'
 import AuthenticatedRoute from './AuthenticatedRoute.jsx'
+import HelloWordService from '../../API/todo/HelloWordService.js';
 
 
 class EditStoreInformationUpdate extends Component {
     constructor(props) {
         super (props)
         this.state = {
-            store_id : this.props.match.params.id,
-            shopname: 'ALDI',
-            adresse: 'Musterstraße',
-
+            product_id: '1',
+            name: 'ALDI', 
+            address: 'Musterstraße',
+            openingHours: 'No 10-12',
+            restrictions: 'only 1 toilett paper'
         }
 
-        this.onSubmit = this.onSubmit.bind(this)
-        this.validate = this.validate.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+       // this.onSubmit = this.onSubmit.bind(this);
+        this.validate = this.validate.bind(this);
 
     }
 
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]
+                :event.target.value
+        })
+    }
+
+    handleSave(event) {
+            HelloWordService.updateStoreInformation(JSON.stringify(this.state), this.state.product_id)
+            .then(response => alert("Successfully saved!"))
+            //.catch()
+        };
     
     validate(values) {
         let errors = {}          //leeres objekt erstellen, welches Error händelt
@@ -37,16 +54,15 @@ class EditStoreInformationUpdate extends Component {
     }
 
 
-    onSubmit(values) {
-        console.log(values)
+    //onSubmit(values) {
+       // console.log(values)
 
-    }
+   // }
 
 
     render() {
 
-        let shopname = this.state.shopname
-        let adresse = this.state.adresse
+       
 
         return (
     <div> 
@@ -61,7 +77,7 @@ class EditStoreInformationUpdate extends Component {
              }}
 
                     
-            onSubmit={this.onSubmit}  
+          //  onSubmit={this.onSubmit}  
             validate={this.validate}   
             validateOnChange={false}
             validateOnBlur={false}  
@@ -80,14 +96,14 @@ class EditStoreInformationUpdate extends Component {
                                         className="alert alert-warning"/>
                         <fieldset className="form-group">
                              <label>Name</label>
-                            <Field className="form-control" type="text" name="shopname"/>       
+                            <Field className="form-control" type="text" name="shopname" value={this.state.shopname} onChange={this.handleChange}/>       
                           </fieldset>
                           
                         <fieldset className="form-group">
-                             <label> </label>
-                            <Field className="form-control" type="text" name="adresse"/>       
+                             <label> Address </label>
+                            <Field className="form-control" type="text" name="adresse" value={this.state.title} onChange={this.handleChange}/>       
                           </fieldset>
-                        <button classNametype="btn btn-success" type ="submit">Save</button> 
+                        <button classNametype="btn btn-success" type ="save" onClick={this.handleSave} >Save</button> 
 
                     </Form>
 

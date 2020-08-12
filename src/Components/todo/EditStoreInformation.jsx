@@ -8,13 +8,11 @@ import HelloWordService from '../../API/todo/HelloWordService';
 class EditStoreInformation extends Component {
     constructor(props) {
         super (props)
-        this.state = {
-            product_id: '1',
-            name: 'ALDI', 
-            address: 'Musterstraße',
-            openingHours: '10-12',
-            restrictions: 'only 1 toilett paper'
-        }
+
+
+
+        this.state = Json.parse(HelloWordService.retrieveStoreInformation(1));
+
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);

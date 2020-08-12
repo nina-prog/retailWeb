@@ -29,7 +29,7 @@ class EditProductComponent extends Component {
     
     handleSave(event) {
         this.setState({imgSrc: document.getElementById("imgTest").innerHTML}, function () {
-            //console.log(this.state.imgSrc);
+            console.log(this.state.imgSrc);
             HelloWorldService.updateProductInformation(JSON.stringify(this.state), this.state.product_id)
             .then(response => alert("Successfully saved!"))
             //.catch()

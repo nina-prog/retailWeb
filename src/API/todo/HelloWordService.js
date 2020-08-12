@@ -16,6 +16,13 @@ class HelloWorldService {
         return Axios.put(`https://localhost:8433/updateProduct/${store_id}`, data)
     }
 
+    retrieveStoreInformation(store_id) {
+        return Axios.get(`https://localhost:8443/storeInformation/${store_id}`)
+
+    }
+
 }
+
+
 
 export default new HelloWorldService();

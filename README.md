@@ -12,15 +12,27 @@ username=root;
 password=1234;`
 
 ### Optional
-Import **all** given CSV example files located in .... into the database PRIS by executing followed SQL Command on MySQL CommanLine:  
-`LOAD DATA LOCAL  
-INFILE '/pathToDownloadedCSVFile/tablename.csv'  
-INTO TABLE tablenname  
-FIELDS TERMINATED BY ';'   
-LINES TERMINATED BY '\n'              
-IGNORE 1 LINES`  
+Import **all** given CSV example files located in .... into the database PRIS by executing followed SQL Command on CommandLine:  
 
-**Note:** Make sure to follow this order by importing the files: category, user, address, retail store, product
+`LOAD DATA LOCAL  
+INFILE '/pathToDownloadedCSVFile/tablenameData.csv'  
+INTO TABLE tablename  
+FIELDS TERMINATED BY ';'   
+LINES TERMINATED BY '\r\n'              
+IGNORE 1 LINES
+(column1, column2,...)`  
+
+Column names are given in the first line of the csv files, make sure these are correct.
+
+**Note:** Make sure to follow this order by importing the files because of the primary and foreign keys: category, user, address, retail store, product  
+
+**If Error "Loading local data is disabled" (default in mysql)** occurs on CommandLine run following code before importing:  
+- `cd C:\Program Files\MySQL\MySQL Server 8.0\bin`
+- `mysql -u root -p`
+- `mysql> SET GLOBAL local_infile=1;`
+- `mysql> quit`
+- `mysql --local-infile=1 -u root -p`
+- `mysql> use database pris;`   
 
 ## Start Application
  1. **Run Backend** jar file located at ....:  

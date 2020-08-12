@@ -7,7 +7,7 @@ class HelloWorldService {
         
     }
     getProductInformation(product_id){
-        let jsonData = {
+        let jsonData = {                        // Wird gelöscht sobal apicall funktioniert
             product_id: '2',
             store_id: '2',
             title: 'Apfel',
@@ -17,21 +17,21 @@ class HelloWorldService {
             imgSrc: 'Hier müssen die Daten des Bildes sein'
         }
         return JSON.stringify(jsonData); // DELETE IF Server gives Information
-        return Axios.get(`https://localhost:8443/product/${product_id}`)
+        return Axios.get(`https://localhost:8443/product/${product_id}`)                // Implementieren
         
     }
     updateProductInformation(data, product_id){
         console.log('execute PUT')
-        return Axios.put(`https://localhost:8433/updateProduct/${product_id}`, data)
+        return Axios.put(`https://localhost:8433/updateProduct/${product_id}`, data)    // Implementieren
     }
    
     updateStoreInformation(data, store_id) {
         console.log('execute PUT' + data)
-        return Axios.put(`https://localhost:8433/updateProduct/${store_id}`, data)
+        return Axios.put(`https://localhost:8433/updateStore/${store_id}`, data)        // Implementieren
     }
 
     retrieveStoreInformation(store_id) {
-        let jsonData = {
+        let jsonData = {                        // Wird gelöscht sobal apicall funktioniert
             store_id: '1',
             name: 'ALDI',
             address: 'Kreuzstraße',
@@ -39,7 +39,7 @@ class HelloWorldService {
             restrictions: "Deine Mudda"
         }
         return JSON.stringify(jsonData); // DELETE IF Server gives Information
-        return Axios.get(`https://localhost:8443/storeInformation/${store_id}`)
+        return Axios.get(`https://localhost:8443/storeInfo/${store_id}`)                // Implementieren
 
     }
 

@@ -5,18 +5,29 @@ Frontend is available at 'retailWeb/pris-frontend'?
 ## Requirements
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  or later
 - [Gradle 4+](http://www.gradle.org/downloads)  or  [Maven 3.2+](https://maven.apache.org/download.cgi)
-- [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/installing.html) installed and created a database with followed characteristics:
->database_name=PRIS on http://localhost:3306/PRIS  
->username=root  
->password=1234
-- You can also import the code straight into your IDE (Eclipse preffered)
-!2 Leerezichen für Zeilenumbruch am Ende!
+- [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/installing.html) installed and created a database with followed characteristics:    
+
+`database_name=PRIS on http://localhost:3306/PRIS;      
+username=root;     
+password=1234;`
+
+### Optional
+Import **all** given CSV example files located in .... into the database PRIS by executing followed SQL Command on MySQL CommanLine:  
+`LOAD DATA LOCAL  
+INFILE '/pathToDownloadedCSVFile/tablename.csv'  
+INTO TABLE tablenname  
+FIELDS TERMINATED BY ';'   
+LINES TERMINATED BY '\n'              
+IGNORE 1 LINES`  
+
+**Note:** Make sure to follow this order by importing the files:
 
 ## Start Application
- 1. **Run Frontend** jar file located at ....:  
- `java -jar pris.jar` oderso
- 2. **Run Backend** jar file located at ...:  
- or open Backend in your IDE and run it as Spring Boot Application
+ 1. **Run Backend** jar file located at ....:  
+ a) Via Command Line: $PathToWhereJarFileIsLocated `java -jar pris.jar` oderso  
+ b) Via IDE: Open/Pull Backend, run as Spring Boot Application  
+ 2. **Run Frontend** jar file located at ...:
+
 
 ## SmartyPants
 SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:

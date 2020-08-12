@@ -20,7 +20,7 @@ FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\n'              
 IGNORE 1 LINES`  
 
-**Note:** Make sure to follow this order by importing the files:
+**Note:** Make sure to follow this order by importing the files: category, user, address, retail store, product
 
 ## Start Application
  1. **Run Backend** jar file located at ....:  

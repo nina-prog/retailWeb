@@ -8,18 +8,9 @@ import HelloWordService from '../../API/todo/HelloWordService';
 class EditStoreInformation extends Component {
     constructor(props) {
         super (props)
-
-
-
-        this.state = Json.parse(HelloWordService.retrieveStoreInformation(1));
-
-
+        this.state = JSON.parse(HelloWordService.retrieveStoreInformation(1));
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
-        
-        
-
-
     }
 
     handleChange(event) {
@@ -29,16 +20,12 @@ class EditStoreInformation extends Component {
         })
     }
   
-   
     handleSave(event) {
            HelloWordService.updateStoreInformation(JSON.stringify(this.state), this.state.product_id)
             .then(response => alert("Successfully saved!!!"))
          
         }
         
-  
-  
-
     render() {
         return (
             <>
@@ -73,14 +60,8 @@ class EditStoreInformation extends Component {
                     
                 <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
                     <button className="btn btn-secondary"onClick={this.loginClicked}> Cancel </button>
-                </div> 
+                </div>
 
-             
-
-
-
-
-                
             </>
         )
     }

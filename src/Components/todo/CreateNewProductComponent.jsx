@@ -2,32 +2,28 @@ import React, {Component } from 'react'
 import{Link} from 'react-router-dom'
 import HelloWorldService from '../../API/todo/HelloWordService.js'
 
-class WelcomeComponent extends Component {
+class CreateNewProductComponent extends Component {
     constructor(props) {
         super(props)
         this.retriveWelcomeMessage = this.retriveWelcomeMessage.bind(this)
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
         this.state = {
-            welcomeMessage : ''
+             isNewProductClicked: false
         }
+        this.handleClickNewProduct = this.handleClickNewProduct.bind(this);
+
+    }
+    handleClickNewProduct (event) {
+        this.setState({ isNewProductClicked: true })
     }
     
     render () {
         return (
             <>
-                <h1>Welcome!</h1>
-                {/* <div className="container">
-                    Welcome {this.props.match.params.name} You can manage your products <Link to="/todos">here</Link>
-                </div> */}
                 <div className="container">
-                    Click  to get a customized welcome message 
-                    <button className="btn btn-success" onClick={this.retriveWelcomeMessage}>Get Welcome Message</button>
-                </div>
-                <div className="container">
-                    {this.state.welcomeMessage}
-                </div>
-                <div className="container">
-
+                    <button type="button" className="btn btn-primary mr-2 mb-2" onClick={this.handleClickNewProduct}>New Product</button>
+                    {this.state.isNewProductClicked && <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>}
+                    {this.state.isNewProductClicked && <button type="button" className="btn btn-success ml-2 mb-2" >Create New Product</button>}
                 </div>
             </>
         )
@@ -44,4 +40,4 @@ class WelcomeComponent extends Component {
     }
 }
 
-export default WelcomeComponent;
+export default CreateNewProductComponent;

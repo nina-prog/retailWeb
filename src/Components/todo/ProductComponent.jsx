@@ -15,8 +15,8 @@ class ProductComponent extends Component {
                                 <div className="col-sm align-self-center">
                                 
                                     <div >Price: </div>
-                                    <p> <button type="button" class="btn btn-primary mu-1">Add to wish list</button></p>
-                                    <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
+                                    <p> <button type="button" className="btn btn-primary mu-1">Add to wish list</button></p>
+                                    <p><button type="button" className="btn btn-success">Notify when in Stock</button> </p>
                                     
                                 </div>
                             </div>

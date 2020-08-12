@@ -2,12 +2,11 @@ import React, {Component } from 'react'
 import TomatoTestComponent from './TomatoTestComponent.jsx'
 import HelloWorldService from '../../API/todo/HelloWordService.js'
 
-// more Information: https://getbootstrap.com/docs/4.0/components/input-group/
-
 class EditProductComponent extends Component {
     constructor(props) {
         super (props)
-        this.state = {
+        this.state = JSON.parse(HelloWorldService.getProductInformation(2));
+        /* {
             product_id: '1',
             store_id: '1',
             title: 'Tomaten',
@@ -15,12 +14,12 @@ class EditProductComponent extends Component {
             stock: '2',
             description: "Hier steht die Beschreibung :-)",
             imgSrc: 'Hi'
-        }
-
+        } */
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.encodeImageFileAsURL = this.encodeImageFileAsURL.bind(this);
     }
+
     handleChange(event) {
         this.setState({
             [event.target.name]
@@ -35,51 +34,32 @@ class EditProductComponent extends Component {
             .then(response => alert("Successfully saved!"))
             //.catch()
         });
-
-        
-        
-        
-
-
-        /* const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.selectedFile.name);
-        axios.post('http://localhost:8082/fileUpload') */
     }
 
-    encodeImageFileAsURL() {
-        
+    encodeImageFileAsURL() {        
         var filesSelected = document.getElementById("inputFileToLoad").files;
 	    console.log(filesSelected);
         
         if (filesSelected.length > 0) {
           var fileToLoad = filesSelected[0];
-    
           var fileReader = new FileReader();
     
           fileReader.onload = function(fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             
-
             var newImage = document.createElement('img');
             newImage.src = srcData;
-    
             document.getElementById("imgTest").innerHTML = newImage.outerHTML;
-            
-            //console.log(this.state.imgSrc);
             //console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
           }
           fileReader.readAsDataURL(fileToLoad);
         }
       }
 
-    
-
     render(){
         return (
             <>
                 <h1>Edit Product</h1>
-
-                
                 <div className="container">
                     <div className="row">
                         <div className="col-sm">
@@ -107,21 +87,11 @@ class EditProductComponent extends Component {
                         </div>
                     </div>
                     
-                    
-                    
                 </div>
                 <div className="container">
-                    
                     <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
                     <button className="btn btn-secondary"onClick={this.loginClicked}> Cancel </button>
                 </div> 
-
-             
-
-
-
-
-                
             </>
         )
     }

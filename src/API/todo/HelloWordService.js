@@ -31,6 +31,14 @@ class HelloWorldService {
     }
 
     retrieveStoreInformation(store_id) {
+        let jsonData = {
+            store_id: '1',
+            name: 'ALDI',
+            address: 'Kreuzstraße',
+            openingHours: '10-12',
+            restrictions: "Deine Mudda"
+        }
+        return JSON.stringify(jsonData); // DELETE IF Server gives Information
         return Axios.get(`https://localhost:8443/storeInformation/${store_id}`)
 
     }

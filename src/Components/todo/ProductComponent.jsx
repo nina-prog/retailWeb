@@ -1,8 +1,23 @@
 import React, {Component } from 'react'
 import Tomatos from '../../img/Tomatos.jpeg'
+import WishListService from './WishListService';
 
 class ProductComponent extends Component {
-    render(){
+
+    constructor(props) {
+        super (props)
+        this.handleAddToWishList = this.handleAddToWishList.bind(this);
+
+
+    }
+
+    handleAddToWishList(event) {
+        WishListService.addToWhishList()
+      
+     }
+
+
+    render() {
         return (
             <div className="container">
                 <div className="col ">
@@ -15,9 +30,8 @@ class ProductComponent extends Component {
                                 <div className="col-sm align-self-center">
                                 
                                     <div >Price: </div>
-                                    <p> <button type="button" class="btn btn-primary mu-1">Add to wish list</button></p>
+                                    <button className="btn btn-primary mu-1" onClick={this.handleAddToWishList}> Add To WishList </button>
                                     <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
-                                    
                                 </div>
                             </div>
                             

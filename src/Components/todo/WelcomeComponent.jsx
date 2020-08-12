@@ -31,10 +31,9 @@ class WelcomeComponent extends Component {
         
     }
     retriveWelcomeMessage(){
-        console.log("Sucessfillll!");
         HelloWorldService.executeHelloWorldService()
         .then(response => this.handleSuccessfulResponse(response))
-       //.catch()
+        .catch(response => alert("REST API Error"))
     }
 
     handleSuccessfulResponse(response){

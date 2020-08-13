@@ -13,7 +13,7 @@ import ErrorComponent from './ErrorComponent'
 import WishListComponent from './WishListComponent.jsx'
 import AdminComponent from './AdminComponent.jsx'
 import EditStoreInformation from './EditStoreInformation.jsx'
-//import EditStoreInformationUpdate from './EditStoreInformationUpdate.jsx'
+import StoreSignedInComponent from './StoreSignedInComponent.jsx'
 
 
 class TodoApp extends Component {
@@ -29,7 +29,8 @@ class TodoApp extends Component {
                         <Route path="/product/:name" exact component={ProductComponent}/>
                         <Route path="/admin" exact component={AdminComponent}/>
                         <AuthenticatedRoute path="/product/edit/:name" component={EditProductComponent}/>
-                        <AuthenticatedRoute path="/store/:name" component={WelcomeComponent}/>
+                        <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/>
+                        <AuthenticatedRoute path="/store/:name" component={StoreSignedInComponent}/>
                         <AuthenticatedRoute path="/todos" component={ListTodosComponent}/>
                         <AuthenticatedRoute path="/logout" component={LogoutComponent}/>
                         <AuthenticatedRoute path="/EditStoreInformation" component={EditStoreInformation}/>

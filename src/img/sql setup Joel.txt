@@ -1,0 +1,15 @@
+
+
+
+JOEL SQL Befehle
+
+SET GLOBAL time_zone = '+2:00';
+
+Note: Make sure to follow this order by importing the files because of the primary and foreign keys: category, user, address, retail store, product
+
+
+LOAD DATA LOCAL INFILE 'C:/csv/categoryData.csv' INTO TABLE category FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE 'C:/csv/userData.csv' INTO TABLE user FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE 'C:/csv/addressData.csv' INTO TABLE address FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE 'C:/csv/retail_storeData.csv' INTO TABLE retail_store FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE 'C:/csv/productData.csv' INTO TABLE product FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;

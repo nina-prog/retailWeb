@@ -6,7 +6,7 @@ class CreateNewProductComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: 'Tomaten',
+            title: 'Product name',
             isNewProductClicked: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -23,7 +23,9 @@ class CreateNewProductComponent extends Component {
         this.setState({ isNewProductClicked: true })
     }
     createNewProduct (event) {
-        HelloWorldService.createProduct(JSON.stringify({title: this.state.title}));
+        HelloWorldService.createProduct(JSON.stringify({title: this.state.title}))
+        .then(response => alert("New Product created!"))
+            //.catch()
     }
     
     render () {

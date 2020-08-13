@@ -20,6 +20,10 @@ class HelloWorldService {
         return Axios.get(`https://localhost:8443/product/${product_id}`)
         
     }
+    createProduct(data){
+        console.log("Post - create product: " + data)
+        return Axios.post('https://localhost:8433/createProduct/}', data)
+    }
     updateProductInformation(data, product_id){
         console.log('execute PUT')
         return Axios.put(`https://localhost:8433/updateProduct/${product_id}`, data)

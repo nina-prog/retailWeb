@@ -5,16 +5,27 @@ import HelloWorldService from '../../API/todo/HelloWordService.js'
 class CreateNewProductComponent extends Component {
     constructor(props) {
         super(props)
-        this.retriveWelcomeMessage = this.retriveWelcomeMessage.bind(this)
-        this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
         this.state = {
-             isNewProductClicked: false
+            title: 'Product name',
+            isNewProductClicked: false
         }
+        this.handleChange = this.handleChange.bind(this);
         this.handleClickNewProduct = this.handleClickNewProduct.bind(this);
-
+        this.createNewProduct = this.createNewProduct.bind(this)
+    }
+    handleChange (event) {
+        this.setState({
+            [event.target.name]
+                :event.target.value
+        })
     }
     handleClickNewProduct (event) {
         this.setState({ isNewProductClicked: true })
+    }
+    createNewProduct (event) {
+        HelloWorldService.createProduct(JSON.stringify({title: this.state.title}))
+        .then(response => alert("New Product created!"))
+            //.catch()
     }
     
     render () {
@@ -23,7 +34,7 @@ class CreateNewProductComponent extends Component {
                 <div className="container">
                     <button type="button" className="btn btn-primary mr-2 mb-2" onClick={this.handleClickNewProduct}>New Product</button>
                     {this.state.isNewProductClicked && <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>}
-                    {this.state.isNewProductClicked && <button type="button" className="btn btn-success ml-2 mb-2" >Create New Product</button>}
+                    {this.state.isNewProductClicked && <button type="button" className="btn btn-success ml-2 mb-2" onClick={this.createNewProduct}>Create New Product</button>}
                 </div>
             </>
         )

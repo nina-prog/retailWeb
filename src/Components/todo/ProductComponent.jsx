@@ -6,16 +6,44 @@ class ProductComponent extends Component {
 
     constructor(props) {
         super (props)
-        this.handleAddToWishList = this.handleAddToWishList.bind(this);
-
+        this.state = {
+            product_id: '1',
+            isWishlistOn: true
+        }
+        this.addToWhishListClicked = this.addToWhishListClicked.bind(this);
+        this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
+        this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bin(this);
 
     }
 
-    handleAddToWishList(event) {
-        WishListService.addToWhishList()
-      
-     }
+    handleClick() {
+        this.setState( state=> ({
+            isWishlistOn: !this.state.isWishlistOn
+        }));
 
+    }
+
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]
+                :event.target.value
+        })
+    }
+
+        addToWhishListClicked() {
+            WishListService.addToWhishList(this.state.product_id)
+        }
+
+        deleteFromWhishListClicked() {
+            WishListService.deleteFromWishList(this.state.product_id)
+        }
+
+        deleteWhishListClicked() {
+            WishListService.deleteWishList()
+        }
 
     render() {
         return (
@@ -30,8 +58,12 @@ class ProductComponent extends Component {
                                 <div className="col-sm align-self-center">
                                 
                                     <div >Price: </div>
-                                    <button className="btn btn-primary mu-1" onClick={this.handleAddToWishList}> Add To WishList </button>
+                                    <input type="text" name="product_id" value={this.state.product_id} onChange={this.handleChange}/>
+                                    <button className="btn btn-success"onClick={this.addToWhishListClicked}> addToWhishList </button>
+                                    <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
+                                    <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
                                     <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
+                                    <button className="btn btn-secondary"onClick={this.handleClick}> Wishlist </button>
                                 </div>
                             </div>
                             

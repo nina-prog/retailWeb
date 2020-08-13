@@ -11,37 +11,27 @@ class ProductComponent extends Component {
             category: null,
             picture: null,
             name: 'Cucumber',
-            price: null,
+            price: 6.90,
             retailStore: null,
             description: `This is the description of a cucumber. It is realy tasty and you gonne like it. It's fresh. Come and buy it today!`,
             limitations: 0.99,
             remainingStock: null,
             
-            
-            
             product_id: '1',
-            isWishlistOn: true
+            isProductInWishlist: false
         }
-        
-        
-
-
-
         this.addToWhishListClicked = this.addToWhishListClicked.bind(this);
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
-        this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        //this.handleClick = this.handleClick.bin(this);
-
+        this.UpdateData = this.UpdateData.bind(this);
     }
 
-   // handleClick() {
-     //   this.setState( state=> ({
-    //        isWishlistOn: !this.state.isWishlistOn
-    //    }));
+    handleClick() {
+        if (!('wishlist' in sessionStorage)) {
 
-   // }
+        }
 
+
+    }
 
     handleChange(event) {
         this.setState({
@@ -50,20 +40,22 @@ class ProductComponent extends Component {
         })
     }
 
-        addToWhishListClicked() {
-            WishListService.addToWhishList(this.state.product_id)
-        }
+    addToWhishListClicked() {
+        this.setState({ isProductInWishlist: true})
+        WishListService.addToWhishList(this.state.product_id)
+    }
 
-        deleteFromWhishListClicked() {
-            WishListService.deleteFromWishList(this.state.product_id)
-        }
+    deleteFromWhishListClicked() {
+        this.setState({ isProductInWishlist: false})
+        WishListService.deleteFromWishList(this.state.product_id)
+    }
 
-        deleteWhishListClicked() {
-            WishListService.deleteWishList()
-            document.getElementById("title").innerHTML = this.state.name;
-            document.getElementById("price").innerHTML = this.state.price;
-            document.getElementById("description").innerHTML = this.state.description;
-        }
+    UpdateData() {
+        WishListService.deleteWishList()
+        document.getElementById("title").innerHTML = this.state.name;
+        document.getElementById("price").innerHTML = 'Price: ' + this.state.price;
+        document.getElementById("description").innerHTML = this.state.description;
+    }
 
     render() {
         return (
@@ -78,12 +70,15 @@ class ProductComponent extends Component {
                                 <div className="col-sm align-self-center">
                                     <h1><div id="title">Titel</div></h1>
                                     <div id="price">Price: 5.90</div>
-                                    <input type="text" name="product_id" value={this.state.product_id} onChange={this.handleChange}/>
-                                    <button className="btn btn-success"onClick={this.addToWhishListClicked}> addToWhishList </button>
-                                    <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
-                                    <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
+                                    <button className="btn btn-success"onClick={this.UpdateData}> UpdateData </button>
                                     <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
-                                 
+                                    
+                                    
+                                    {this.state.isProductInWishlist && <button className="btn btn-secondary" onClick={this.deleteFromWhishListClicked}>In wishlist</button>}
+                                    {!this.state.isProductInWishlist && <button className="btn btn-primary" onClick={this.addToWhishListClicked}>In wishlist</button>}
+                                    
+
+
                                 </div>
                             </div>
                             

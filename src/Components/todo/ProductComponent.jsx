@@ -14,16 +14,16 @@ class ProductComponent extends Component {
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
         this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bin(this);
+        //this.handleClick = this.handleClick.bin(this);
 
     }
 
-    handleClick() {
-        this.setState( state=> ({
-            isWishlistOn: !this.state.isWishlistOn
-        }));
+   // handleClick() {
+     //   this.setState( state=> ({
+    //        isWishlistOn: !this.state.isWishlistOn
+    //    }));
 
-    }
+   // }
 
 
     handleChange(event) {
@@ -63,7 +63,7 @@ class ProductComponent extends Component {
                                     <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
                                     <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
                                     <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
-                                    <button className="btn btn-secondary"onClick={this.handleClick}> Wishlist </button>
+                                 
                                 </div>
                             </div>
                             

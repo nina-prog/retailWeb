@@ -1,58 +1,41 @@
 package praktikum.AIFB.PRIS.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import praktikum.AIFB.PRIS.service.UserService;
 
 /**
- * This class handles the https requests of the logged in Users (retail stores)
+ * This class handles the https requests regarding the user data.
+ *
  * @author merti
  *
  */
 //enable requests from frontend, an other server
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-//first path part, easy way to define Prefix for ALL Request URIs in this class 
-@RequestMapping("/{user_id}")
 public class UserController {
 
-	/**
-	 * Start page for logged-in Users (retail store)
-	 * @return 
-	 */
-	@GetMapping ("/dashboard")
-	public String start() {
-		return "welcome";
-	}
-	
-	/**
-	 * Delete a product
-	 * @return
-	 */
-	@DeleteMapping ("/products/delete/{product_id}") // =/{user_id}/products/{product_id}
-	public String deleteProduct() {
-		return "index";
-	}
-	
-	/**
-	 * Update a product
-	 * @return
-	 */
-	@PutMapping ("/products/update/{product_id}")
-	public String updateProduct() {
-		return "index";
-	}
+  @Autowired // This means to get the bean called userRepository
+  private UserService userService;
 
-	/**
-	 * Add a product
-	 * @return
-	 */
-	@PutMapping ("/products/add/{product_id}")
-	public String addProduct() {
-		return "index";
-	}
+  // not finished yet!
+  /**
+   * Add new user to database.
+   *
+   * @param username    username of the new added user account
+   * @param password    of the new added user account
+   * @param name        name of the retail store if user added is
+   * @param phoneNumber phone number to contact retail store
+   * @param email       email to contact retail store
+   */
+  @PostMapping("/addUser") // Map ONLY POST Requests
+  public void addNewUser(@RequestParam String username, @RequestParam String password,
+      @RequestParam String name, @RequestParam String phoneNumber, @RequestParam String email,
+      @RequestParam String role) {
+    userService.addUser(username, password, name, phoneNumber, email, role);
+  }
 
 }

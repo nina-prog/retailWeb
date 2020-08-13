@@ -3,6 +3,7 @@ package praktikum.AIFB.PRIS.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import praktikum.AIFB.PRIS.service.UserService;
@@ -16,6 +17,7 @@ import praktikum.AIFB.PRIS.service.UserService;
 //enable requests from frontend, an other server
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/admin")
 public class UserController {
 
   @Autowired // This means to get the bean called userRepository

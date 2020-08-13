@@ -1,5 +1,16 @@
 class WishListService {
 
+    isProductInWishlist(product_id) {
+        //Ist Produkt in WishListe?
+        if ('wishlist' in sessionStorage){
+            if (sessionStorage.getItem('wishlist').match(product_id) !== null) {
+                return true
+            }  
+        }
+        return false
+    }
+
+
     addToWhishList(product_id){
             // Gibt es eine Wishlist?
         if (!('wishlist' in sessionStorage)) { //Nein

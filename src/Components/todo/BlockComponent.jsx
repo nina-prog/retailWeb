@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import HelloWorldService from '../../API/todo/HelloWordService.js'
+import { withRouter } from 'react-router'
 
 class BlockComponent extends Component {
      constructor(props) {
@@ -22,4 +22,4 @@ class BlockComponent extends Component {
             )
     }
 }
-export default BlockComponent;
+export default withRouter(BlockComponent);

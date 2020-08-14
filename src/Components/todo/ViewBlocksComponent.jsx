@@ -47,7 +47,7 @@ class ViewBlockComponent extends Component {
                             {
                                 this.state.data.map(
                                 todo =>
-                                    <td><BlockComponent {... todo} /></td>
+                                    <td><BlockComponent {... todo} to={`/product/${todo.productId}`} /></td>
                                 )
                             }
                         </tr>

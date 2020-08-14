@@ -7,30 +7,39 @@ class ProductBlockComponent extends Component {
         
         //this.state = JSON.parse(HelloWorldService.getFirstProduct()),
         this.state = {
+            data: '',
             title: 'herbert',
             price: 5.90,
-            stock: 2
+            stock: 2,
+            product_id: 1
         }
-        //--->  props.product_id 
         this.loadProduct=this.loadProduct.bind(this)
+        this.handleSuccessfulResponse=this.handleSuccessfulResponse.bind(this)
+
+        this.loadProduct ()
         
     } 
-    loadProduct(event){
-        let data
-        HelloWorldService.getFirstProduct()
-        .then(response => data = (response))
-        .catch(response => alert("REST API Error"))
+    loadProduct(){
+        
+        HelloWorldService.getProductInformation(2)
+            .then(response => this.handleSuccessfulResponse(response))
+            .catch(response => alert("REST API Error"))
         
         
-        console.log(data)
+        //console.log(this.data)
         
         /* this.setState({
-            title: product.name,
-            price: product.price,
-            stock: product.stock,
+            
         }) */
+    } 
+    handleSuccessfulResponse(response) {
+        console.log(response.data)
+        
+        document.getElementById("title").innerHTML = response.data.name;
+        document.getElementById("price").innerHTML = 'Price: ' + response.data.price;
+        document.getElementById("description").innerHTML = response.data.description;
+        document.getElementById("stock").innerHTML = response.data.stock;
     }
-    
 
     render () {
         return (
@@ -39,8 +48,9 @@ class ProductBlockComponent extends Component {
                     }<h1><div id="title">Titel: {this.state.title}</div></h1>
                         <div>
                             
-                            Price:  {this.state.price}<br/>
-                            Remaining stock:  {this.state.stock}<br/>
+                            Price:  <span id="price"></span><br/>
+                            Remaining stock:  <span id="stock"></span><br/>
+                            Description: <span id="description"></span><br/>
                             product_id: {this.props.product_id}
                             <button className="btn btn-success"onClick={this.loadProduct}> Load </button>
                         </div>

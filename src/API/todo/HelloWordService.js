@@ -16,16 +16,16 @@ class HelloWorldService {
     }
     
     getProductInformation(product_id){
-        let jsonData = {
-            product_id: '2',
+        /* let jsonData = {
+            
             store_id: '2',
             title: 'Apfel',
             price: '3.90',
             stock: '4',
             description: "Hier steht die Beschreibung :-)",
             imgSrc: 'Hier müssen die Daten des Bildes sein'
-        }
-        return JSON.stringify(jsonData); // DELETE IF Server gives Information
+        } */
+        //return JSON.stringify(jsonData); // DELETE IF Server gives Information
         return Axios.get(`https://localhost:8443/product/${product_id}`)
         
     }
@@ -51,13 +51,10 @@ class HelloWorldService {
             openingHours: '10-12',
             restrictions: "Deine Mudda"
         }
-        return JSON.stringify(jsonData); // DELETE IF Server gives Information
-        return Axios.get(`https://localhost:8443/storeInformation/${store_id}`)
+        return JSON.stringify(jsonData); // DELETE IF Server gives Information  return Axios.get(`https://localhost:8443/storeInformation/${store_id}`)
 
     }
 
 }
-
-
 
 export default new HelloWorldService();

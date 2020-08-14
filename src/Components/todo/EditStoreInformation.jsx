@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import Tomatos from '../../img/Tomatos.jpeg'
+//import Tomatos from '../../img/Tomatos.jpeg'
 import HelloWordService from '../../API/todo/HelloWordService';
 //hier muss noch TodoDataService oder so importiert werden, damit wir 
 

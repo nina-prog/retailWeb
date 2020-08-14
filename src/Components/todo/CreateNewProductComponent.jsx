@@ -1,5 +1,4 @@
 import React, {Component } from 'react'
-import{Link} from 'react-router-dom'
 import HelloWorldService from '../../API/todo/HelloWordService.js'
 
 class CreateNewProductComponent extends Component {

@@ -38,7 +38,3 @@ class WishListService {
 }
 
 export default new WishListService();
-
-
-let oldstring = "Ersetze a duch b";
-let newstring = oldstring.replace("a","b");

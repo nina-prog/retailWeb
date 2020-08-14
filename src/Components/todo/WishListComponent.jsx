@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import Tomatos from '../../img/Tomatos.jpeg'
+//import Tomatos from '../../img/Tomatos.jpeg'
 import  WishListService from './WishListService';
 
 class WishListComponent extends Component {

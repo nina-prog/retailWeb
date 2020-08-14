@@ -1,7 +1,6 @@
 import React, {Component } from 'react'
 import AuthentificationService from './AuthenticationService.js'
-import ProductBlockComponent from './ProductBlockComponent.jsx'
-import Greeting from './Greeting.jsx'
+import ViewBlockComponent from './ViewBlocksComponent.jsx'
 
 
 class LoginComponent extends Component {
@@ -12,13 +11,13 @@ class LoginComponent extends Component {
             username: 'in28minutes',
             password: '',
             hasLoginFailed: false,
-            showSuccessMessage: false
+            showSuccessMessage: false,
+            product: ''
         }
         
         this.handleChange = this.handleChange.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
     }
-
     handleChange(event) {
         this.setState({
             [event.target.name]
@@ -42,10 +41,7 @@ class LoginComponent extends Component {
         return(
             <div>
                 <h1>Welcome to the Retail Project</h1>
-                {//<Greeting greeting={"Servus zusammen"} />
-                }
-                <ProductBlockComponent product_id={"1"} />
-    
+                <ViewBlockComponent />
                 
                 <h1>Login</h1>
                 <div className="container">

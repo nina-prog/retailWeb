@@ -1,6 +1,7 @@
 import React, {Component } from 'react'
 import Tomatos from '../../img/Tomatos.jpeg'
 import WishListService from './WishListService';
+import NotifyWhenInStock from './NotifyWhenInStock';
 
 class ProductComponent extends Component {
 
@@ -71,14 +72,10 @@ class ProductComponent extends Component {
                                     <h1><div id="title">Titel</div></h1>
                                     <div id="price">Price: 5.90</div>
                                     <button className="btn btn-success"onClick={this.UpdateData}> UpdateData </button>
-                                    <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
-                                    
-                                    
+                                    <NotifyWhenInStock/>
+                                    {/* <p><button type="button" class="btn btn-success" onClick={this.NotificationStock}>Notify when in Stock</button> </p>    */}                               
                                     {this.state.isProductInWishlist && <button className="btn btn-secondary" onClick={this.deleteFromWhishListClicked}>In wishlist</button>}
                                     {!this.state.isProductInWishlist && <button className="btn btn-primary" onClick={this.addToWhishListClicked}>In wishlist</button>}
-                                    
-
-
                                 </div>
                             </div>
                             

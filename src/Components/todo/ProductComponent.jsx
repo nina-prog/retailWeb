@@ -1,6 +1,7 @@
 import React, {Component } from 'react'
 import Tomatos from '../../img/Tomatos.jpeg'
 import WishListService from './WishListService';
+import HelloWorldService from '../../API/todo/HelloWordService.js'
 
 class ProductComponent extends Component {
 
@@ -23,14 +24,8 @@ class ProductComponent extends Component {
         this.addToWhishListClicked = this.addToWhishListClicked.bind(this);
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
         this.UpdateData = this.UpdateData.bind(this);
-    }
 
-    handleClick() {
-        if (!('wishlist' in sessionStorage)) {
-
-        }
-
-
+        this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
     }
 
     handleChange(event) {
@@ -50,11 +45,22 @@ class ProductComponent extends Component {
         WishListService.deleteFromWishList(this.state.product_id)
     }
 
+    handleSuccessfulResponse(response){
+        console.log(response.data[0])
+
+        document.getElementById("title").innerHTML = response.data[0].name;
+        document.getElementById("price").innerHTML = 'Price: ' + response.data[0].price;
+        document.getElementById("description").innerHTML = response.data[0].description;
+        document.getElementById("stock").innerHTML = response.data[0].stock;
+        
+    }
     UpdateData() {
+        HelloWorldService.executeHelloWorldService()
+            .then(response => this.handleSuccessfulResponse(response))
+            .catch(response => alert("REST API Error"))
+        
         WishListService.deleteWishList()
-        document.getElementById("title").innerHTML = this.state.name;
-        document.getElementById("price").innerHTML = 'Price: ' + this.state.price;
-        document.getElementById("description").innerHTML = this.state.description;
+        
     }
 
     render() {
@@ -69,9 +75,12 @@ class ProductComponent extends Component {
                                 </div>
                                 <div className="col-sm align-self-center">
                                     <h1><div id="title">Titel</div></h1>
-                                    <div id="price">Price: 5.90</div>
+                                    <div>
+                                        Price: <span id="price"> 5.90</span> <br/>
+                                        Remaining stock: <span id="stock"> 2</span>
+                                    </div>
                                     <button className="btn btn-success"onClick={this.UpdateData}> UpdateData </button>
-                                    <p><button type="button" class="btn btn-success">Notify when in Stock</button> </p>
+                                    <p><button type="button" className="btn btn-success">Notify when in Stock</button> </p>
                                     
                                     
                                     {this.state.isProductInWishlist && <button className="btn btn-secondary" onClick={this.deleteFromWhishListClicked}>In wishlist</button>}

@@ -1,5 +1,7 @@
 import React, {Component } from 'react'
 import AuthentificationService from './AuthenticationService.js'
+import ProductBlockComponent from './ProductBlockComponent.jsx'
+import Greeting from './Greeting.jsx'
 
 
 class LoginComponent extends Component {
@@ -39,6 +41,12 @@ class LoginComponent extends Component {
     render(){
         return(
             <div>
+                <h1>Welcome to the Retail Project</h1>
+                {//<Greeting greeting={"Servus zusammen"} />
+                }
+                <ProductBlockComponent product_id={"1"} />
+    
+                
                 <h1>Login</h1>
                 <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}

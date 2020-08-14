@@ -6,6 +6,15 @@ class HelloWorldService {
         return Axios.get('https://localhost:8443/products')
         
     }
+    getProducts(){
+        return Axios.get('https://localhost:8443/products')
+        
+    }
+    getFirstProduct(){
+        
+        return Axios.get('https://localhost:8443/products')
+    }
+    
     getProductInformation(product_id){
         let jsonData = {
             product_id: '2',

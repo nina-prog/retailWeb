@@ -5,6 +5,20 @@ JOEL SQL Befehle
 
 SET GLOBAL time_zone = '+2:00';
 
+
+------------------------------
+If Error "Loading local data is disabled" (default in mysql) occurs on CommandLine run following code before importing:
+
+cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+mysql -u root -p
+mysql> SET GLOBAL local_infile=1;
+mysql> quit
+mysql --local-infile=1 -u root -p
+mysql> use pris;
+------------------------------
+
+
+
 Note: Make sure to follow this order by importing the files because of the primary and foreign keys: category, user, address, retail store, product
 
 

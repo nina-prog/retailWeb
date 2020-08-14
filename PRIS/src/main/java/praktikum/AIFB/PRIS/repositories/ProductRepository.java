@@ -15,7 +15,7 @@ import praktikum.AIFB.PRIS.entity.Product;
  */
 @Repository
 @Transactional
-public interface ProductRepository extends JpaRepository<Product, Object> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
   /**
    * Return all products of a specific store (same store_id).

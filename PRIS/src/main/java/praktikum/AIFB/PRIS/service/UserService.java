@@ -1,10 +1,11 @@
 package praktikum.AIFB.PRIS.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.entity.Role;
 import praktikum.AIFB.PRIS.entity.User;
+import praktikum.AIFB.PRIS.exception.UserNotFoundException;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
 import praktikum.AIFB.PRIS.repositories.UserRepository;
 
@@ -17,30 +18,39 @@ public class UserService {
   @Autowired
   private RetailStoreRepository storerepo;
 
-  /**
-   * Add new user to database.
-   *
-   * @param username    username of the new user
-   * @param password    password of the new user
-   * @param name        name of the new user
-   * @param phoneNumber phone number of the new user
-   * @param email       email of the new user
-   * @param role        defines to what the user account is authorized to do
-   *                    (admin or regular user)
-   */
-  public void addUser(String username, String password, String name, String phoneNumber,
-      String email, String role) {
+  // Aggregated root
+
+  public List<User> findAllUser() {
+    return userrepo.findAll();
+  }
+
+  // Single Item
+
+  public User addUser(User user) {
+    // salt and hash password before save
+    String code = encode(user.getPassword());
+    user.setPassword(code);
     // add new user
-    User u = new User(username, password);
-    userrepo.save(u);
+    userrepo.save(user);
     // check authorization
-    if (role.equalsIgnoreCase(Role.USER.name())) {
-      u.setRole(Role.USER);
-      RetailStore s = new RetailStore(u, name, phoneNumber, email);
-      storerepo.save(s);
-    } else if (role.equalsIgnoreCase(Role.ADMIN.name())) {
-      u.setRole(Role.ADMIN);
+    if (user.getRole().equals(Role.USER) && user.getRetailStore() != null) {
+      storerepo.save(user.getRetailStore());
     }
+
+    return user;
+  }
+
+  public void deleteUser(String userId) {
+    Long id = Long.parseLong(userId);
+    if (userrepo.existsById(id)) {
+      userrepo.deleteById(id);
+    } else {
+      throw new UserNotFoundException(id);
+    }
+  }
+
+  public String encode(String password) {
+    return password;
   }
 
 }

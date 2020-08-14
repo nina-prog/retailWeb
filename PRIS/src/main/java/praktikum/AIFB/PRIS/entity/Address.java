@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import lombok.Data;
 
 /**
  * This class represents the address table for the database.
@@ -13,6 +14,7 @@ import javax.persistence.OneToOne;
  * @author merti
  *
  */
+@Data
 @Entity
 public class Address {
 
@@ -62,112 +64,6 @@ public class Address {
     this.district = district;
     this.postalCode = postalCode;
     this.country = country;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return street name of address
-   */
-  public String getStreetName() {
-    return streetName;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param streetName street name of address
-   */
-  public void setStreetName(String streetName) {
-    this.streetName = streetName;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return houseNumber of address
-   */
-  public String getHouseNumber() {
-    return houseNumber;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param houseNumber house number of address
-   */
-  public void setHouseNumber(String houseNumber) {
-    this.houseNumber = houseNumber;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return district of address
-   */
-  public String getDistrict() {
-    return district;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param district of address
-   */
-  public void setDistrict(String district) {
-    this.district = district;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return postalCode of address
-   */
-  public String getPostalCode() {
-    return postalCode;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param postalCode postal code of the address
-   */
-  public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return country of address
-   */
-  public String getCountry() {
-    return country;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param country country of address
-   */
-  public void setCountry(String country) {
-    this.country = country;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return id of address
-   */
-  public Long getAddressId() {
-    return addressId;
-  }
-
-  @Override
-  public String toString() {
-    return "address [addressId=" + addressId + ", streetName=" + streetName + ", houseNumber="
-        + houseNumber + ", district=" + district + ", postalCode=" + postalCode + ", country="
-        + country + "]";
   }
 
 }

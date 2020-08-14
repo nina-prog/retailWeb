@@ -14,6 +14,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import lombok.Data;
 
 /**
  * This class represents the product table in the database.
@@ -21,6 +22,7 @@ import javax.persistence.PreUpdate;
  * @author merti
  *
  */
+@Data
 @Entity
 public class Product {
 
@@ -86,49 +88,6 @@ public class Product {
   @PreUpdate
   public void pricePrecisionConvertion() {
     this.price.setScale(2, RoundingMode.HALF_UP);
-  }
-
-  public Long getProductId() {
-    return productId;
-  }
-
-  public Category getCategory() {
-    return category;
-  }
-
-  public byte[] getPicture() {
-    return picture;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public RetailStore getRetailStore() {
-    return retailStore;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public String getLimitations() {
-    return limitations;
-  }
-
-  public Integer getRemainingStock() {
-    return remainingStock;
-  }
-
-  @Override
-  public String toString() {
-    return "Product [productId=" + productId + ", category=" + category + ", name=" + name
-        + ", price=" + price + ", retailStore=" + retailStore + ", description=" + description
-        + ", limitations=" + limitations + ", remainingStock=" + remainingStock + "]";
   }
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import lombok.Data;
 
 /**
  * This class represents the category table in the database.
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
  * @author merti
  *
  */
+@Data
 @Entity
 public class Category {
 
@@ -46,27 +48,6 @@ public class Category {
   public Category(String name) {
     super();
     this.name = name;
-  }
-
-  public Integer getCategoryId() {
-    return categoryId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setCategoryId(Integer categoryId) {
-    this.categoryId = categoryId;
-  }
-
-  @Override
-  public String toString() {
-    return "Category [categoryId=" + categoryId + ", name=" + name + "]";
   }
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import lombok.Data;
 
 /**
  * This class represents the retail store table in the database.
@@ -18,6 +19,7 @@ import javax.persistence.OneToOne;
  * @author merti
  *
  */
+@Data
 @Entity
 public class RetailStore {
 
@@ -83,94 +85,6 @@ public class RetailStore {
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.email = email;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public Long getStoreId() {
-    return storeId;
-  }
-
-  public void setStoreId(Long storeId) {
-    this.storeId = storeId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
-  public String getOpening_hours() {
-    return openingHours;
-  }
-
-  public void setOpeningHours(String openingHours) {
-    this.openingHours = openingHours;
-  }
-
-  public String getCustomerService() {
-    return customerService;
-  }
-
-  public void setCustomerService(String customerService) {
-    this.customerService = customerService;
-  }
-
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getImportantNotifications() {
-    return importantNotifications;
-  }
-
-  public void setImportantNotifications(String importantNotifications) {
-    this.importantNotifications = importantNotifications;
-  }
-
-  public String getLimitations() {
-    return limitations;
-  }
-
-  public void setLimitations(String limitations) {
-    this.limitations = limitations;
-  }
-
-  @Override
-  public String toString() {
-    return "RetailStore [user=" + user + ", storeId=" + storeId + ", name=" + name + ", address="
-        + address + ", openingHours=" + openingHours + ", customerService=" + customerService
-        + ", phoneNumber=" + phoneNumber + ", email=" + email + ", importantNotifications="
-        + importantNotifications + ", limitations=" + limitations + "]";
   }
 
 }

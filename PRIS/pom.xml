@@ -71,6 +71,13 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- lombok project -->
+		<dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.12</version>
+    </dependency>
+		
 		<!-- security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

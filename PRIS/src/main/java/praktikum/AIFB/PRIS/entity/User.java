@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import lombok.Data;
 
 //Changes to make it better: interface +  class called name and enum defining that so it looks nicer
 
@@ -17,6 +18,7 @@ import javax.persistence.OneToOne;
  * @author merti
  *
  */
+@Data
 @Entity
 public class User {
 
@@ -49,63 +51,13 @@ public class User {
    *
    * @param username username of the user account
    * @param password password of the user account
+   * @param role     defines to what the user is authorized to do
    */
-  public User(String username, String password) {
+  public User(String username, String password, Role role) {
     super();
     this.username = username;
     this.password = password;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return id of user account
-   */
-  public Long getId() {
-    return userId;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return password of user account
-   */
-  public String getUsername() {
-    return username;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param username username of user account
-   */
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return role
-   */
-  public Role getRole() {
-    return role;
-  }
-
-  /**
-   * Setter.
-   *
-   * @param role defines to what the user account is authorized to do (admin or
-   *             regular user)
-   */
-  public void setRole(Role role) {
     this.role = role;
-  }
-
-  @Override
-  public String toString() {
-    return "User [userId=" + userId + ", username=" + username + ", password=" + password
-        + ", role=" + role + ", retailStore=" + retailStore + "]";
   }
 
 }

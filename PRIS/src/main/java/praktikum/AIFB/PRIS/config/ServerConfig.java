@@ -20,6 +20,6 @@ public class ServerConfig extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().anyRequest().permitAll().and().formLogin().and().httpBasic();
+    http.csrf().disable().authorizeRequests().anyRequest().permitAll();
   }
 }

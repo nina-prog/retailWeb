@@ -28,6 +28,4 @@ public interface ProductRepository extends JpaRepository<Product, Object> {
   @Override
   List<Product> findAll();
 
-  Product findById(Long productId);
-
 }

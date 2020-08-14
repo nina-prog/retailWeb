@@ -2,7 +2,7 @@ import React, {Component } from 'react'
 import Tomatos from '../../img/Tomatos.jpeg'
 import WishListService from './WishListService';
 import NotifyWhenInStock from './NotifyWhenInStock';
-
+import HelloWorldService from '../../API/todo/HelloWordService.js'
 class ProductComponent extends Component {
 
     constructor(props) {

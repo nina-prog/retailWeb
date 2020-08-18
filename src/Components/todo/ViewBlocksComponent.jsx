@@ -1,7 +1,7 @@
 import React, {Component } from 'react'
 import HelloWordService from '../../API/todo/HelloWordService.js'
 import BlockComponent from './BlockComponent'
-
+import { Container, Row, Col } from 'reactstrap';
 class ViewBlockComponent extends Component {
      constructor(props) {
          console.log('CONSTRUCTOR')
@@ -38,24 +38,23 @@ class ViewBlockComponent extends Component {
     }
     render () {
         if(!this.state.isDataFetched) return null;
+        let productCards = this.state.data.map(product => {
+            return (
+                <Col sm="4" key={product.productId}>
+                    <BlockComponent  product={product} />
+                </Col>
+            )
+        });
         return (
             <>
-            <h6>ViewBlockComponent</h6>
-                <table className="table table-bordered">
-                    <tbody>
-                        <tr>
-                            {
-                                this.state.data.map(
-                                todo =>
-                                    <td><BlockComponent {... todo} to={`/product/${todo.productId}`} /></td>
-                                )
-                            }
-                        </tr>
-                    </tbody>
-                </table>
+                <h6>ViewBlockComponent</h6>           
+                <Container>
+                    <Row>
+                        {productCards}
+                    </Row>
+                </Container>
             </>
         );
     }
 }
-
 export default ViewBlockComponent;

@@ -1,6 +1,7 @@
 import React, {Component } from 'react'
 import { withRouter } from 'react-router'
 import {Card} from 'react-bootstrap'
+import { ListGroupItemHeading } from 'reactstrap';
 
 class BlockComponent extends Component {
     render () {
@@ -19,3 +20,4 @@ class BlockComponent extends Component {
     }
 }
 export default withRouter(BlockComponent);
+

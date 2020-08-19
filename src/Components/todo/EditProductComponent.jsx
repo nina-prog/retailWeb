@@ -1,26 +1,53 @@
 import React, {Component } from 'react'
 import TomatoTestComponent from './TomatoTestComponent.jsx'
-import HelloWorldService from '../../API/todo/HelloWordService.js'
+import HelloWordService from '../../API/todo/HelloWordService.js'
 
 class EditProductComponent extends Component {
     constructor(props) {
         super (props)
-        this.state = JSON.parse(HelloWorldService.getProductInformation(2));
-        /* {
-            product_id: '1',
-            store_id: '1',
-            title: 'Tomaten',
-            price: '5.90',
-            stock: '2',
+        this.state = {
+            productId: 3,
+            category: null,
+            picture: null,
+            name: "Default",
+            price: 4.90,
+            retailStore: null,
             description: "Hier steht die Beschreibung :-)",
-            imgSrc: 'Hi'
-        } */
+            limitations: "Feb 45",
+            remainingStock: 5,
+
+            data: null,
+            isDataFetched: false
+        }
+        this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.encodeImageFileAsURL = this.encodeImageFileAsURL.bind(this);
     }
+    componentDidMount(){
+        HelloWordService.getProductInformation(1)
+            .then(response => this.handleSuccessfulResponse(response))
+            .catch(response => alert("REST API Error"))
+    }
+    handleSuccessfulResponse(res) {
+        console.log(res.data)
+        this.setState({
+            productId: res.data.productId,
+            category: res.data.category,
+            picture: res.data.picture,
+            name: res.data.name,
+            price: res.data.price,
+            retailStore: res.data.retailStore,
+            description: res.data.description,
+            limitations: res.data.limitations,
+            remainingStock: res.data.remainingStock,
 
+            isDataFetched: true
+        })
+    }
     handleChange(event) {
+        console.log([event.target.name])
+        console.log([event.target.value])
         this.setState({
             [event.target.name]
                 :event.target.value
@@ -28,9 +55,13 @@ class EditProductComponent extends Component {
     }
     
     handleSave(event) {
-        this.setState({imgSrc: document.getElementById("imgTest").innerHTML}, function () {
-            console.log(this.state.imgSrc);
-            HelloWorldService.updateProductInformation(JSON.stringify(this.state), this.state.product_id)
+        this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
+            /* console.log(this.state.picture); */
+            
+            
+            
+            console.log(JSON.stringify(this.state));
+            HelloWordService.updateProductInformation(JSON.stringify(this.state), this.state.productId)
             .then(response => alert("Successfully saved!"))
             //.catch()
         });
@@ -57,38 +88,45 @@ class EditProductComponent extends Component {
       }
 
     render(){
+        if (!this.state.isDataFetched) return null;
         return (
             <>
                 <h1>Edit Product</h1>
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm">
-                            <div className="col">
-                                <div className="row-sm mb-2 text-left">Title: </div>
-                                <div className="row-sm mb-2 text-left">Price: </div>
-                                <div className="row-sm mb-2 text-left">Stock: </div>
-                                <div className="row-sm mb-2 text-left"> Product Description:</div>
+                        <div className="col-8">
+                            <div className="row">
+                                <div className="col-sm mb-2 text-left">Title: </div>
+                                <div className="col-sm mb-2 text-left"> <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/></div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm mb-2 text-left">Price: </div>
+                                <div className="col-sm mb-2 text-left"> <input type="text" name="price" value={this.state.price} onChange={this.handleChange}/></div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm mb-2 text-left">Stock: </div>
+                                <div className="col-sm mb-2 text-left"> <input type="text" name="remainingStock" value={this.state.remainingStock} onChange={this.handleChange}/></div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm mb-2 text-left">Limitations: </div>
+                                <div className="col-sm mb-2 text-left"> <input type="text" name="limitations" value={this.state.limitations} onChange={this.handleChange}/></div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm mb-2 text-left"> Product Description:</div>
+                                <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></div>
                             </div>
                         </div>
-                        <div className="col-sm">
+                        <div className="col-4">
                             <div className="col">
-                                <div className="row-sm mb-2 text-left"> <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/></div>
-                                <div className="row-sm mb-2 text-left"> <input type="text" name="price" value={this.state.price} onChange={this.handleChange}/></div>
-                                <div className="row-sm mb-2 text-left"> <input type="text" name="stock" value={this.state.stock} onChange={this.handleChange}/></div>
-                                <div className="row-sm mb-2 text-left"> <input type="text" name="stock" value={this.state.description} onChange={this.handleChange}/></div>
+                                <div id="imgTest" >
+                                    <TomatoTestComponent />
+                                </div>
+                                <input id="inputFileToLoad" type="file" onChange={this.encodeImageFileAsURL}/>
                             </div>
-                        </div>
-                        <div className="col-sm" >
-                            <div id="imgTest" >
-                                <TomatoTestComponent />
-                            </div>
-                            <input id="inputFileToLoad" type="file" onChange={this.encodeImageFileAsURL}/>
-                            
                         </div>
                     </div>
-                    
                 </div>
-                <div className="container">
+                <div className="container mt-2">
                     <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
                     <button className="btn btn-secondary"onClick={this.loginClicked}> Cancel </button>
                 </div> 

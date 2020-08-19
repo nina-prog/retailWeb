@@ -6,6 +6,7 @@ class CreateNewProductComponent extends Component {
         super(props)
         this.state = {
             title: 'Product name',
+            price: 1.99,
             isNewProductClicked: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -22,9 +23,15 @@ class CreateNewProductComponent extends Component {
         this.setState({ isNewProductClicked: true })
     }
     createNewProduct (event) {
-        HelloWorldService.createProduct(JSON.stringify({title: this.state.title}))
-        .then(response => alert("New Product created!"))
-            //.catch()
+        let newProduct = {
+            name: this.state.title,
+            price: this.state.price,
+            remainingStock: 0,
+            description: "Lorem ipsum dolor ",
+        }
+        HelloWorldService.createProduct(newProduct)
+            .then(response => alert("New Product created!"))
+            .catch(response => alert("API Put Error"))
     }
     
     render () {
@@ -33,6 +40,7 @@ class CreateNewProductComponent extends Component {
                 <div className="container">
                     <button type="button" className="btn btn-primary mr-2 mb-2" onClick={this.handleClickNewProduct}>New Product</button>
                     {this.state.isNewProductClicked && <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>}
+                    {this.state.isNewProductClicked && <input type="number" name="price" min="0" value={this.state.price} onChange={this.handleChange}/>}
                     {this.state.isNewProductClicked && <button type="button" className="btn btn-success ml-2 mb-2" onClick={this.createNewProduct}>Create New Product</button>}
                 </div>
             </>

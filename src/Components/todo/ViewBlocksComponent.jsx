@@ -1,10 +1,9 @@
 import React, {Component } from 'react'
+import { Container, Row, Col } from 'reactstrap';
 import HelloWordService from '../../API/todo/HelloWordService.js'
 import BlockComponent from './BlockComponent'
-import { Container, Row, Col } from 'reactstrap';
 class ViewBlockComponent extends Component {
      constructor(props) {
-         console.log('CONSTRUCTOR')
         super(props)
         this.state = {
             productId: 3,
@@ -23,13 +22,11 @@ class ViewBlockComponent extends Component {
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
     } 
     componentDidMount(){
-        console.log('COMOPONENT DID MOUNT')
         HelloWordService.getProducts()
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
     handleSuccessfulResponse(res) {
-        console.log("API Call in ViewBlocksComponent: ")
         console.log(res.data)
         this.setState({
             data: res.data,
@@ -37,7 +34,7 @@ class ViewBlockComponent extends Component {
         })
     }
     render () {
-        if(!this.state.isDataFetched) return null;
+        if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {
             return (
                 <Col sm="4" key={product.productId}>

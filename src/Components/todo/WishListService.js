@@ -1,5 +1,8 @@
 class WishListService {
 
+
+   
+   
     isProductInWishlist(product_id) {
         //Ist Produkt in WishListe?
         if ('wishlist' in sessionStorage){
@@ -35,6 +38,20 @@ class WishListService {
    deleteWishList(){
         sessionStorage.removeItem('wishlist')
    }
+
+      //Methode, um Elemente von WishListe zu erhalten 
+      getProductsfromWishlist () {
+        var products
+        if ('wishlist' in sessionStorage){
+            products = sessionStorage.getItem('wishlist').split(' ');
+            console.log('passt')            
+        } else {
+            products = null
+        }
+        return products
+     //Methode, die Elemente aus erstellten Array nimmt und den String Inhalt in eine get Methode vom Server macht 
+    }
+
 }
 
 export default new WishListService();

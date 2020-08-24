@@ -1,6 +1,7 @@
 import React, {Component } from 'react'
 //import Tomatos from '../../img/Tomatos.jpeg'
 import  WishListService from './WishListService';
+import HelloWorldservice from '../../API/todo/HelloWordService.js'
 
 class WishListComponent extends Component {
 
@@ -17,21 +18,45 @@ class WishListComponent extends Component {
         WishListService.deleteWishList()
     }
 
+    getProductsfromWishlistClicked () {
+        let arrayWithProducts = WishListService.getProductsfromWishlist()
+        let data 
+        console.log(arrayWithProducts)
+        for ( i=0; i<arrayWithProducts.length; i++ ) {
+            data[i] = HelloWorldservice.getProductInformation(arrayWithProducts[i])
+        } 
+        console.log(data)
+        this.setState({
+            
+        })
+
+
+        /* this.setState({
+            products: arrayWithProducts
+        }) 
+        console.log(arrayWithProducts) */
+    }
+
+//Aus Session storage auslesen und in Array speichern 
+//For-Schleife durchlaufen lassen, sodass für jedes Produkt ein API-Call die benötigten Informationen holt 
+
     constructor(props) {
         super(props)
         this.state = {
-            todos : 
-              [
-                {id: 1, description: 'Tomatos', done:false, targetDate: new Date()},
-                {id: 2, description: 'Carrots', done:false, targetDate: new Date()},
-                {id: 3, description: 'Bananas', done:false, targetDate: new Date()}
-              ]
+
+            products: 
+            [
+                {test: '2', title: 'Apfel'},
+                {test: '1', title: 'Apfel'}
+            ]
+               
         }
 
         this.addToWhishListClicked = this.addToWhishListClicked.bind(this);
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
         this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.getProductsfromWishlistClicked = this.getProductsfromWishlistClicked.bind(this); 
 
 
         
@@ -55,6 +80,7 @@ class WishListComponent extends Component {
                         <button className="btn btn-success"onClick={this.addToWhishListClicked}> addToWhishList </button>
                         <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
                         <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
+                        <button className="btn btn-success"onClick={this.getProductsfromWishlistClicked}> Get Items from Wishlist </button>
                     </div>
 
 
@@ -68,12 +94,11 @@ class WishListComponent extends Component {
                           </thead>
                           <tbody>
                               {
-                                  this.state.todos.map(
-                                  todo =>
-                                      <tr key={todo.id}>
-                                          <td>{todo.description}</td>
-                                          <td>{todo.done.toString()}</td>
-                                          <td>{todo.targetDate.toString()}</td>
+                                  this.state.products.map(
+                                  product =>
+                                      <tr >
+                                          <td>{product.test}</td>
+                                          <td>{product.title}</td>
                                       </tr>
                                   )
                               }

@@ -20,15 +20,14 @@ class WishListComponent extends Component {
 
     getProductsfromWishlistClicked () {
         let arrayWithProducts = WishListService.getProductsfromWishlist()
-        let data 
+        let data = [arrayWithProducts.length]
         console.log(arrayWithProducts)
-        for ( i=0; i<arrayWithProducts.length; i++ ) {
-            data[i] = HelloWorldservice.getProductInformation(arrayWithProducts[i])
+        for ( let i=0; i<arrayWithProducts.length; i++ ) {
+            /* console.log(parseInt(arrayWithProducts[i])) */
+            data[i] = HelloWorldservice.getProductInformation(parseInt(arrayWithProducts[(i)]))
         } 
         console.log(data)
-        this.setState({
-            
-        })
+        
 
 
         /* this.setState({

@@ -41,7 +41,7 @@ class LoginComponent extends Component {
         return(
             <div>
                 <h1>Welcome to the Retail Project</h1>
-                <ViewBlockComponent />
+                {/* <ViewBlockComponent /> */}
                 
                 <h1>Login</h1>
                 <div className="container">

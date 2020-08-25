@@ -6,7 +6,7 @@ class EditProductComponent extends Component {
     constructor(props) {
         super (props)
         this.state = {
-            productId: 3,
+            productId: this.props.match.params.id,
             category: null,
             picture: null,
             name: "Default",
@@ -25,7 +25,7 @@ class EditProductComponent extends Component {
         this.encodeImageFileAsURL = this.encodeImageFileAsURL.bind(this);
     }
     componentDidMount(){
-        HelloWordService.getProductInformation(1)
+        HelloWordService.getProductInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
@@ -56,14 +56,21 @@ class EditProductComponent extends Component {
     
     handleSave(event) {
         this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
-            /* console.log(this.state.picture); */
+            let updateProduct = {
+                productId: this.props.match.params.id,
+                name: this.state.name,
+                price: this.state.price,
+                description: this.state.description,
+                limitations: this.state.limitations,
+                remainingStock: this.state.remainingStock,
+            }
             
             
             
-            console.log(JSON.stringify(this.state));
-            HelloWordService.updateProductInformation(JSON.stringify(this.state), this.state.productId)
-            .then(response => alert("Successfully saved!"))
-            //.catch()
+            console.log(updateProduct);
+            HelloWordService.updateProductInformation(updateProduct, this.props.match.params.id)
+                .then(response => alert("Product updated!"))
+                .catch(response => alert("API PUT Error"))
         });
     }
 
@@ -91,7 +98,7 @@ class EditProductComponent extends Component {
         if (!this.state.isDataFetched) return null;
         return (
             <>
-                <h1>Edit Product</h1>
+                <h1>Edit Product #{this.props.match.params.id}</h1>
                 <div className="container">
                     <div className="row">
                         <div className="col-8">

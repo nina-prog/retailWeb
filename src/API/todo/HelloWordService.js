@@ -6,27 +6,41 @@ class HelloWorldService {
         return Axios.get('https://localhost:8443/products')
         
     }
+    getFirstProduct(){
+        return Axios.get('https://localhost:8443/products')
+    }
+
+
     getProducts(){
         return Axios.get('https://localhost:8443/products')
-        
     }
-    getFirstProduct(){
-        
-        return Axios.get('https://localhost:8443/products')
-    }
-    
     getProductInformation(product_id){
         return Axios.get(`https://localhost:8443/product/${product_id}`)
-        
     }
     createProduct(data){
         return Axios.post('https://localhost:8443/product/create', data)
     }
-    updateProductInformation(data, product_id){
-        console.log('execute PUT')
-        return Axios.put(`https://localhost:8433/updateProduct/${product_id}`, data)
+
+
+
+    updateProductInformation(data, productId){
+        let myData = {
+            picture: 123,
+            name: "Siebzig",
+            price: 1.99,
+            description: "Gurke",
+            limitations: "0.99",
+            remainingStock: 11
+        }
+        let myId = productId;
+        console.log(`execute PUT: ${myId}`)
+        console.log(myData)
+        return Axios.put(`https://localhost:8433/product/update/${myId}`, myData)
     }
    
+
+
+
     updateStoreInformation(data, store_id) {
         console.log('execute PUT' + data)
         return Axios.put(`https://localhost:8433/updateProduct/${store_id}`, data)

@@ -31,7 +31,7 @@ class CreateNewProductComponent extends Component {
         }
         HelloWorldService.createProduct(newProduct)
             .then(response => alert("New Product created!"))
-            .catch(response => alert("API Put Error"))
+            .catch(response => alert("API POST Error"))
     }
     
     render () {

@@ -44,12 +44,15 @@ class ViewBlockComponent extends Component {
         });
         return (
             <>
-                <h6>ViewBlockComponent</h6>           
+                <h6>ViewBlockComponent</h6>   
+                <div className="overflow-auto">
                 <Container>
                     <Row>
                         {productCards}
                     </Row>
                 </Container>
+                </div>        
+                
             </>
         );
     }

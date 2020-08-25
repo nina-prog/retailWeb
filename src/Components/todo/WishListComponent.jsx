@@ -25,15 +25,14 @@ class WishListComponent extends Component {
         for ( let i=0; i<arrayWithProducts.length; i++ ) {
             /* console.log(parseInt(arrayWithProducts[i])) */
             data[i] = HelloWorldservice.getProductInformation(parseInt(arrayWithProducts[(i)]))
+            console.log(data[i])
         } 
-        console.log(data)
-        
+       /*  console.log(data)
 
-
-        /* this.setState({
-            products: arrayWithProducts
-        }) 
-        console.log(arrayWithProducts) */
+        this.setState({
+            products: arrayWithProducts[i]
+        })  */
+        console.log(arrayWithProducts)
     }
 
 //Aus Session storage auslesen und in Array speichern 
@@ -45,7 +44,7 @@ class WishListComponent extends Component {
 
             products: 
             [
-                {test: '2', title: 'Apfel'},
+                {product_id: '2', product: 'Apfel', category: 'Essen', price: '5,90' },
                 {test: '1', title: 'Apfel'}
             ]
                
@@ -86,9 +85,10 @@ class WishListComponent extends Component {
                       <table className="table table-bordered">
                           <thead>
                               <tr>
-                                  <th>description</th>
-                                  <th>Is competed?</th>
-                                  <th>Target Date</th>
+                                  <th>product_id</th>
+                                  <th>Product</th>
+                                  <th>Category</th>
+                                  <th>Price</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -96,8 +96,10 @@ class WishListComponent extends Component {
                                   this.state.products.map(
                                   product =>
                                       <tr >
-                                          <td>{product.test}</td>
-                                          <td>{product.title}</td>
+                                          <td>{product.product_id}</td>
+                                          <td>{product.product}</td>
+                                          <td>{product.category}</td>
+                                          <td>{product.price}</td>
                                       </tr>
                                   )
                               }

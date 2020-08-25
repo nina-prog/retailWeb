@@ -2,6 +2,7 @@ import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import HelloWordService from '../../API/todo/HelloWordService.js'
 import BlockComponent from './BlockComponent'
+
 class ViewBlockComponent extends Component {
      constructor(props) {
         super(props)
@@ -57,4 +58,5 @@ class ViewBlockComponent extends Component {
         );
     }
 }
+
 export default ViewBlockComponent;

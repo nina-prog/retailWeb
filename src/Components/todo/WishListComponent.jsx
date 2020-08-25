@@ -1,9 +1,8 @@
 import React, {Component } from 'react'
-import BlockComponent from './BlockComponent'
 import { Container, Row, Col } from 'reactstrap';
 import  WishListService from './WishListService';
 import HelloWorldservice from '../../API/todo/HelloWordService.js'
-
+import BlockComponent from './BlockComponent'
 class WishListComponent extends Component {
     constructor(props) {
         super(props)
@@ -19,7 +18,7 @@ class WishListComponent extends Component {
         this.getProductsfromWishlistClicked = this.getProductsfromWishlistClicked.bind(this); 
     }  
     componentDidMount(){
-        let arrayWithProducts = WishListService.getProductsfromWishlist()
+               let arrayWithProducts = WishListService.getProductsfromWishlist()
         if (arrayWithProducts!==null){
             this.setState({arrayIsEmpty: false})
             this.setState({ data: new Array(arrayWithProducts.length)}, function () {
@@ -38,13 +37,6 @@ class WishListComponent extends Component {
                 }
                 console.log(this.state)
             });
-        } else {
-            /* this.setState({
-                isDataFetched: true,
-                data: [{name: "Your Wishlist is empty", price: null}]
-            }, function(){
-
-            }) */
         }
         
     }
@@ -101,7 +93,6 @@ class WishListComponent extends Component {
             } else {
                 return null;
             }
-            
         } else {
             return (
                 <>
@@ -112,12 +103,8 @@ class WishListComponent extends Component {
                     </div>
                 </>
             )
-        }
-        
-          
+        } 
       }
   }
-
-
 
 export default WishListComponent;

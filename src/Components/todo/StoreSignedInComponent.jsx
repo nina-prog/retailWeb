@@ -1,24 +1,21 @@
 import React, {Component } from 'react'
 import CreateNewProductComponent from './CreateNewProductComponent.jsx'
 import LinkButtonComponent from './LinkButtonComponent'
+
 class StoreSignedInComponent extends Component {
     constructor(props) {
       super(props)
       this.state = {
-            
           todos : 
             [
               {id: 1, title: 'Apfel', price: 5.90, description: 'Dies ist ein Apfel'},
               {id: 2, title: 'Banane', price: 3.90, description: 'Dies ist eine Banane'},
               {id: 3, title: 'Birne', price: 4.90, description: 'Dies ist eine Birne'}
             ]
-            
       }
       this.handleEdit = this.handleEdit.bind(this)
     }    
     handleEdit(event) {
-
-
         this.setState({
             [event.target.name]
                 :event.target.value
@@ -27,12 +24,9 @@ class StoreSignedInComponent extends Component {
 
     render () {
         return (
-            
             <div> 
                 <h1>List Products</h1>
-                
                 <CreateNewProductComponent />
-                
                 <div className="container">
                     <table className="table table-bordered">
                         <thead>

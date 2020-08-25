@@ -4,7 +4,6 @@ import ViewBlockComponent from './ViewBlocksComponent.jsx'
 
 
 class LoginComponent extends Component {
-
     constructor(props) {
         super (props)
         this.state = {
@@ -14,7 +13,6 @@ class LoginComponent extends Component {
             showSuccessMessage: false,
             product: ''
         }
-        
         this.handleChange = this.handleChange.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
     }
@@ -41,7 +39,6 @@ class LoginComponent extends Component {
         return(
             <div>
                 <h1>Welcome to the Retail Project</h1>
-                {/* <ViewBlockComponent /> */}
                 
                 <h1>Login</h1>
                 <div className="container">

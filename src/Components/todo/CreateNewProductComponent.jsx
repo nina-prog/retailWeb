@@ -45,14 +45,12 @@ class CreateNewProductComponent extends Component {
                 </div>
             </>
         )
-        
     }
     retriveWelcomeMessage(){
         HelloWorldService.executeHelloWorldService()
         .then(response => this.handleSuccessfulResponse(response))
         .catch(response => alert("REST API Error"))
     }
-
     handleSuccessfulResponse(response){
         this.setState({welcomeMessage: response.data})
     }

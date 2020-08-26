@@ -100,6 +100,7 @@ class WishListComponent extends Component {
                     <div className="container">
                         <input type="text" name="product_id" value={this.state.product_id} onChange={this.handleChange}/>   
                         <button className="btn btn-success"onClick={this.addToWhishListClicked}> addToWhishList </button>
+                        <button className="btn btn-info"onClick={() => window.print()}>PRINT</button>
                     </div>
                 </>
             )

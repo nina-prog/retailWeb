@@ -31,7 +31,7 @@ class CreateNewProductComponent extends Component {
         }
         HelloWorldService.createProduct(newProduct)
             .then(response => alert("New Product created!"))
-            .catch(response => alert("API Put Error"))
+            .catch(response => alert("API POST Error"))
     }
     
     render () {
@@ -45,14 +45,12 @@ class CreateNewProductComponent extends Component {
                 </div>
             </>
         )
-        
     }
     retriveWelcomeMessage(){
         HelloWorldService.executeHelloWorldService()
         .then(response => this.handleSuccessfulResponse(response))
         .catch(response => alert("REST API Error"))
     }
-
     handleSuccessfulResponse(response){
         this.setState({welcomeMessage: response.data})
     }

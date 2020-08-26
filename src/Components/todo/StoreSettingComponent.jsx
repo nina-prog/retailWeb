@@ -44,7 +44,7 @@ class StoreSettingComponent extends Component {
         if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {
             return (
-                <Col sm="4"  key={product.productId}>
+                <Col sm="4" className="jtColMagin" key={product.productId}>
                     <BlockComponent  product={product} />
                 </Col>
             )
@@ -56,7 +56,7 @@ class StoreSettingComponent extends Component {
                     <CreateNewProductComponent />
                     <h6>ViewBlockComponent</h6>   
                     <Container>
-                        <Row>
+                        <Row >
                             {productCards}
                         </Row>
                     </Container>

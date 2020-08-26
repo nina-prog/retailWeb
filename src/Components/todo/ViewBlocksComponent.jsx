@@ -38,14 +38,14 @@ class ViewBlockComponent extends Component {
         if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {
             return (
-                <Col sm="4" key={product.productId}>
+                <Col sm="4" className="jtColMagin" key={product.productId}>
                     <BlockComponent  product={product} />
                 </Col>
             )
         });
         return (
             <>
-                <h6>ViewBlockComponent</h6>   
+                {/* <h6>ViewBlockComponent</h6> */}   
                 <div className="jtScroll">
                 <Container>
                     <Row>

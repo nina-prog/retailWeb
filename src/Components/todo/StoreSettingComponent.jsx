@@ -2,8 +2,9 @@ import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import HelloWordService from '../../API/todo/HelloWordService.js'
 import BlockComponent from './BlockComponent'
+import CreateNewProductComponent from './CreateNewProductComponent.jsx'
 
-class ViewBlockComponent extends Component {
+class StoreSettingComponent extends Component {
      constructor(props) {
         super(props)
         this.state = {
@@ -23,9 +24,14 @@ class ViewBlockComponent extends Component {
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
     } 
     componentDidMount(){
+        /* HelloWordService.getStoreProducts(this.props.match.params.id) */
         HelloWordService.getProducts()
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
+
+        /* HelloWordService.deleteProduct(15)
+            .then(response => alert("Product 15 is deleted"))
+            .catch(response => alert("Error while deleting, please try again")) */
     }
     handleSuccessfulResponse(res) {
         console.log(res.data)
@@ -38,20 +44,22 @@ class ViewBlockComponent extends Component {
         if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {
             return (
-                <Col sm="4" key={product.productId}>
+                <Col sm="4"  key={product.productId}>
                     <BlockComponent  product={product} />
                 </Col>
             )
         });
         return (
             <>
-                <h6>ViewBlockComponent</h6>   
                 <div className="jtScroll">
-                <Container>
-                    <Row>
-                        {productCards}
-                    </Row>
-                </Container>
+                    <h1>List Products</h1>
+                    <CreateNewProductComponent />
+                    <h6>ViewBlockComponent</h6>   
+                    <Container>
+                        <Row>
+                            {productCards}
+                        </Row>
+                    </Container>
                 </div>        
                 
             </>
@@ -59,4 +67,4 @@ class ViewBlockComponent extends Component {
     }
 }
 
-export default ViewBlockComponent;
+export default StoreSettingComponent;

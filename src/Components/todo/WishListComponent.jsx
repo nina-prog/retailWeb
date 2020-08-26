@@ -3,6 +3,7 @@ import React, {Component } from 'react'
 import  WishListService from './WishListService';
 import HelloWorldservice from '../../API/todo/HelloWordService.js'
 
+
 class WishListComponent extends Component {
 
     addToWhishListClicked() {
@@ -25,7 +26,8 @@ class WishListComponent extends Component {
         for ( let i=0; i<arrayWithProducts.length; i++ ) {
             /* console.log(parseInt(arrayWithProducts[i])) */
             data[i] = HelloWorldservice.getProductInformation(parseInt(arrayWithProducts[(i)]))
-            console.log(data[i])
+            console.log(data[i].PromisValue.data)
+            
         } 
        /*  console.log(data)
 
@@ -79,6 +81,7 @@ class WishListComponent extends Component {
                         <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
                         <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
                         <button className="btn btn-success"onClick={this.getProductsfromWishlistClicked}> Get Items from Wishlist </button>
+                        <button className="btn btn-info"onClick={() => window.print()}>PRINT</button>
                     </div>
 
 

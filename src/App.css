@@ -7,6 +7,16 @@
 }
 
 
+.jtScroll {
+  height: calc(100vh - 96px);
+  overflow-y: scroll;
+}
+
+.jtColMagin {
+  /* vertical | horizontal */
+  margin: 1em 0em;
+}
+
 .App {
   text-align: center;
 }

@@ -1,4 +1,5 @@
 import React, {Component } from 'react'
+import { Container, Row, Col } from 'reactstrap';
 import Tomatos from '../../img/Tomatos.jpeg'
 import WishListService from './WishListService';
 import NotifyWhenInStock from './NotifyWhenInStock';
@@ -18,16 +19,19 @@ class ProductComponent extends Component {
             limitations: 0.99,
             remainingStock: null,
             
-            product_id: '1',
+            data: null,
             isProductInWishlist: false
         }
         this.addToWhishListClicked = this.addToWhishListClicked.bind(this);
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
-        this.UpdateData = this.UpdateData.bind(this);
-
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
     }
 
+    componentDidMount(){
+        HelloWorldService.getProductInformation(this.props.match.params.id)
+            .then(response => this.handleSuccessfulResponse(response))
+            .catch(response => alert("REST API Error"))
+    }
     handleChange(event) {
         this.setState({
             [event.target.name]
@@ -37,33 +41,29 @@ class ProductComponent extends Component {
 
     addToWhishListClicked() {
         this.setState({ isProductInWishlist: true})
-        WishListService.addToWhishList(this.state.product_id)
+        WishListService.addToWhishList(this.props.match.params.id)
     }
-
     deleteFromWhishListClicked() {
         this.setState({ isProductInWishlist: false})
-        WishListService.deleteFromWishList(this.state.product_id)
+        WishListService.deleteFromWishList(this.props.match.params.id)
     }
 
-    handleSuccessfulResponse(response){
-        console.log(response.data[0])
+    handleSuccessfulResponse(res) {
+        console.log(res.data)
+        this.setState({
+            data: res.data,
+            isDataFetched : true
+        })
+    }
 
-        document.getElementById("title").innerHTML = response.data[0].name;
+        /* document.getElementById("title").innerHTML = response.data[0].name;
         document.getElementById("price").innerHTML = 'Price: ' + response.data[0].price;
         document.getElementById("description").innerHTML = response.data[0].description;
-        document.getElementById("stock").innerHTML = response.data[0].stock;
-        
-    }
-    UpdateData() {
-        HelloWorldService.executeHelloWorldService()
-            .then(response => this.handleSuccessfulResponse(response))
-            .catch(response => alert("REST API Error"))
-        
-        WishListService.deleteWishList()
-        
-    }
+        document.getElementById("stock").innerHTML = response.data[0].stock; */
+       
 
     render() {
+        if (!this.state.isDataFetched) return null;
         return (
             <div className="container">
                 <div className="col ">
@@ -74,12 +74,11 @@ class ProductComponent extends Component {
                                 <img src={Tomatos} width='250' heigt='250' />
                                 </div>
                                 <div className="col-sm align-self-center">
-                                    <h1><div id="title">Titel</div></h1>
+                                    <h1>{this.state.data.name}</h1>
                                     <div>
-                                        Price: <span id="price"> 5.90</span> <br/>
-                                        Remaining stock: <span id="stock"> 2</span>
+                                        Price: {this.state.data.price} <br/>
+                                        Remaining stock: {this.state.data.name}
                                     </div>
-                                    <button className="btn btn-success"onClick={this.UpdateData}> UpdateData </button>
                                     <NotifyWhenInStock/>
                                     {/* <p><button type="button" class="btn btn-success" onClick={this.NotificationStock}>Notify when in Stock</button> </p>    */}                               
                                     {this.state.isProductInWishlist && <button className="btn btn-secondary" onClick={this.deleteFromWhishListClicked}>In wishlist</button>}
@@ -91,7 +90,7 @@ class ProductComponent extends Component {
                     </div>
                     <div className ="row-sm">
                         <h3>Product Description</h3>
-                        <p id="description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
+                        <p id="description">{this.state.data.description} </p>
                     </div>    
                     
                     

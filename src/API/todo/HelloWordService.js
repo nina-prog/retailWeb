@@ -7,6 +7,9 @@ class HelloWorldService {
     getProductInformation(product_id){
         return Axios.get(`https://localhost:8443/product/${product_id}`)
     }
+    getStoreProducts(store_id){
+        return Axios.get(`https://localhost:8443/products/${store_id}`)
+    }
     createProduct(data){
         return Axios.post('https://localhost:8443/product/create', data)
     }
@@ -26,6 +29,9 @@ class HelloWorldService {
         return Axios.put(`https://localhost:8433/product/update/${myId}`, myData)
     }
    
+    deleteProduct(product_id){
+        return Axios.delete(`product/delete/${product_id}`)
+    }
 
 
 

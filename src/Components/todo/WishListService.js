@@ -30,11 +30,11 @@ class WishListService {
             sessionStorage.setItem('wishlist', (temp.replace(' ' + product_id, '')))
         }
     }
-   deleteWishList(){
-        sessionStorage.removeItem('wishlist')
-   }
+    deleteWishList(){
+            sessionStorage.removeItem('wishlist')
+    }
       //Methode, um Elemente von WishListe zu erhalten 
-      getProductsfromWishlist () {
+    getProductsfromWishlist () {
         var products
         if ('wishlist' in sessionStorage){
             products = sessionStorage.getItem('wishlist').split(' ');

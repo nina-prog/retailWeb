@@ -9,16 +9,19 @@ class WishListComponent extends Component {
         this.state = {
             data: null,
             isDataFetched: false,
-            arrayIsEmpty: true
+            arrayIsEmpty: true,
+            product_id: ''
         }
-        this.addToWhishListClicked = this.addToWhishListClicked.bind(this);
-        this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this);
-        this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.getProductsfromWishlistClicked = this.getProductsfromWishlistClicked.bind(this); 
+        this.addToWhishListClicked = this.addToWhishListClicked.bind(this)
+        this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this)
+        this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    
     }  
     componentDidMount(){
-               let arrayWithProducts = WishListService.getProductsfromWishlist()
+        let response = WishListService.getProductsfromWishlist() 
+        console.log(response)
+        let arrayWithProducts = response
         if (arrayWithProducts!==null){
             this.setState({arrayIsEmpty: false})
             this.setState({ data: new Array(arrayWithProducts.length)}, function () {
@@ -34,12 +37,17 @@ class WishListComponent extends Component {
                                 }
                             })
                         })
+                        .catch(response => alert("REST API Error"))
                 }
                 console.log(this.state)
             });
         }
         
+
     }
+         
+ 
+    
     getProductsfromWishlistClicked () {
         console.log(this.state.data)
     } 
@@ -79,6 +87,7 @@ class WishListComponent extends Component {
                               <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
                               <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
                               <button className="btn btn-success"onClick={this.getProductsfromWishlistClicked}> Get Items from Wishlist </button>
+                              <button className="btn btn-info"onClick={() => window.print()}>PRINT</button>
                           </div>
                           <div className="overflow-auto">
                               <Container>
@@ -100,7 +109,6 @@ class WishListComponent extends Component {
                     <div className="container">
                         <input type="text" name="product_id" value={this.state.product_id} onChange={this.handleChange}/>   
                         <button className="btn btn-success"onClick={this.addToWhishListClicked}> addToWhishList </button>
-                        <button className="btn btn-info"onClick={() => window.print()}>PRINT</button>
                     </div>
                 </>
             )

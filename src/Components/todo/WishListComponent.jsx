@@ -10,7 +10,7 @@ class WishListComponent extends Component {
             data: null,
             isDataFetched: false,
             arrayIsEmpty: true,
-            product_id: ''
+            /* product_id: '' */
         }
         this.addToWhishListClicked = this.addToWhishListClicked.bind(this)
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this)
@@ -24,13 +24,13 @@ class WishListComponent extends Component {
         let arrayWithProducts = response
         if (arrayWithProducts!==null){
             this.setState({arrayIsEmpty: false})
-            this.setState({ data: new Array(arrayWithProducts.length)}, function () {
-                for (let i=0; i < arrayWithProducts.length; i++){
+            this.setState({ data: new Array(arrayWithProducts.length-1)}, function () {
+                for (let i=1; i < arrayWithProducts.length; i++){
                     HelloWorldservice.getProductInformation(arrayWithProducts[i])
                         .then((response)=> {
                             console.log(response.data);
                             let data = [...this.state.data];
-                            data[i] = response.data;
+                            data[i-1] = response.data;
                             this.setState({data}, function (){
                                 if (i===(arrayWithProducts.length-1)){
                                     this.setState({isDataFetched: true}, function(){console.log(this.state.isDataFetched)}) 
@@ -74,6 +74,7 @@ class WishListComponent extends Component {
                     return (
                         <Col sm="4" key={product.productId}>
                             <BlockComponent  product={product} />
+                            {console.log(product)}
                         </Col>
                     )
                 });

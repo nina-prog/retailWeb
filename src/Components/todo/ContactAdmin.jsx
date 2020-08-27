@@ -17,7 +17,7 @@ class ContactAdmin extends Component {
         }, (error) => {
           console.log(error.text);
         });
-        alert ("Message sent")
+        alert ("Thank you for your request, we will contact you as soon as possible")
       }
 
     render () {
@@ -26,14 +26,14 @@ class ContactAdmin extends Component {
             <h1>Contact Admin</h1>
             <p>Enter your name, email and message. A copy of the message will also be sent to you</p>
             <form className="contact-form" onSubmit={this.sendEmail}>
-            <input type="hidden" name="product_ID" /> 
-            <label>Name</label>
-            <input type="text" name="user_name"></input>
-            <label>Email</label>
-            <input type="email" name="user_email" />   
-            <label>Message</label>
-            <textarea name="message"></textarea>
-            <input type="submit" className="btn btn-primary" value="Send" />
+              <input type="hidden" name="product_ID" /> 
+              <label>Name</label>
+              <input type="text" name="user_name"></input>
+              <label>Email</label>
+              <input type="email" name="user_email" />   
+              <label>Message</label>
+              <textarea name="message"></textarea>
+              <input type="submit" className="btn btn-primary" value="Send" />
             </form> 
         </div>
         

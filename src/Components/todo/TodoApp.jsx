@@ -18,6 +18,7 @@ import StoreSettingComponent from './StoreSettingComponent.jsx'
 import StoreEditComponent from './StoreEditComponent.jsx'
 import StoreComponent from './StoreComponent.jsx'
 import ViewBlockComponent from './ViewBlocksComponent.jsx'
+import ContactAdmin from './ContactAdmin.jsx'
 
 
 class TodoApp extends Component {
@@ -33,6 +34,7 @@ class TodoApp extends Component {
                         <Route path="/product/:id" exact component={ProductComponent}/>
                         <Route path="/store/:id" exact component={StoreComponent}/>
                         <Route path="/admin" exact component={AdminComponent}/>
+                        <Route path="/contactadmin" exact component={ContactAdmin}/>
                         <AuthenticatedRoute path="/product/edit/:id" component={EditProductComponent}/>
                         <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/>
                         <AuthenticatedRoute path="/store/edit/:id" component={StoreEditComponent}/>

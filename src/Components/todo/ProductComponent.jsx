@@ -31,6 +31,12 @@ class ProductComponent extends Component {
         HelloWorldService.getProductInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
+
+        if (WishListService.isProductInWishlist(this.props.match.params.id)){
+            this.setState({isProductInWishlist: true})
+        } else {
+            this.setState({isProductInWishlist: false})
+        }
     }
     handleChange(event) {
         this.setState({

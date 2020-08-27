@@ -13,7 +13,8 @@ class BlockComponent extends Component {
                     <Card.Subtitle>Price:  {this.props.product.price}</Card.Subtitle>
                     <Card.Text> Description: {this.props.product.description} </Card.Text>
                     <Card.Link href={`/product/${this.props.product.productId}`}>View Product</Card.Link>
-                    <Card.Link href={`/product/${this.props.product.retailStore}`}>View Store</Card.Link>
+                    {(this.props.view === 'Product') && <Card.Link href={`/product/${this.props.product.retailStore}`}>View Store</Card.Link>}
+                    {(this.props.view === 'Edit') && <Card.Link href={`/product/edit/${this.props.product.productId}`}>Edit Product</Card.Link>}
                 </Card.Body>
             </Card>
         )

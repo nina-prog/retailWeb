@@ -19,7 +19,7 @@ class HeaderComponent extends Component {
                                 <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>}
                         
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/in28minutes">StoreNameMussHierStehen</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/1">StoreNameMussHierStehen</Link></li>}
                         <li><Link className="nav-link" to="/product/Tomatos">Tomatos</Link></li>
                         {isUserLoggedIn && <li><Link className="nav-link" to="/product/edit/Tomatos">EditTomatos</Link></li>}
                     </ul>
@@ -27,6 +27,8 @@ class HeaderComponent extends Component {
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         {!isUserLoggedIn && <li><Link className="nav-link" to="/wishlist">Wishlist</Link></li>}  
                         {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/edit/1">Edit Products</Link></li>} 
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/settings/1">Settings</Link></li>}  
                         {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthentificationService.logout}>Logout</Link></li>}
                     </ul>
                 </nav>

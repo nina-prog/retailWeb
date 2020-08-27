@@ -1,37 +1,23 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import HelloWordService from '../../API/todo/HelloWordService.js'
-import BlockComponent from './BlockComponent'
-import CreateNewProductComponent from './CreateNewProductComponent.jsx'
 
 class StoreSettingComponent extends Component {
      constructor(props) {
         super(props)
         this.state = {
-            productId: 3,
-            category: null,
-            picture: null,
-            name: "Default",
-            price: 4.90,
-            retailStore: null,
-            description: "gummi bears",
-            limitations: "Feb 45",
-            stock: 5,
-
+            
             data: null,
             isDataFetched: false
         }
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     } 
     componentDidMount(){
-        /* HelloWordService.getStoreProducts(this.props.match.params.id) */
-        HelloWordService.getProducts()
+        HelloWordService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
-
-        /* HelloWordService.deleteProduct(15)
-            .then(response => alert("Product 15 is deleted"))
-            .catch(response => alert("Error while deleting, please try again")) */
     }
     handleSuccessfulResponse(res) {
         console.log(res.data)
@@ -40,26 +26,69 @@ class StoreSettingComponent extends Component {
             isDataFetched : true
         })
     }
+    handleChange(event) {
+        this.setState({
+            [event.target.name]
+                :event.target.value
+        })
+    }
+    handleSave(){
+        HelloWordService.updateStoreInformation(this.state.data, this.props.match.params.id)
+                .then(response => alert("StoreInformation updated!"))
+                .catch(response => alert("API PUT Error"))
+    }
     render () {
         if (!this.state.isDataFetched) return null;
-        let productCards = this.state.data.map(product => {
+        /* let productCards = this.state.data.map(product => {
             return (
                 <Col sm="4" className="jtColMagin" key={product.productId}>
-                    <BlockComponent  product={product} />
+                    <BlockComponent  product={product} view="Edit" />
                 </Col>
             )
-        });
+        }); */
+        
         return (
             <>
                 <div className="jtScroll">
-                    <h1>List Products</h1>
-                    <CreateNewProductComponent />
-                    <h6>ViewBlockComponent</h6>   
-                    <Container>
-                        <Row >
-                            {productCards}
-                        </Row>
-                    </Container>
+                    <h1>Store Settings</h1>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Store Name: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="name" value={this.state.data.name} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Address: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="price" value={this.state.data.address} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Opening Hours: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="remainingStock" value={this.state.data.openingHours} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Customer Service: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="limitations" value={this.state.data.customerService} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left"> Phone Number</div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.phoneNumber} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left"> Email:</div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.email} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left"> Important Notifications:</div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.importantNotifications} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left"> Limitations:</div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.limitations} onChange={this.handleChange}/></div>
+                        </div>
+                    </div>  
+                    <div className="container">
+                        <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
+                        <button className="btn btn-secondary"onClick={this.props.history.goBack}> Cancel </button>
+                    </div>
                 </div>        
                 
             </>

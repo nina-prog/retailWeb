@@ -30,14 +30,17 @@ class HelloWorldService {
     }
    
     deleteProduct(product_id){
-        return Axios.delete(`product/delete/${product_id}`)
+        return Axios.delete(`https://localhost:8433/product/delete/${product_id}`)
     }
 
 
+    getStoreInformation(store_id){
+        return Axios.get(`https://localhost:8443/storeInfo/${store_id}`)
+    }
 
     updateStoreInformation(data, store_id) {
         console.log('execute PUT' + data)
-        return Axios.put(`https://localhost:8433/updateProduct/${store_id}`, data)
+        return Axios.put(`https://localhost:8433/storeInfo/update/${store_id}`, data)
     }
     retrieveStoreInformation(store_id) {
         let jsonData = {

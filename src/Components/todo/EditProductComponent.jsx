@@ -23,6 +23,7 @@ class EditProductComponent extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.encodeImageFileAsURL = this.encodeImageFileAsURL.bind(this);
+        this.handleDelete = this.handleDelete.bind(this)
     }
     componentDidMount(){
         HelloWordService.getProductInformation(this.props.match.params.id)
@@ -46,8 +47,6 @@ class EditProductComponent extends Component {
         })
     }
     handleChange(event) {
-        console.log([event.target.name])
-        console.log([event.target.value])
         this.setState({
             [event.target.name]
                 :event.target.value
@@ -73,7 +72,19 @@ class EditProductComponent extends Component {
                 .catch(response => alert("API PUT Error"))
         });
     }
-
+    handleDelete(){
+        if (window.confirm("Do you really want to delete this Product?")) {
+            console.log("You pressed OK!");
+            HelloWordService.deleteProduct(this.props.match.params.id)
+                .then(response => {
+                    alert(`Product ${this.props.match.params.id} is deleted!`)
+                    this.props.history.goBack()
+                })
+                .catch(response => alert("An Error occured while deleting, please try again."))
+          } else {
+            console.log("You pressed Cancel!")
+          }
+    }
     encodeImageFileAsURL() {        
         var filesSelected = document.getElementById("inputFileToLoad").files;
 	    console.log(filesSelected);
@@ -92,8 +103,8 @@ class EditProductComponent extends Component {
           }
           fileReader.readAsDataURL(fileToLoad);
         }
-      }
-
+    }
+    
     render(){
         if (!this.state.isDataFetched) return null;
         return (
@@ -135,7 +146,8 @@ class EditProductComponent extends Component {
                 </div>
                 <div className="container mt-2">
                     <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
-                    <button className="btn btn-secondary"onClick={this.loginClicked}> Cancel </button>
+                    <button className="btn btn-secondary"onClick={this.props.history.goBack}> Cancel </button>
+                    <button className="btn btn-success mr-2"onClick={this.handleDelete}> Delete </button>
                 </div> 
             </>
         )

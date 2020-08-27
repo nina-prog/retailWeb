@@ -24,7 +24,8 @@ class ContactAdmin extends Component {
       return(
         <div>
             <h1>Contact Admin</h1>
-            <p>Enter your name, email and message. A copy of the message will also be sent to you</p>
+            <p>Hello. We are happy that you are here. With this form you can contact the admin of the retail shop information system.</p>
+              <p>If you have any requests or if you want to create a retail store account, don´t hestitate to contact us.</p>
             <form className="contact-form" onSubmit={this.sendEmail}>
               <input type="hidden" name="product_ID" /> 
               <label>Name</label>

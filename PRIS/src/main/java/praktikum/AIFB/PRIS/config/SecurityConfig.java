@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfig {
   /**
    * Enable SSL Traffic.
    *

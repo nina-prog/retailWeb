@@ -1,6 +1,8 @@
 package praktikum.AIFB.PRIS.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,17 +29,26 @@ public class StoreController {
   /**
    * View all informations of a retail store.
    *
-   * @return RetailStore
+   * @param retailStoreId id of retail store
+   * @return storeinfo
    */
   @GetMapping("/storeInfo/{retailStore_id}")
   public RetailStore viewInfo(@PathVariable("retailStore_id") String retailStoreId) {
     return retailStoreService.findStore(retailStoreId);
   }
 
-  @PutMapping("/storeInfo/update/{retailStore_id}")
-  public RetailStore updateInfo(@RequestBody RetailStore newStore,
-      @PathVariable("retailStore_id") String retailStoreId) {
-    return retailStoreService.replaceInfo(newStore, retailStoreId);
+  /**
+   * Update store info.
+   *
+   * @param newStore      updated store info
+   * @param retailStoreId id of retail store which info is being updated
+   * @return http response ok an also updated store info
+   */
+  @PutMapping("store/{username}/storeInfo/update/{retailStore_id}")
+  public ResponseEntity<RetailStore> updateInfo(@RequestBody RetailStore newStore,
+      @PathVariable("retailStore_id") Long retailStoreId) {
+    RetailStore storeUpdated = retailStoreService.replaceInfo(newStore, retailStoreId);
+    return new ResponseEntity<RetailStore>(storeUpdated, HttpStatus.OK);
   }
 
 }

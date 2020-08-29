@@ -3,6 +3,7 @@ package praktikum.AIFB.PRIS.repositories;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import praktikum.AIFB.PRIS.entity.Product;
 
@@ -15,7 +16,8 @@ import praktikum.AIFB.PRIS.entity.Product;
  */
 @Repository
 @Transactional
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository
+    extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
   /**
    * Return all products of a specific store (same store_id).
@@ -24,8 +26,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
    * @return List of products of a specific store
    */
   List<Product> findByRetailStore_storeId(Long storeId);
-
-  @Override
-  List<Product> findAll();
 
 }

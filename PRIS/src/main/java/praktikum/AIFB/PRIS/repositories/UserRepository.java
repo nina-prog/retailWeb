@@ -19,4 +19,12 @@ import praktikum.AIFB.PRIS.entity.User;
 //the annotation @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 
+  /**
+   * Find user of database by it`s username.
+   * 
+   * @param username username of user
+   * @return user
+   */
+  User findByUsername(String username);
+
 }

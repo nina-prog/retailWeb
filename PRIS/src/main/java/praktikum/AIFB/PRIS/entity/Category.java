@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 /**
@@ -29,8 +30,7 @@ public class Category {
   private String name;
 
   // non-Owning side of the ManyToOne relationship
-  @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-      mappedBy = "category")
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
   private List<Product> products;
 
   /**
@@ -48,6 +48,11 @@ public class Category {
   public Category(String name) {
     super();
     this.name = name;
+  }
+
+  @JsonManagedReference
+  public List<Product> getProducts() {
+    return products;
   }
 
 }

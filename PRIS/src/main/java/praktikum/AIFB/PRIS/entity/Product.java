@@ -14,6 +14,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 /**
@@ -88,6 +89,16 @@ public class Product {
   @PreUpdate
   public void pricePrecisionConvertion() {
     this.price.setScale(2, RoundingMode.HALF_UP);
+  }
+
+  @JsonBackReference
+  public Category getCategory() {
+    return category;
+  }
+
+  @JsonBackReference
+  public RetailStore getRetailStore() {
+    return retailStore;
   }
 
 }

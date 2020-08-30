@@ -75,7 +75,6 @@ public class BuildExamples implements CommandLineRunner {
     Product p2 = new Product(cat2, "chocolate", new BigDecimal(1.99), store1);
     productRepo.save(p2);
     log.info("New product is created: " + p2);
-
   }
 
 }

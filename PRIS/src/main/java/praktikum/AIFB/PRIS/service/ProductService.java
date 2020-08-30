@@ -1,6 +1,7 @@
 package praktikum.AIFB.PRIS.service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import praktikum.AIFB.PRIS.entity.Product;
@@ -114,7 +115,8 @@ public class ProductService {
    *                   with given postal code
    * @return list of products which match given criteria
    */
-  public List<Product> filterProducts(String keyword, Integer categoryId, String postalCode) {
+  public List<Product> filterProducts(Optional<String> keyword, Optional<Integer> categoryId,
+      Optional<String> postalCode) {
     // run dynamic query, which is build (by Specifications) in order to combine
     // different filters
     return productrepo.findAll(ProductSpecs.getProductsByFilter(keyword, categoryId, postalCode));

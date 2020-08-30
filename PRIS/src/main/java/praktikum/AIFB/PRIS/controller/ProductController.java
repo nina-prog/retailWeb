@@ -2,6 +2,7 @@ package praktikum.AIFB.PRIS.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,16 +37,6 @@ public class ProductController {
   // Aggregate root.
 
   /**
-   * View all products.
-   *
-   * @return list of products
-   */
-  @GetMapping("/products")
-  public List<Product> viewAllProducts() {
-    return productService.findAll();
-  }
-
-  /**
    * View all products of a retail store.
    *
    * @return list of products
@@ -56,18 +47,17 @@ public class ProductController {
   }
 
   /**
-   * Filter products by different parameters, if all parameters are null all
-   * products get returned. URL looks something like
-   * this:"/products?keyword={keyword}&category={catId}&postal_code=null"
+   * View all products, or filtered products if parameters are given.
    *
    * @param keyword    text entered in searchbar
    * @param categoryId id of selected category
    * @param postalCode selected postal code
    * @return list of products which match selected filters
    */
-  @GetMapping("/products/filter")
-  public List<Product> keywordSearchProducts(@RequestParam("keyword") String keyword,
-      @RequestParam("category") Integer categoryId, @RequestParam("postalCode") String postalCode) {
+  @GetMapping("/products")
+  public List<Product> keywordSearchProducts(@RequestParam("keyword") Optional<String> keyword,
+      @RequestParam("category") Optional<Integer> categoryId,
+      @RequestParam("postalCode") Optional<String> postalCode) {
     return productService.filterProducts(keyword, categoryId, postalCode);
   }
 

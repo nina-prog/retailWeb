@@ -2,6 +2,7 @@ package praktikum.AIFB.PRIS.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import praktikum.AIFB.PRIS.entity.Category;
 import praktikum.AIFB.PRIS.repositories.CategoryRepository;
 
@@ -11,6 +12,7 @@ import praktikum.AIFB.PRIS.repositories.CategoryRepository;
  * @author merti
  *
  */
+@Service
 public class CategoryService {
 
   @Autowired
@@ -27,7 +29,7 @@ public class CategoryService {
 
   /**
    * Delete category.
-   * 
+   *
    * @param categoryId id of category
    */
   public void deleteCategory(Integer categoryId) {
@@ -37,7 +39,7 @@ public class CategoryService {
 
   /**
    * Add new category.
-   * 
+   *
    * @param newCategory info about new category
    */
   public void addCategory(Category newCategory) {

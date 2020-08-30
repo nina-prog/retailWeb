@@ -1,14 +1,13 @@
 package praktikum.AIFB.PRIS.repositories;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
+import java.util.Optional;
 import javax.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import praktikum.AIFB.PRIS.entity.Address;
+import lombok.extern.slf4j.Slf4j;
 import praktikum.AIFB.PRIS.entity.Product;
-import praktikum.AIFB.PRIS.entity.RetailStore;
 
 /**
  * This class defines JPA-Specifications which help filtering/searching products
@@ -17,6 +16,7 @@ import praktikum.AIFB.PRIS.entity.RetailStore;
  * @author merti
  *
  */
+@Slf4j
 public class ProductSpecs {
 
   /**
@@ -29,32 +29,35 @@ public class ProductSpecs {
    *                   with given postal code
    * @return List of products matching given criteria
    */
-  public static Specification<Product> getProductsByFilter(String keyword, Integer categoryId,
-      String postalCode) {
-    return (root, cq, cb) -> {
+  public static Specification<Product> getProductsByFilter(Optional<String> keyword,
+      Optional<Integer> categoryId, Optional<String> postalCode) {
+    return (product, cq, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
       // Note: Using hibernate Metamodel, like Product_.retailStore instead of
-      // "retaiLstore" does not work, eclipse doesn`t recognize it join tables
-      // product, retailStore, address and category for correct filtering
-      Join<Product, RetailStore> storeJoin = root.join("retailStore", JoinType.INNER);
-      Join<RetailStore, Address> addressJoin = storeJoin.join("address", JoinType.INNER);
+      // "retaiLstore" does not work, eclipse doesn`t recognize it
 
       // create comparsion elements using CriteriaBuilder
-      if (keyword != null) {
-        Predicate keywordSearch = cb.like(cb.lower(root.get("name")),
-            "%" + keyword.toLowerCase() + "%");
+      if (keyword.isPresent()) {
+        Predicate keywordSearch = cb.like(cb.lower(product.get("name")),
+            "%" + keyword.orElse(null).toLowerCase() + "%");
         predicates.add(keywordSearch);
+        log.debug("keywordSearch: " + keyword.toString());
       }
-      if (categoryId != null) {
-        Predicate categorySearch = cb.equal(root.get("category").get("categoryId"), categoryId);
+      if (categoryId.isPresent()) {
+        Predicate categorySearch = cb.equal(product.get("category").get("categoryId"),
+            categoryId.orElse(null));
         predicates.add(categorySearch);
+        log.debug("categorySearch: " + categoryId.toString());
       }
-      if (postalCode != null) {
-        Predicate postalCodeSearch = cb.equal(addressJoin.get("postalCode"), postalCode);
+      if (postalCode.isPresent()) {
+        Predicate postalCodeSearch = cb.equal(
+            product.get("retailStore").get("address").get("postalCode"), postalCode.orElse(null));
         predicates.add(postalCodeSearch);
+        log.debug("postalCodeSearch: " + postalCode.toString());
       }
       // add selected predicates to where clause and build query
-      return cb.and(predicates.toArray(new Predicate[0]));
+      log.info("Predicates of SQL Query: " + Arrays.deepToString(predicates.toArray()));
+      return cq.where(predicates.toArray(new Predicate[0])).getRestriction();
     };
   }
 

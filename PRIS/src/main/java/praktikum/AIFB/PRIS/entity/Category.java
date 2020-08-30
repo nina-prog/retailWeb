@@ -44,7 +44,7 @@ public class Category {
   /**
    * Constructor.
    *
-   * @param name name of the category
+   * @param catName name of the category
    */
   public Category(String catName) {
     super();

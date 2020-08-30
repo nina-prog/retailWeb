@@ -14,14 +14,6 @@ import praktikum.AIFB.PRIS.entity.Category;
  */
 @Repository
 @Transactional
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-
-  /**
-   * Find category of database by name.
-   *
-   * @param cname category name
-   * @return category object
-   */
-  Category findByName(String cname);
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 }

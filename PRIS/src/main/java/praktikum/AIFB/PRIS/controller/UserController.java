@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import praktikum.AIFB.PRIS.dto.Account;
+import praktikum.AIFB.PRIS.entity.Category;
 import praktikum.AIFB.PRIS.entity.User;
+import praktikum.AIFB.PRIS.service.CategoryService;
 import praktikum.AIFB.PRIS.service.JwtUserDetailsService;
 
 /**
- * This class handles the https requests regarding the user data.
+ * This class handles the https requests regarding user and category data only
+ * admin has access to.
  *
  * @author merti
  *
@@ -32,6 +35,9 @@ public class UserController {
   @Autowired
   private JwtUserDetailsService userService;
 
+  @Autowired
+  private CategoryService categoryService;
+
   // Aggregated root
 
   /**
@@ -42,6 +48,16 @@ public class UserController {
   @GetMapping("/user")
   public List<User> viewAllUser() {
     return userService.findAllUser();
+  }
+
+  /**
+   * View all categories.
+   *
+   * @return list of categories
+   */
+  @GetMapping("/categories")
+  public List<Category> viewAllCat() {
+    return categoryService.findAllCategories();
   }
 
   // Single Item
@@ -74,6 +90,30 @@ public class UserController {
   public ResponseEntity<Void> deleteUser(@PathVariable("user_id") Long userId) {
     userService.deleteUser(userId);
     return ResponseEntity.notFound().build();
+  }
+
+  /**
+   * Delete category.
+   *
+   * @param categoryId id of category
+   * @return http status not found
+   */
+  @DeleteMapping("/category/delete/{category_id}")
+  public ResponseEntity<Void> deleteCat(@PathVariable("category_id") Integer categoryId) {
+    categoryService.deleteCategory(categoryId);
+    return ResponseEntity.notFound().build();
+  }
+
+  /**
+   * Add new category.
+   *
+   * @param newCategory info of new category
+   * @return http status created
+   */
+  @PostMapping("/category/add")
+  public ResponseEntity<Void> addNewCat(@RequestBody Category newCategory) {
+    categoryService.addCategory(newCategory);
+    return ResponseEntity.ok().build();
   }
 
 }

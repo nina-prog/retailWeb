@@ -56,19 +56,19 @@ public class ProductController {
   }
 
   /**
-   * Filter products by different parameters. URL looks something like this, where
-   * it is optional which parameters are
-   * given:"/products?keyword={keyword}&category_name={category_name}&postal_code={postal_code}"
+   * Filter products by different parameters, if all parameters are null all
+   * products get returned. URL looks something like
+   * this:"/products?keyword={keyword}&category={catId}&postal_code=null"
    *
    * @param keyword    text entered in searchbar
-   * @param cname      name of selected category
+   * @param categoryId id of selected category
    * @param postalCode selected postal code
    * @return list of products which match selected filters
    */
-  @GetMapping(value = "/products/filter", params = { "keyword", "category_name", "postal_code" })
+  @GetMapping("/products/filter")
   public List<Product> keywordSearchProducts(@RequestParam("keyword") String keyword,
-      @RequestParam("category_name") String cname, @RequestParam("postal_code") String postalCode) {
-    return productService.filterProducts(keyword, cname, postalCode);
+      @RequestParam("category") Integer categoryId, @RequestParam("postalCode") String postalCode) {
+    return productService.filterProducts(keyword, categoryId, postalCode);
   }
 
   // Single item

@@ -24,8 +24,7 @@ public class ProductSpecs {
    *
    * @param keyword    only show products of which their name is something like
    *                   keyword
-   * @param categoryId only show products of a specific category with given
-   *                   category id
+   * @param categoryId only show products of a specific category
    * @param postalCode only show products available at stores located at addresses
    *                   with given postal code
    * @return List of products matching given criteria
@@ -34,13 +33,11 @@ public class ProductSpecs {
       String postalCode) {
     return (root, cq, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
-
       // Note: Using hibernate Metamodel, like Product_.retailStore instead of
-      // "retaiLstore" does not work, eclipse doesn`t recognize it
-
-      // join tables product, retailStore and address for correct filtering
-      Join<Product, RetailStore> store = root.join("retailStore", JoinType.LEFT);
-      Join<RetailStore, Address> address = store.join("address", JoinType.LEFT);
+      // "retaiLstore" does not work, eclipse doesn`t recognize it join tables
+      // product, retailStore, address and category for correct filtering
+      Join<Product, RetailStore> storeJoin = root.join("retailStore", JoinType.INNER);
+      Join<RetailStore, Address> addressJoin = storeJoin.join("address", JoinType.INNER);
 
       // create comparsion elements using CriteriaBuilder
       if (keyword != null) {
@@ -49,16 +46,15 @@ public class ProductSpecs {
         predicates.add(keywordSearch);
       }
       if (categoryId != null) {
-        Predicate categorySearch = cb.equal(root.get("categoryId"), categoryId);
+        Predicate categorySearch = cb.equal(root.get("category").get("categoryId"), categoryId);
         predicates.add(categorySearch);
       }
       if (postalCode != null) {
-        Predicate postalCodeSearch = cb.equal(address.get("postalCode"), postalCode);
+        Predicate postalCodeSearch = cb.equal(addressJoin.get("postalCode"), postalCode);
         predicates.add(postalCodeSearch);
       }
       // add selected predicates to where clause and build query
-      return cq.where(predicates.toArray(new Predicate[0])).orderBy(cb.desc(root.get("name")))
-          .getRestriction();
+      return cb.and(predicates.toArray(new Predicate[0]));
     };
   }
 

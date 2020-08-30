@@ -3,7 +3,6 @@ package praktikum.AIFB.PRIS.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import praktikum.AIFB.PRIS.entity.Category;
 import praktikum.AIFB.PRIS.entity.Product;
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.exception.ProductNotFoundException;
@@ -110,16 +109,12 @@ public class ProductService {
    *
    * @param keyword    only show products of which their name is something like
    *                   keyword
-   * @param cname      category name - only show products of a specific category
+   * @param categoryId category name - only show products of a specific category
    * @param postalCode only show products available at stores located at addresses
    *                   with given postal code
    * @return list of products which match given criteria
    */
-  public List<Product> filterProducts(String keyword, String cname, String postalCode) {
-    // find matching categoryId to given category name from frontend in order to
-    // filter products also by their category_id
-    Category category = categoryrepo.findByName(cname);
-    Integer categoryId = category.getCategoryId();
+  public List<Product> filterProducts(String keyword, Integer categoryId, String postalCode) {
     // run dynamic query, which is build (by Specifications) in order to combine
     // different filters
     return productrepo.findAll(ProductSpecs.getProductsByFilter(keyword, categoryId, postalCode));

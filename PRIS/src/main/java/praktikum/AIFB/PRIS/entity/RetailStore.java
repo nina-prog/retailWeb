@@ -39,7 +39,8 @@ public class RetailStore {
   @Column(name = "store_id")
   private Long storeId;
 
-  private String name;
+  @Column(name = "name")
+  private String storeName;
 
   // defines foreign key column address_id and indicates the owner of the OneToOne
   // relationship
@@ -87,7 +88,7 @@ public class RetailStore {
   public RetailStore(User user, String name, String phoneNumber, String email) {
     super();
     this.user = user;
-    this.name = name;
+    this.storeName = name;
     this.phoneNumber = phoneNumber;
     this.email = email;
   }

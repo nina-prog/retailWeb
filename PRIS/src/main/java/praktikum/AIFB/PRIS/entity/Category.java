@@ -27,7 +27,8 @@ public class Category {
   @Column(name = "category_id")
   private Integer categoryId;
 
-  private String name;
+  @Column(name = "name")
+  private String catName;
 
   // non-Owning side of the ManyToOne relationship
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
@@ -45,9 +46,9 @@ public class Category {
    *
    * @param name name of the category
    */
-  public Category(String name) {
+  public Category(String catName) {
     super();
-    this.name = name;
+    this.catName = catName;
   }
 
   @JsonManagedReference

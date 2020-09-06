@@ -69,7 +69,7 @@ public class ProductController {
    * @param productId id of the product
    * @return product
    */
-  @GetMapping("/product/{product_id}")
+  @GetMapping("/products/{product_id}")
   public Product viewOneProduct(@PathVariable("product_id") Long productId) {
     return productService.findProduct(productId);
   }
@@ -80,7 +80,7 @@ public class ProductController {
    * @param productId id of the product
    * @return http response not found
    */
-  @DeleteMapping("store/{username}/product/delete/{product_id}")
+  @DeleteMapping("store/{username}/products/{product_id}")
   public ResponseEntity<Void> deleteProduct(@PathVariable("product_id") Long productId) {
     productService.deleteProduct(productId);
     return ResponseEntity.notFound().build();
@@ -93,7 +93,7 @@ public class ProductController {
    * @param productId  id of product being updated
    * @return http response ok an also updated product
    */
-  @PutMapping("store/{username}/product/update/{product_id}")
+  @PutMapping("store/{username}/products/{product_id}")
   public ResponseEntity<Product> updateProduct(@RequestBody Product newProduct,
       @PathVariable("product_id") Long productId) {
     Product productUpdated = productService.updateProduct(newProduct, productId);
@@ -106,12 +106,12 @@ public class ProductController {
    * @param newProduct new product which should be added to the database
    * @return http response created
    */
-  @PostMapping("store/{username}/product/create")
+  @PostMapping("store/{username}/products")
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<Void> addProduct(@RequestBody Product newProduct,
       @PathVariable("username") String username) {
     Product product = productService.addProduct(newProduct, username);
-    // Location
+    // Location (self reference)
     // Get current ressource URL and change path
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/product/{product_id}")
         .buildAndExpand(product.getProductId()).toUri();

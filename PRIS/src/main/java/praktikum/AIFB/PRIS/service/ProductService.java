@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import praktikum.AIFB.PRIS.entity.Product;
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.exception.ProductNotFoundException;
-import praktikum.AIFB.PRIS.repositories.CategoryRepository;
 import praktikum.AIFB.PRIS.repositories.ProductRepository;
 import praktikum.AIFB.PRIS.repositories.ProductSpecs;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
@@ -23,9 +22,6 @@ public class ProductService {
 
   @Autowired
   private ProductRepository productrepo;
-
-  @Autowired
-  private CategoryRepository categoryrepo;
 
   @Autowired
   private RetailStoreRepository storerepo;

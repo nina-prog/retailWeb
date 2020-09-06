@@ -44,7 +44,7 @@ public class StoreController {
    * @param retailStoreId id of retail store which info is being updated
    * @return http response ok an also updated store info
    */
-  @PutMapping("store/{username}/storeInfo/update/{retailStore_id}")
+  @PutMapping("store/{username}/storeInfo/{retailStore_id}")
   public ResponseEntity<RetailStore> updateInfo(@RequestBody RetailStore newStore,
       @PathVariable("retailStore_id") Long retailStoreId) {
     RetailStore storeUpdated = retailStoreService.replaceInfo(newStore, retailStoreId);

@@ -69,7 +69,7 @@ public class UserController {
    * @param newAccount info of new user
    * @return http status created
    */
-  @PostMapping("/user/add")
+  @PostMapping("/user")
   public ResponseEntity<Void> addNewUser(@RequestBody Account newAccount) {
     Account account = userService.addUser(newAccount);
     // Location
@@ -86,7 +86,7 @@ public class UserController {
    * @param userId id of user
    * @return http status not found
    */
-  @DeleteMapping("/user/delete/{user_id}")
+  @DeleteMapping("/user/{user_id}")
   public ResponseEntity<Void> deleteUser(@PathVariable("user_id") Long userId) {
     userService.deleteUser(userId);
     return ResponseEntity.notFound().build();
@@ -98,7 +98,7 @@ public class UserController {
    * @param categoryId id of category
    * @return http status not found
    */
-  @DeleteMapping("/category/delete/{category_id}")
+  @DeleteMapping("/categories/{category_id}")
   public ResponseEntity<Void> deleteCat(@PathVariable("category_id") Integer categoryId) {
     categoryService.deleteCategory(categoryId);
     return ResponseEntity.notFound().build();
@@ -110,7 +110,7 @@ public class UserController {
    * @param newCategory info of new category
    * @return http status created
    */
-  @PostMapping("/category/add")
+  @PostMapping("/categories")
   public ResponseEntity<Void> addNewCat(@RequestBody Category newCategory) {
     categoryService.addCategory(newCategory);
     return ResponseEntity.ok().build();

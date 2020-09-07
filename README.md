@@ -39,8 +39,10 @@ Column names are given in the first line of the csv files, make sure these are c
  a) Via Command Line: $PathToWhereJarFileIsLocated `java -jar pris.jar` oderso  
  b) Via IDE: Open/Pull Backend, run as Spring Boot Application  
  2. **Run Frontend** jar file located at ...:  
- a) Via Command Line:$PathToWhereJarFileIsLocated `npm start` oderso  
+ a) Via Command Line:$PathToWhereJarFileIsLocated `npm install` and then `npm start` oderso  
  b) Via IDE: Open/Pull Frontend, run 
+ 
+ **Note:** If the frontend does not appear in the browser, enter: http://localhost:4200/ in your browser
 
 ## SmartyPants
 SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:

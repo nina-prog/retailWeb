@@ -37,28 +37,20 @@ public class ProductController {
   // Aggregate root.
 
   /**
-   * View all products of a retail store.
-   *
-   * @return list of products
-   */
-  @GetMapping("/products/{retailStore_id}")
-  public List<Product> viewSomeProducts(@PathVariable("retailStore_id") Long retailStoreId) {
-    return productService.findStoreProducts(retailStoreId);
-  }
-
-  /**
    * View all products, or filtered products if parameters are given.
    *
-   * @param keyword    text entered in searchbar
-   * @param categoryId id of selected category
-   * @param postalCode selected postal code
+   * @param keyword       text entered in searchbar
+   * @param categoryId    id of selected category
+   * @param postalCode    selected postal code
+   * @param retailStoreId id of selected store
    * @return list of products which match selected filters
    */
   @GetMapping("/products")
   public List<Product> keywordSearchProducts(@RequestParam("keyword") Optional<String> keyword,
       @RequestParam("category") Optional<Integer> categoryId,
-      @RequestParam("postalCode") Optional<String> postalCode) {
-    return productService.filterProducts(keyword, categoryId, postalCode);
+      @RequestParam("postalCode") Optional<String> postalCode,
+      @RequestParam("retailStore_id") Optional<Long> retailStoreId) {
+    return productService.filterProducts(keyword, categoryId, postalCode, retailStoreId);
   }
 
   // Single item

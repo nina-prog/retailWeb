@@ -112,10 +112,11 @@ public class ProductService {
    * @return list of products which match given criteria
    */
   public List<Product> filterProducts(Optional<String> keyword, Optional<Integer> categoryId,
-      Optional<String> postalCode) {
+      Optional<String> postalCode, Optional<Long> storeId) {
     // run dynamic query, which is build (by Specifications) in order to combine
     // different filters
-    return productrepo.findAll(ProductSpecs.getProductsByFilter(keyword, categoryId, postalCode));
+    return productrepo
+        .findAll(ProductSpecs.getProductsByFilter(keyword, categoryId, postalCode, storeId));
   }
 
 }

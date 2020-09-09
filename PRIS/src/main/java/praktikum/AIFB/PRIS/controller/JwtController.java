@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import praktikum.AIFB.PRIS.config.jwt.JwtTokenUtil;
-import praktikum.AIFB.PRIS.dto.JwtTokenRequest;
-import praktikum.AIFB.PRIS.dto.JwtTokenResponse;
-import praktikum.AIFB.PRIS.dto.JwtUserDetails;
+import praktikum.AIFB.PRIS.dto.JwtTokenRequestDto;
+import praktikum.AIFB.PRIS.dto.JwtTokenResponseDto;
+import praktikum.AIFB.PRIS.dto.JwtUserDetailsDto;
 import praktikum.AIFB.PRIS.exception.AuthenticationException;
 import praktikum.AIFB.PRIS.service.JwtUserDetailsService;
 
@@ -57,7 +57,7 @@ public class JwtController {
   // path located in application.properties file at jwtget.toke.uri
   @PostMapping("${jwt.get.token.uri}")
   public ResponseEntity<?> createAuthenticationToken(
-      @RequestBody JwtTokenRequest authenticationRequest) throws AuthenticationException {
+      @RequestBody JwtTokenRequestDto authenticationRequest) throws AuthenticationException {
     // use spring security to check user details, if they are correct
     authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
     // load user details
@@ -66,7 +66,7 @@ public class JwtController {
     // create token
     final String token = jwtTokenUtil.generateToken(userDetails);
     // return token back
-    return ResponseEntity.ok(new JwtTokenResponse(token));
+    return ResponseEntity.ok(new JwtTokenResponseDto(token));
   }
 
   /**
@@ -80,11 +80,11 @@ public class JwtController {
     // check if token in request is valid and then getting user details
     final String token = request.getHeader(tokenHeader).substring(7);
     String username = jwtTokenUtil.getUsernameFromToken(token);
-    JwtUserDetails user = (JwtUserDetails) userDetailsService.loadUserByUsername(username);
+    JwtUserDetailsDto user = (JwtUserDetailsDto) userDetailsService.loadUserByUsername(username);
     // also get expiration date, if all is matching create token and return it back
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);
-      return ResponseEntity.ok(new JwtTokenResponse(refreshedToken));
+      return ResponseEntity.ok(new JwtTokenResponseDto(refreshedToken));
     } else {
       return ResponseEntity.badRequest().body(null);
     }

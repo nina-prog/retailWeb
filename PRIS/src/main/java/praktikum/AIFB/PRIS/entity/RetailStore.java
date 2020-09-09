@@ -4,7 +4,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -28,7 +28,8 @@ public class RetailStore {
 
   // defines foreign key column user_id and indicates the owner of the OneToOne
   // relationship
-  @OneToOne(fetch = FetchType.LAZY)
+  @JsonIgnore
+  @OneToOne
   @JoinColumn(name = "user_id")
   // make sure when user is converted into json no endless loop starts because
   // retailStore and user reference each other
@@ -66,8 +67,8 @@ public class RetailStore {
   private String limitations;
 
   // non-Owning side of the ManyToOne relationship
-  @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-      mappedBy = "retailStore")
+  @JsonManagedReference(value = "product-store")
+  @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL, mappedBy = "retailStore")
   private List<Product> products;
 
   /**
@@ -91,11 +92,6 @@ public class RetailStore {
     this.storeName = name;
     this.phoneNumber = phoneNumber;
     this.email = email;
-  }
-
-  @JsonManagedReference
-  public List<Product> getProducts() {
-    return products;
   }
 
 }

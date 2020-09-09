@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * This class gives controllers advice what to do if a exception occurs.
- * 
+ *
  * @author merti
  *
  */
@@ -17,7 +17,7 @@ public class ExceptionAdvice {
 
   /**
    * Handle ProductNotFoundException.
-   * 
+   *
    * @param ex exception
    * @return error message
    */
@@ -30,7 +30,7 @@ public class ExceptionAdvice {
 
   /**
    * Handle StoreNotFoundException.
-   * 
+   *
    * @param ex excepiton
    * @return error message
    */
@@ -43,7 +43,7 @@ public class ExceptionAdvice {
 
   /**
    * Handle UserNotFoundException.
-   * 
+   *
    * @param ex exception
    * @return error message
    */

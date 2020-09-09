@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import praktikum.AIFB.PRIS.dto.Account;
-import praktikum.AIFB.PRIS.dto.JwtUserDetails;
+import praktikum.AIFB.PRIS.dto.AccountDto;
+import praktikum.AIFB.PRIS.dto.JwtUserDetailsDto;
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.entity.Role;
 import praktikum.AIFB.PRIS.entity.User;
@@ -48,7 +48,7 @@ public class JwtUserDetailsService implements UserDetailsService {
    * @param account information about new user
    * @return new user
    */
-  public Account addUser(Account account) {
+  public AccountDto addUser(AccountDto account) {
     String username = account.getUser().getUsername();
     // encode password (hashing)
     String code = bcryptEncoder.encode(account.getUser().getPassword()).toString();
@@ -92,7 +92,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     if (user == null) {
       throw new UsernameNotFoundException("User not found with username: " + username);
     }
-    return new JwtUserDetails(user.getUserId(), user.getUsername(), user.getPassword(),
+    return new JwtUserDetailsDto(user.getUserId(), user.getUsername(), user.getPassword(),
         user.getRole().toString());
   }
 

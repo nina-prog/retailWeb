@@ -5,7 +5,6 @@ import java.math.RoundingMode;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,12 +33,12 @@ public class Product {
 
   // defines foreign key column category_id and indicates the owner of the
   // ManyToOne relationship
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "category_id")
   private Category category;
 
   @Lob
-  @Basic(fetch = FetchType.LAZY)
+  @Basic
   private byte[] picture;
 
   private String name;
@@ -48,7 +47,8 @@ public class Product {
 
   // defines foreign key column store_id and indicates the owner of the ManyToOne
   // relationship
-  @ManyToOne(fetch = FetchType.LAZY)
+  @JsonBackReference(value = "product-store")
+  @ManyToOne
   @JoinColumn(name = "store_id")
   private RetailStore retailStore;
 
@@ -89,16 +89,6 @@ public class Product {
   @PreUpdate
   public void pricePrecisionConvertion() {
     this.price.setScale(2, RoundingMode.HALF_UP);
-  }
-
-  @JsonBackReference
-  public Category getCategory() {
-    return category;
-  }
-
-  @JsonBackReference
-  public RetailStore getRetailStore() {
-    return retailStore;
   }
 
 }

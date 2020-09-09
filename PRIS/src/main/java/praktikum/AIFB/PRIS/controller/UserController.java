@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import praktikum.AIFB.PRIS.dto.Account;
+import praktikum.AIFB.PRIS.dto.AccountDto;
 import praktikum.AIFB.PRIS.entity.Category;
 import praktikum.AIFB.PRIS.entity.User;
 import praktikum.AIFB.PRIS.service.CategoryService;
@@ -70,8 +70,8 @@ public class UserController {
    * @return http status created
    */
   @PostMapping("/user")
-  public ResponseEntity<Void> addNewUser(@RequestBody Account newAccount) {
-    Account account = userService.addUser(newAccount);
+  public ResponseEntity<Void> addNewUser(@RequestBody AccountDto newAccount) {
+    AccountDto account = userService.addUser(newAccount);
     // Location
     // Get current resource URL and change path
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

@@ -47,10 +47,10 @@ public class ProductController {
    */
   @GetMapping("/products")
   public List<Product> keywordSearchProducts(@RequestParam("keyword") Optional<String> keyword,
-      @RequestParam("category") Optional<Integer> categoryId,
+      @RequestParam("category") Optional<String> category,
       @RequestParam("postalCode") Optional<String> postalCode,
       @RequestParam("retailStore_id") Optional<Long> retailStoreId) {
-    return productService.filterProducts(keyword, categoryId, postalCode, retailStoreId);
+    return productService.filterProducts(keyword, category, postalCode, retailStoreId);
   }
 
   // Single item

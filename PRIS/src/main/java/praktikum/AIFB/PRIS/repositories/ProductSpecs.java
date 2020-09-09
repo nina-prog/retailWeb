@@ -30,7 +30,7 @@ public class ProductSpecs {
    * @return List of products matching given criteria
    */
   public static Specification<Product> getProductsByFilter(Optional<String> keyword,
-      Optional<Integer> categoryId, Optional<String> postalCode, Optional<Long> storeId) {
+      Optional<String> category, Optional<String> postalCode, Optional<Long> storeId) {
     return (product, cq, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
       // Note: Using hibernate Metamodel, like Product_.retailStore instead of
@@ -43,11 +43,11 @@ public class ProductSpecs {
         predicates.add(keywordSearch);
         log.debug("keywordSearch: " + keyword.toString());
       }
-      if (categoryId.isPresent()) {
-        Predicate categorySearch = cb.equal(product.get("category").get("categoryId"),
-            categoryId.orElse(null));
+      if (category.isPresent()) {
+        Predicate categorySearch = cb.equal(product.get("category").get("catName"),
+            category.orElse(null));
         predicates.add(categorySearch);
-        log.debug("categorySearch: " + categoryId.toString());
+        log.debug("categorySearch: " + category);
       }
       if (postalCode.isPresent()) {
         Predicate postalCodeSearch = cb.equal(

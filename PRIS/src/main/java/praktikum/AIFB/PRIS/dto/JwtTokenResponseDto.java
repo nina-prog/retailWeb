@@ -9,12 +9,12 @@ import java.io.Serializable;
  * @author merti
  *
  */
-public class JwtTokenResponse implements Serializable {
+public class JwtTokenResponseDto implements Serializable {
   private static final long serialVersionUID = 8317676219297719109L;
 
   private final String token;
 
-  public JwtTokenResponse(String token) {
+  public JwtTokenResponseDto(String token) {
     this.token = token;
   }
 

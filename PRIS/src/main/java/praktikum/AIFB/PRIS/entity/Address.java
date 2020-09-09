@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -37,6 +38,7 @@ public class Address {
   private String country;
 
   // non-Owning side of the OneToOne relationship
+  @JsonIgnore
   @OneToOne(mappedBy = "address")
   private RetailStore retailStore;
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import praktikum.AIFB.PRIS.entity.Product;
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.exception.ProductNotFoundException;
+import praktikum.AIFB.PRIS.exception.StoreNotFoundException;
 import praktikum.AIFB.PRIS.repositories.ProductRepository;
 import praktikum.AIFB.PRIS.repositories.ProductSpecs;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
@@ -63,12 +64,12 @@ public class ProductService {
   /**
    * Add new product to database.
    *
-   * @param newProduct which has to be stored
-   * @param username   of store adding new product
+   * @param newProduct product which has to be stored
+   * @param username   username of store adding new product
    * @return added product
    */
   public Product addProduct(Product newProduct, String username) {
-    RetailStore store = storerepo.findbyUsername(username);
+    RetailStore store = storerepo.findByUser_username(username);
     newProduct.setRetailStore(store);
     return productrepo.save(newProduct);
   }
@@ -81,14 +82,14 @@ public class ProductService {
    * @return updated product
    */
   public Product updateProduct(Product newProduct, Long id) {
-    // make sure product already exists in database
+    // make sure store already exists in database
     if (productrepo.existsById(id)) {
       // make sure to set correct id
       newProduct.setProductId(id);
-      // save updated store info in database
+      // save updated info in database
       return productrepo.save(newProduct);
     } else {
-      throw new ProductNotFoundException(id);
+      throw new StoreNotFoundException(id);
     }
   }
 
@@ -111,12 +112,13 @@ public class ProductService {
    *                   with given postal code
    * @return list of products which match given criteria
    */
-  public List<Product> filterProducts(Optional<String> keyword, Optional<Integer> categoryId,
+  public List<Product> filterProducts(Optional<String> keyword,
+      Optional<String> category,
       Optional<String> postalCode, Optional<Long> storeId) {
     // run dynamic query, which is build (by Specifications) in order to combine
     // different filters
     return productrepo
-        .findAll(ProductSpecs.getProductsByFilter(keyword, categoryId, postalCode, storeId));
+        .findAll(ProductSpecs.getProductsByFilter(keyword, category, postalCode, storeId));
   }
 
 }

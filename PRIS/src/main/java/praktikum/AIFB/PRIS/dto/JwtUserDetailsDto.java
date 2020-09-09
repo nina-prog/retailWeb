@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author merti
  *
  */
-public class JwtUserDetails implements UserDetails {
+public class JwtUserDetailsDto implements UserDetails {
 
   private static final long serialVersionUID = 5155720064139820502L;
 
@@ -32,7 +32,7 @@ public class JwtUserDetails implements UserDetails {
    * @param password password of user
    * @param role     role user has
    */
-  public JwtUserDetails(Long id, String username, String password, String role) {
+  public JwtUserDetailsDto(Long id, String username, String password, String role) {
     this.id = id;
     this.username = username;
     this.password = password;

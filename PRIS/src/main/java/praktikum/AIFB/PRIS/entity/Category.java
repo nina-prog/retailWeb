@@ -4,12 +4,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -31,7 +30,8 @@ public class Category {
   private String catName;
 
   // non-Owning side of the ManyToOne relationship
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
   private List<Product> products;
 
   /**
@@ -49,11 +49,6 @@ public class Category {
   public Category(String catName) {
     super();
     this.catName = catName;
-  }
-
-  @JsonManagedReference
-  public List<Product> getProducts() {
-    return products;
   }
 
 }

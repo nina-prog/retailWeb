@@ -1,6 +1,5 @@
 import React, {Component } from 'react'
-import { Container, Row, Col } from 'reactstrap';
-import HelloWordService from '../../API/todo/HelloWordService.js'
+import StoreService from '../../API/todo/StoreService.js'
 
 class StoreSettingComponent extends Component {
      constructor(props) {
@@ -15,7 +14,7 @@ class StoreSettingComponent extends Component {
         this.handleSave = this.handleSave.bind(this);
     } 
     componentDidMount(){
-        HelloWordService.getStoreInformation(this.props.match.params.id)
+        StoreService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
@@ -33,9 +32,9 @@ class StoreSettingComponent extends Component {
         })
     }
     handleSave(){
-        HelloWordService.updateStoreInformation(this.state.data, this.props.match.params.id)
-                .then(response => alert("StoreInformation updated!"))
-                .catch(response => alert("API PUT Error"))
+        StoreService.updateStoreInformation(this.state.data, this.props.match.params.id)
+            .then(response => alert("StoreInformation updated!"))
+            .catch(response => alert("API PUT Error"))
     }
     render () {
         if (!this.state.isDataFetched) return null;

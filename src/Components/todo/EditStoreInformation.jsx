@@ -1,14 +1,12 @@
 import React, {Component } from 'react'
-//import Tomatos from '../../img/Tomatos.jpeg'
-import HelloWordService from '../../API/todo/HelloWordService';
-//hier muss noch TodoDataService oder so importiert werden, damit wir 
+import StoreService from '../../API/todo/StoreService';
 
 // more Information: https://getbootstrap.com/docs/4.0/components/input-group/
 
 class EditStoreInformation extends Component {
     constructor(props) {
         super (props)
-        this.state = JSON.parse(HelloWordService.retrieveStoreInformation(1));
+        this.state = JSON.parse(StoreService.retrieveStoreInformation(1));
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
@@ -21,8 +19,8 @@ class EditStoreInformation extends Component {
     }
   
     handleSave(event) {
-           HelloWordService.updateStoreInformation(JSON.stringify(this.state), this.state.product_id)
-            .then(response => alert("Successfully saved!!!"))
+            StoreService.updateStoreInformation(JSON.stringify(this.state), this.state.product_id)
+                .then(response => alert("Successfully saved!!!"))
          
         }
         

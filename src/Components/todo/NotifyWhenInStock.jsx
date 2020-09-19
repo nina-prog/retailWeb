@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import emailjs from 'emailjs-com';
-import { render } from '@testing-library/react';
 
 class NotifyWhenInStock extends Component {
 

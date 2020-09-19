@@ -1,7 +1,7 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import  WishListService from './WishListService';
-import HelloWorldservice from '../../API/todo/HelloWordService.js'
+import  WishListService from '../../API/todo/WishListService';
+import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
 class WishListComponent extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class WishListComponent extends Component {
             this.setState({arrayIsEmpty: false})
             this.setState({ data: new Array(arrayWithProducts.length-1)}, function () {
                 for (let i=1; i < arrayWithProducts.length; i++){
-                    HelloWorldservice.getProductInformation(arrayWithProducts[i])
+                    ProductService.getProductInformation(arrayWithProducts[i])
                         .then((response)=> {
                             console.log(response.data);
                             let data = [...this.state.data];

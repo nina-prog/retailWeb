@@ -1,13 +1,12 @@
 import React, {Component } from 'react'
-import AuthentificationService from './AuthenticationService.js'
-import ViewBlockComponent from './ViewBlocksComponent.jsx'
+import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
 
 class LoginComponent extends Component {
     constructor(props) {
         super (props)
         this.state = {
-            username: 'in28minutes',
+            username: '',
             password: '',
             hasLoginFailed: false,
             showSuccessMessage: false,
@@ -23,6 +22,7 @@ class LoginComponent extends Component {
         })
     }
     loginClicked() {
+        /* 
         //in28minutes,dummy
         if(this.state.username==='in28minutes' && this.state.password==='dummy'){
             AuthentificationService.registerSuccessfulLogin(this.state.username, this.state.password)
@@ -32,9 +32,21 @@ class LoginComponent extends Component {
         } else {
             this.setState({showSuccessMessage:false})
             this.setState({hasLoginFailed:true})
-        }
+        } */
+        AuthentificationService
+        .executeJwtAuthenticationService(this.state.username, this.state.password)
+        .then((response) => {
+            console.log(response)
+            AuthentificationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+            this.props.history.push(`/welcome/${this.state.username}`)
+        }).catch( () => {
+            alert ("Login Failed")
+        })
         
     }
+
+
+
     render(){
         return(
             <div>

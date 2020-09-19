@@ -1,11 +1,11 @@
 import Axios from "axios";
 
-class HelloWorldService {
+class ProductService {
     getProducts(){
         return Axios.get('https://localhost:8443/products')
     }
     getProductInformation(product_id){
-        return Axios.get(`https://localhost:8443/product/${product_id}`)
+        return Axios.get(`https://localhost:8443/products/${product_id}`)
     }
     getStoreProducts(store_id){
         return Axios.get(`https://localhost:8443/products/${store_id}`)
@@ -34,24 +34,6 @@ class HelloWorldService {
     }
 
 
-    getStoreInformation(store_id){
-        return Axios.get(`https://localhost:8443/storeInfo/${store_id}`)
-    }
-
-    updateStoreInformation(data, store_id) {
-        console.log('execute PUT' + data)
-        return Axios.put(`https://localhost:8433/storeInfo/update/${store_id}`, data)
-    }
-    retrieveStoreInformation(store_id) {
-        let jsonData = {
-            store_id: '1',
-            name: 'ALDI',
-            address: 'Kreuzstraße',
-            openingHours: '10-12',
-            restrictions: "Deine Mudda"
-        }
-        return JSON.stringify(jsonData); // DELETE IF Server gives Information  return Axios.get(`https://localhost:8443/storeInformation/${store_id}`)
-    }
 }
 
-export default new HelloWorldService();
+export default new ProductService();

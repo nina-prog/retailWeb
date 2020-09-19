@@ -1,9 +1,8 @@
 import React, {Component } from 'react'
-import { Container, Row, Col } from 'reactstrap';
 import Tomatos from '../../img/Tomatos.jpeg'
-import WishListService from './WishListService';
+import WishListService from '../../API/todo/WishListService';
 import NotifyWhenInStock from './NotifyWhenInStock';
-import HelloWorldService from '../../API/todo/HelloWordService.js'
+import ProductService from '../../API/todo/ProductService.js'
 class ProductComponent extends Component {
 
     constructor(props) {
@@ -28,7 +27,7 @@ class ProductComponent extends Component {
     }
 
     componentDidMount(){
-        HelloWorldService.getProductInformation(this.props.match.params.id)
+        ProductService.getProductInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
 

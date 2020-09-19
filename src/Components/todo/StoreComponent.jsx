@@ -1,7 +1,7 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import BlockComponent from './BlockComponent';
-import HelloWorldService from '../../API/todo/HelloWordService.js'
+import StoreService from '../../API/todo/StoreService.js'
 
 class StoreComponent extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class StoreComponent extends Component {
        this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
     }
     componentDidMount(){
-        HelloWorldService.getStoreInformation(this.props.match.params.id)
+        StoreService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }

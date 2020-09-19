@@ -1,11 +1,12 @@
 import React, {Component } from 'react'
 import {withRouter} from 'react-router';
 import{Link} from 'react-router-dom'
-import AuthentificationService from './AuthenticationService.js'
+import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
 class HeaderComponent extends Component {
     render(){
         const isUserLoggedIn = AuthentificationService.isUserLoggedIn();
+        const username = AuthentificationService.getLoggedInUsername();
         //console.log(isUserLoggedIn);
         return (
             <header>
@@ -19,7 +20,7 @@ class HeaderComponent extends Component {
                                 <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>}
                         
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/1">StoreNameMussHierStehen</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/1">{username}</Link></li>}
                         <li><Link className="nav-link" to="/product/Tomatos">Tomatos</Link></li>
                         {isUserLoggedIn && <li><Link className="nav-link" to="/product/edit/Tomatos">EditTomatos</Link></li>}
                     </ul>

@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import HelloWordService from '../../API/todo/HelloWordService.js'
+import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
 import CreateNewProductComponent from './CreateNewProductComponent.jsx'
 
@@ -26,7 +26,7 @@ class StoreEditComponent extends Component {
     } 
     componentDidMount(){
         /* HelloWordService.getStoreProducts(this.props.match.params.id) */
-        HelloWordService.getProducts()
+        ProductService.getProducts()
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
 
@@ -40,7 +40,7 @@ class StoreEditComponent extends Component {
         })
     }
     deleteProductClicked (){
-        HelloWordService.deleteProduct(14)
+        ProductService.deleteProduct(14)
             .then(response => alert("Product 14 is deleted"))
             .catch(response => alert("Error while deleting, please try again"))
     }

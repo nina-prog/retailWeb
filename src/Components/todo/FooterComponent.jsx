@@ -6,12 +6,12 @@ class FooterComponent extends Component {
         return (
             <footer className="footer">
                 
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
                             <span className="text-muted">All Right has Joel</span>
                          </div>
-                        <div class="col">
+                        <div className="col">
                         <Link className="nav-link" to="/ContactAdmin">Contact Admin</Link>
                          </div>
                      </div>

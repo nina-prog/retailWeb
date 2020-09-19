@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import HelloWorldService from '../../API/todo/HelloWordService.js'
+import ProductService from '../../API/todo/ProductService.js'
 
 class CreateNewProductComponent extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class CreateNewProductComponent extends Component {
             remainingStock: 0,
             description: "Lorem ipsum dolor ",
         }
-        HelloWorldService.createProduct(newProduct)
+        ProductService.createProduct(newProduct)
             .then(response => alert("New Product created!"))
             .catch(response => alert("API POST Error"))
     }
@@ -47,7 +47,7 @@ class CreateNewProductComponent extends Component {
         )
     }
     retriveWelcomeMessage(){
-        HelloWorldService.executeHelloWorldService()
+        ProductService.getProducts()
         .then(response => this.handleSuccessfulResponse(response))
         .catch(response => alert("REST API Error"))
     }

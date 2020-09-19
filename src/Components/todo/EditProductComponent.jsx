@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
 import TomatoTestComponent from './TomatoTestComponent.jsx'
-import HelloWordService from '../../API/todo/HelloWordService.js'
+import ProductService from '../../API/todo/ProductService.js'
 
 class EditProductComponent extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class EditProductComponent extends Component {
         this.handleDelete = this.handleDelete.bind(this)
     }
     componentDidMount(){
-        HelloWordService.getProductInformation(this.props.match.params.id)
+        ProductService.getProductInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
@@ -67,7 +67,7 @@ class EditProductComponent extends Component {
             
             
             console.log(updateProduct);
-            HelloWordService.updateProductInformation(updateProduct, this.props.match.params.id)
+            ProductService.updateProductInformation(updateProduct, this.props.match.params.id)
                 .then(response => alert("Product updated!"))
                 .catch(response => alert("API PUT Error"))
         });
@@ -75,7 +75,7 @@ class EditProductComponent extends Component {
     handleDelete(){
         if (window.confirm("Do you really want to delete this Product?")) {
             console.log("You pressed OK!");
-            HelloWordService.deleteProduct(this.props.match.params.id)
+            ProductService.deleteProduct(this.props.match.params.id)
                 .then(response => {
                     alert(`Product ${this.props.match.params.id} is deleted!`)
                     this.props.history.goBack()

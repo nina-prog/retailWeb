@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import HelloWordService from '../../API/todo/HelloWordService.js'
+import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
 
 class ViewBlockComponent extends Component {
@@ -23,12 +23,11 @@ class ViewBlockComponent extends Component {
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
     } 
     componentDidMount(){
-        HelloWordService.getProducts()
+        ProductService.getProducts()
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
     handleSuccessfulResponse(res) {
-        console.log(res.data)
         this.setState({
             data: res.data,
             isDataFetched : true

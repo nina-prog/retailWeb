@@ -4,6 +4,20 @@ import{Link} from 'react-router-dom'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
 class HeaderComponent extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            searchfield: 'Search'
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+    handleChange(event) {
+        this.setState({
+            [event.target.name]
+                :event.target.value
+        })
+    }
+
     render(){
         const isUserLoggedIn = AuthentificationService.isUserLoggedIn();
         const username = AuthentificationService.getLoggedInUsername();
@@ -15,14 +29,13 @@ class HeaderComponent extends Component {
                     <ul className="navbar-nav"> 
                         <li><Link className="nav-link" to="/">Home</Link></li>
                         {!isUserLoggedIn &&
-                        <form className="form-inline">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>}
+                        /* <form className="form-inline"> */<>
+                                <input className="form-control mr-sm-2" /* type="search" */ name="searchfield" value={this.state.searchfield} /* aria-label="Search" */ onChange={this.handleChange}></input>
+                                <Link className="btn btn-outline-success my-2 my-sm-0"  to={`/search?keyword=${this.state.searchfield}`}>Search</Link>
+                                {/* <button className="btn btn-outline-success my-2 my-sm-0"  to={`/search?keyword=${this.state.searchfield}`}>Search</button> */}
+                        {/* </form> */}</>}
                         
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/store/1">{username}</Link></li>}
-                        <li><Link className="nav-link" to="/product/Tomatos">Tomatos</Link></li>
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/product/edit/Tomatos">EditTomatos</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/admin">{username}</Link></li>}
                     </ul>
                         
                     <ul className="navbar-nav navbar-collapse justify-content-end">

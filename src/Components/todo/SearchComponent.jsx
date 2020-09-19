@@ -2,9 +2,9 @@ import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
-import CreateNewProductComponent from './CreateNewProductComponent.jsx'
+import { withRouter } from "react-router";
 
-class StoreEditComponent extends Component {
+class SearchComponent extends Component {
      constructor(props) {
         super(props)
         this.state = {
@@ -24,46 +24,47 @@ class StoreEditComponent extends Component {
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
     } 
     componentDidMount(){
-        /* HelloWordService.getStoreProducts(this.props.match.params.id) */
-        /* ProductService.getProducts()
+        console.log()
+        ProductService.searchProduct(this.props.location.search)
             .then(response => this.handleSuccessfulResponse(response))
-            .catch(response => alert("REST API Error"))
- */
-        /*  */
+            .catch(response => alert("REST API Error")) 
     }
     handleSuccessfulResponse(res) {
-        console.log(res.data)
-        this.setState({
-            data: res.data,
-            isDataFetched : true
-        })
+        if (typeof res.data !== 'undefined' && res.data.length > 0) {
+            // the array is defined and has at least one element
+            this.setState({
+                data: res.data,
+                isDataFetched : true
+            })
+        } else {
+            alert("No search results");
+            this.props.history.goBack()
+        }
+        
     }
-    
     render () {
         if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {
             return (
                 <Col sm="4" className="jtColMagin" key={product.productId}>
-                    <BlockComponent  product={product} view="Edit" />
+                    <BlockComponent  product={product} view="Product" />
                 </Col>
             )
         });
         return (
             <>
+                <h2>Search</h2> 
+                <h6>Search results:</h6> 
                 <div className="jtScroll">
-                    <h1>Store Edit: List Products</h1>
-                    <CreateNewProductComponent />
-                    <h6>ViewBlockComponent</h6>   
                     <Container>
-                        <Row >
+                        <Row>
                             {productCards}
                         </Row>
                     </Container>
                 </div>        
-                
             </>
         );
     }
 }
 
-export default StoreEditComponent;
+export default SearchComponent;

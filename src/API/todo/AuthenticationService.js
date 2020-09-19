@@ -1,10 +1,11 @@
 import Axios from "axios";
 
 class AuthenticationService {
-    registerSuccessfulLogin(username,password){
+    /* registerSuccessfulLogin(username,password){
         console.log('registerSuccessfulLogin');
         sessionStorage.setItem('authenticatedUser', username);
-    }
+        this.setupAxiosInterceptors()
+    } */
     logout(){
         sessionStorage.removeItem('authenticatedUser');
     }
@@ -15,7 +16,7 @@ class AuthenticationService {
         return true
     }
     getLoggedInUsername(){
-        sessionStorage.getItem('authenticatedUser');
+        return sessionStorage.getItem('authenticatedUser');
     }
     executeJwtAuthenticationService(username, password){
         return Axios.post('https://localhost:8443/authenticate', {

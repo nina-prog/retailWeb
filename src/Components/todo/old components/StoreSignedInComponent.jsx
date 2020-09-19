@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
-import CreateNewProductComponent from './CreateNewProductComponent.jsx'
-import LinkButtonComponent from './LinkButtonComponent'
+import CreateNewProductComponent from '../CreateNewProductComponent.jsx'
+import LinkButtonComponent from '../LinkButtonComponent'
 
 class StoreSignedInComponent extends Component {
     constructor(props) {

@@ -1,5 +1,6 @@
 import React, {Component } from 'react'
 import StoreService from '../../API/todo/StoreService.js'
+import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
 class StoreSettingComponent extends Component {
      constructor(props) {
@@ -32,7 +33,7 @@ class StoreSettingComponent extends Component {
         })
     }
     handleSave(){
-        StoreService.updateStoreInformation(this.state.data, this.props.match.params.id)
+        StoreService.updateStoreInformation(AuthentificationService.getLoggedInUsername(), this.props.match.params.id, this.state.data)
             .then(response => alert("StoreInformation updated!"))
             .catch(response => alert("API PUT Error"))
     }

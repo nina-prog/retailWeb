@@ -4,36 +4,29 @@ class ProductService {
     getProducts(){
         return Axios.get('https://localhost:8443/products')
     }
-    getProductInformation(product_id){
-        return Axios.get(`https://localhost:8443/products/${product_id}`)
+    getProductInformation(productId){
+        return Axios.get(`https://localhost:8443/products/${productId}`)
     }
-    getStoreProducts(store_id){
-        return Axios.get(`https://localhost:8443/products/${store_id}`)
+    getStoreProducts(storeId){
+        return Axios.get(`https://localhost:8443/products/${storeId}`)
     }
-    createProduct(data){
-        return Axios.post('https://localhost:8443/product/create', data)
+    createProduct(username, data){
+        console.log(username)
+        return Axios.post(`https://localhost:8443/store/${username}/products`, data)
     }
-
-    updateProductInformation(data, productId){
-        let myData = {
-            picture: 123,
-            name: "Siebzig",
-            price: 1.99,
-            description: "Gurke",
-            limitations: "0.99",
-            remainingStock: 11
-        }
-        let myId = productId;
-        console.log(`execute PUT: ${myId}`)
-        console.log(myData)
-        return Axios.put(`https://localhost:8433/product/update/${myId}`, myData)
+    updateProductInformation(username, productId, data){
+        return Axios.put(`https://localhost:8443/store/${username}/products/${productId}`, data)
     }
-   
-    deleteProduct(product_id){
-        return Axios.delete(`https://localhost:8433/product/delete/${product_id}`)
+    deleteProduct(username, productId){
+        return Axios.delete(`https://localhost:8443/store/${username}/products/${productId}`)
     }
 
-
+    searchProduct(query){
+        return Axios.get(`https://localhost:8443/products${query}`)
+    }
+    /* searchProduct(queryName, queryValue){
+        return Axios.get(`https://localhost:8443/products?${queryName}=${queryValue}`)
+    } */
 }
 
 export default new ProductService();

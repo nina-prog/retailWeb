@@ -8,9 +8,7 @@ class LoginComponent extends Component {
         this.state = {
             username: '',
             password: '',
-            hasLoginFailed: false,
-            showSuccessMessage: false,
-            product: ''
+            hasLoginFailed: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
@@ -22,40 +20,23 @@ class LoginComponent extends Component {
         })
     }
     loginClicked() {
-        /* 
-        //in28minutes,dummy
-        if(this.state.username==='in28minutes' && this.state.password==='dummy'){
-            AuthentificationService.registerSuccessfulLogin(this.state.username, this.state.password)
-            this.props.history.push(`/store/${this.state.username}`)
-            this.setState({showSuccessMessage:true})
-            this.setState({hasLoginFailed:false})
-        } else {
-            this.setState({showSuccessMessage:false})
-            this.setState({hasLoginFailed:true})
-        } */
-        AuthentificationService
-        .executeJwtAuthenticationService(this.state.username, this.state.password)
-        .then((response) => {
-            console.log(response)
-            AuthentificationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
-            this.props.history.push(`/welcome/${this.state.username}`)
-        }).catch( () => {
-            alert ("Login Failed")
-        })
-        
+        AuthentificationService.executeJwtAuthenticationService(this.state.username, this.state.password)
+            .then((response) => {
+                console.log(response.data.token)
+                AuthentificationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+                this.props.history.push(`/welcome/${this.state.username}`)
+            }).catch( () => {
+                alert ("Login Failed")
+            })
     }
-
-
 
     render(){
         return(
             <div>
                 <h1>Welcome to the Retail Project</h1>
-                
                 <h1>Login</h1>
                 <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
-                    {this.state.showSuccessMessage && <div>Login succsessful</div>}
                     User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
                     Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
                     <button className="btn btn-success"onClick={this.loginClicked}> Login </button>

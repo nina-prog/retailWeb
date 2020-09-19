@@ -1,5 +1,6 @@
 import React, {Component } from 'react'
 import ProductService from '../../API/todo/ProductService.js'
+import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
 class CreateNewProductComponent extends Component {
     constructor(props) {
@@ -24,13 +25,22 @@ class CreateNewProductComponent extends Component {
     }
     createNewProduct (event) {
         let newProduct = {
+            category: {
+                categoryId: 2,
+                catName: "sweets"
+            },
+            picture: null,
             name: this.state.title,
             price: this.state.price,
-            remainingStock: 0,
-            description: "Lorem ipsum dolor ",
+            description: null,
+            limitations: null,
+            remainingStock: null
         }
-        ProductService.createProduct(newProduct)
-            .then(response => alert("New Product created!"))
+        ProductService.createProduct(AuthentificationService.getLoggedInUsername(), newProduct)
+            .then(response => {
+                alert("New Product created!")
+                window.location.reload(false);
+                })
             .catch(response => alert("API POST Error"))
     }
     

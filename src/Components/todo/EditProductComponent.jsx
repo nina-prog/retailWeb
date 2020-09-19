@@ -1,6 +1,7 @@
 import React, {Component } from 'react'
-import TomatoTestComponent from './TomatoTestComponent.jsx'
+import TomatoTestComponent from './old components/TomatoTestComponent.jsx'
 import ProductService from '../../API/todo/ProductService.js'
+import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
 class EditProductComponent extends Component {
     constructor(props) {
@@ -9,12 +10,11 @@ class EditProductComponent extends Component {
             productId: this.props.match.params.id,
             category: null,
             picture: null,
-            name: "Default",
-            price: 4.90,
-            retailStore: null,
-            description: "Hier steht die Beschreibung :-)",
-            limitations: "Feb 45",
-            remainingStock: 5,
+            name: null,
+            price: null,
+            description: null,
+            limitations: null,
+            remainingStock: null,
 
             data: null,
             isDataFetched: false
@@ -33,7 +33,7 @@ class EditProductComponent extends Component {
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({
-            productId: res.data.productId,
+            /* productId: res.data.productId, */
             category: res.data.category,
             picture: res.data.picture,
             name: res.data.name,
@@ -56,26 +56,32 @@ class EditProductComponent extends Component {
     handleSave(event) {
         this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
             let updateProduct = {
-                productId: this.props.match.params.id,
-                name: this.state.name,
-                price: this.state.price,
-                description: this.state.description,
-                limitations: this.state.limitations,
-                remainingStock: this.state.remainingStock,
+                category: {
+                    categoryId: 2,
+                    catName: "sweets"
+                  },
+                  picture: null,    // <----------- IMG
+                  name: this.state.name,
+                  price: this.state.price,
+                  retailStore: this.state.retailStore,
+                  description: this.state.description,
+                  limitations: this.state.limitations,
+                  remainingStock: this.state.remainingStock
             }
             
-            
-            
             console.log(updateProduct);
-            ProductService.updateProductInformation(updateProduct, this.props.match.params.id)
-                .then(response => alert("Product updated!"))
+            ProductService.updateProductInformation(AuthentificationService.getLoggedInUsername(), this.state.productId, updateProduct)
+                .then(response => {
+                    alert("Product updated!")
+                    this.props.history.goBack()
+                    })
                 .catch(response => alert("API PUT Error"))
         });
     }
     handleDelete(){
         if (window.confirm("Do you really want to delete this Product?")) {
             console.log("You pressed OK!");
-            ProductService.deleteProduct(this.props.match.params.id)
+            ProductService.deleteProduct(AuthentificationService.getLoggedInUsername(), this.props.match.params.id)
                 .then(response => {
                     alert(`Product ${this.props.match.params.id} is deleted!`)
                     this.props.history.goBack()
@@ -98,7 +104,10 @@ class EditProductComponent extends Component {
             
             var newImage = document.createElement('img');
             newImage.src = srcData;
-            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            this.setState({picture: srcData}, function (){
+                document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            })
+            
             //console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
           }
           fileReader.readAsDataURL(fileToLoad);

@@ -40,7 +40,7 @@ public class ProductController {
    * View all products, or filtered products if parameters are given.
    *
    * @param keyword       text entered in searchbar
-   * @param categoryId    id of selected category
+   * @param category      name of selected category
    * @param postalCode    selected postal code
    * @param retailStoreId id of selected store
    * @return list of products which match selected filters

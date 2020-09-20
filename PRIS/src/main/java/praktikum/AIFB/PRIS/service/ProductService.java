@@ -107,13 +107,12 @@ public class ProductService {
    *
    * @param keyword    only show products of which their name is something like
    *                   keyword
-   * @param categoryId category name - only show products of a specific category
+   * @param category   category name - only show products of a specific category
    * @param postalCode only show products available at stores located at addresses
    *                   with given postal code
    * @return list of products which match given criteria
    */
-  public List<Product> filterProducts(Optional<String> keyword,
-      Optional<String> category,
+  public List<Product> filterProducts(Optional<String> keyword, Optional<String> category,
       Optional<String> postalCode, Optional<Long> storeId) {
     // run dynamic query, which is build (by Specifications) in order to combine
     // different filters

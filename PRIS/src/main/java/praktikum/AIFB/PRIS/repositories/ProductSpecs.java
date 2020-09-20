@@ -24,7 +24,7 @@ public class ProductSpecs {
    *
    * @param keyword    only show products of which their name is something like
    *                   keyword
-   * @param categoryId only show products of a specific category
+   * @param category   category name - only show products of a specific category
    * @param postalCode only show products available at stores located at addresses
    *                   with given postal code
    * @return List of products matching given criteria

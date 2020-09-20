@@ -11,7 +11,7 @@ import praktikum.AIFB.PRIS.entity.Product;
 
 /**
  * This class defines JPA-Specifications which help filtering/searching products
- * trough more complex queries. It Predicates
+ * trough more complex queries. The predicates display query parameters given in URL.
  *
  * @author merti
  *

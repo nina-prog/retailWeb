@@ -6,8 +6,20 @@ class StoreSettingComponent extends Component {
      constructor(props) {
         super(props)
         this.state = {
-            
-            data: null,
+            storeName: '',
+            address: {
+                streetName:"Kreuzstraße",
+                houseNumber:"29",
+                district: "Karlsruhe",
+                postalCode:"76133",
+                country:"Germany"
+              },
+            openingHours: '',
+            customerService: '',
+            phoneNumber: '',
+            email: '',
+            importantNotifications: '',
+            limitations: '',
             isDataFetched: false
         }
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
@@ -17,12 +29,20 @@ class StoreSettingComponent extends Component {
     componentDidMount(){
         StoreService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
-            .catch(response => alert("REST API Error"))
+            .catch( () => alert("REST API Error"))
     }
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({
-            data: res.data,
+            /* data: res.data, */
+            storeName: res.data.storeName,
+            address: res.data.address,
+            openingHours: res.data.openingHours,
+            customerService: res.data.customerService,
+            phoneNumber: res.data.phoneNumber,
+            email: res.data.email,
+            importantNotifications: res.data.importantNotifications,
+            limitations: res.data.limitations,
             isDataFetched : true
         })
     }
@@ -33,9 +53,12 @@ class StoreSettingComponent extends Component {
         })
     }
     handleSave(){
-        StoreService.updateStoreInformation(AuthentificationService.getLoggedInUsername(), this.props.match.params.id, this.state.data)
-            .then(response => alert("StoreInformation updated!"))
-            .catch(response => alert("API PUT Error"))
+        let newData = this.state
+        delete newData.isDataFetched;
+        console.log(newData)
+        StoreService.updateStoreInformation(AuthentificationService.getLoggedInUsername(), this.props.match.params.id, newData)
+            .then( () => alert("StoreInformation updated!"))
+            .catch( () => alert("API PUT Error"))
     }
     render () {
         if (!this.state.isDataFetched) return null;
@@ -47,35 +70,51 @@ class StoreSettingComponent extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-sm mb-2 text-left">Store Name: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="name" value={this.state.data.name} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="storeName" value={this.state.storeName} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left">Address: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="price" value={this.state.data.address} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.streetName" value={this.state.address.streetName} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Address: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.houseNumber" value={this.state.address.houseNumber} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Address: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.district" value={this.state.address.district} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Address: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.postalCode" value={this.state.address.postalCode} onChange={this.handleChange}/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm mb-2 text-left">Address: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.country" value={this.state.address.country} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left">Opening Hours: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="remainingStock" value={this.state.data.openingHours} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="openingHours" value={this.state.openingHours} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left">Customer Service: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="limitations" value={this.state.data.customerService} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="customerService" value={this.state.customerService} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left"> Phone Number</div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.phoneNumber} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="number" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left"> Email:</div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.email} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left"> Important Notifications:</div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.importantNotifications} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="importantNotifications" value={this.state.importantNotifications} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left"> Limitations:</div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.data.limitations} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="limitations" value={this.state.limitations} onChange={this.handleChange}/></div>
                         </div>
                     </div>  
                     <div className="container">

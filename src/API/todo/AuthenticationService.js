@@ -1,5 +1,4 @@
-import Axios from "axios";
-import UserService from '../../API/todo/UserService.js'
+import Axios from "axios"
 
 class AuthenticationService {
     /* registerSuccessfulLogin(username,password){
@@ -10,6 +9,7 @@ class AuthenticationService {
     logout(){
         sessionStorage.removeItem('authenticatedUser');
         sessionStorage.removeItem('authenticatedUserRole');
+        sessionStorage.removeItem('USER_TOKEN');
     }
 
     isUserLoggedIn() {
@@ -20,7 +20,7 @@ class AuthenticationService {
     isUserAdmin() {
         let role = sessionStorage.getItem('authenticatedUserRole');
         if(role===null) return false
-        if(role=='ADMIN') return true
+        if(role==='ADMIN') return true
         return null
     }
     getLoggedInUsername(){
@@ -38,6 +38,7 @@ class AuthenticationService {
         this.setupAxiosInterceptors(this.createJWTToken(token))
     }
     createJWTToken(token) {
+        sessionStorage.setItem("USER_TOKEN", "Bearer "+ token);
         return 'Bearer ' + token
     }
     setupAxiosInterceptors(token) {

@@ -25,7 +25,7 @@ class CreateNewUserComponent extends Component {
     }
     createNewUser (event) {
         let newUser
-        if (this.props.role == 'ADMIN'){
+        if (this.props.role === 'ADMIN'){
             newUser = {
                 user: {
                     username: this.state.username,
@@ -36,7 +36,7 @@ class CreateNewUserComponent extends Component {
                     name: ""
                 }
             }
-        } else if (this.props.role == 'STORE'){
+        } else if (this.props.role === 'STORE'){
             newUser = {
                 user: {
                     username: this.state.username,
@@ -67,7 +67,7 @@ class CreateNewUserComponent extends Component {
                     <button type="button" className="btn btn-primary mr-2 mb-2" onClick={this.handleClickNewUser}>New {this.props.role} User</button>
                     {this.state.isNewProductClicked && <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>}
                     {this.state.isNewProductClicked && <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>}
-                    {this.state.isNewProductClicked && this.props.role == 'STORE' && <input type="text" name="storename" value={this.state.storename} onChange={this.handleChange}/>}
+                    {this.state.isNewProductClicked && this.props.role === 'STORE' && <input type="text" name="storename" value={this.state.storename} onChange={this.handleChange}/>}
                     {this.state.isNewProductClicked && <button type="button" className="btn btn-success ml-2 mb-2" onClick={this.createNewUser}>Create New {this.props.role} User</button>}
                 </div>
             </>

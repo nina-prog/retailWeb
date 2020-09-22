@@ -2,7 +2,6 @@ import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
-import { withRouter } from "react-router";
 
 class SearchComponent extends Component {
      constructor(props) {

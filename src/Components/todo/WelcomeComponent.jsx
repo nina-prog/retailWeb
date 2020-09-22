@@ -1,6 +1,5 @@
 import React, {Component } from 'react'
-import UserService from '../../API/todo/UserService.js'
-import ProductService from '../../API/todo/ProductService.js'
+
 class WelcomeComponent extends Component {
     constructor(props) {
         super(props)

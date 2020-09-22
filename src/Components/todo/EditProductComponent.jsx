@@ -1,6 +1,5 @@
 import React, {Component } from 'react'
 import ProductService from '../../API/todo/ProductService.js'
-import UserService from '../../API/todo/UserService.js'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -34,14 +33,14 @@ class EditProductComponent extends Component {
         ProductService.getProductInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
-        UserService.getCategories()
+        /* UserService.getCategories()
             .then(response => {
                 this.setState({
                     allCategories: response.data,
                     categoriesFetched: true
                 })
             })
-            .catch(() => alert("Couln't load Categories."))
+            .catch(() => alert("Couln't load Categories.")) */
     }
     handleSuccessfulResponse(res) {
         console.log(res.data)
@@ -65,7 +64,30 @@ class EditProductComponent extends Component {
                 :event.target.value
         })
     }
+    encodeImageFileAsURL() {        
+        var filesSelected = document.getElementById("inputFileToLoad").files;
+	    console.log(filesSelected);
+        
+        /* let exportData; */
+        if (filesSelected.length > 0) {
+          var fileToLoad = filesSelected[0];
+          var fileReader = new FileReader();
     
+          fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+            newImage.className="img-fluid";
+
+                        
+            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            /* exportData = srcData.slice(24, srcData.length)
+            console.log(exportData) */
+          }
+          fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+
     handleSave(event) {
         this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
             console.log(this.state.picture)
@@ -74,7 +96,8 @@ class EditProductComponent extends Component {
                     categoryId: 2,
                     catName: "sweets"
                   },
-                  picture: this.state.picture.slice(33, this.state.picture.length-2),    // <----------- IMG 24
+                  picture: this.state.picture.slice(33, this.state.picture.length-20),
+                  /* picture: this.state.picture.slice(33, this.state.picture.length-2), */    // <----------- IMG ohne Class flow
                   name: this.state.name,
                   price: this.state.price,
                   retailStore: this.state.retailStore,
@@ -87,7 +110,7 @@ class EditProductComponent extends Component {
             ProductService.updateProductInformation(AuthentificationService.getLoggedInUsername(), this.state.productId, updateProduct)
                 .then(response => {
                     alert("Product updated!")
-                    /* this.props.history.goBack() */
+                    this.props.history.goBack()
                     })
                 .catch(response => alert("API PUT Error"))
         });
@@ -105,28 +128,7 @@ class EditProductComponent extends Component {
             console.log("You pressed Cancel!")
           }
     }
-    encodeImageFileAsURL() {        
-        var filesSelected = document.getElementById("inputFileToLoad").files;
-	    console.log(filesSelected);
-        
-        /* let exportData; */
-        if (filesSelected.length > 0) {
-          var fileToLoad = filesSelected[0];
-          var fileReader = new FileReader();
     
-          fileReader.onload = function(fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result; // <--- data: base64
-            
-            var newImage = document.createElement('img');
-            newImage.src = srcData;
-                        
-            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
-            /* exportData = srcData.slice(24, srcData.length)
-            console.log(exportData) */
-          }
-          fileReader.readAsDataURL(fileToLoad);
-        }
-    }
     
     render(){
         if (!this.state.isDataFetched && !this.state.categoriesFetched) return null;
@@ -170,9 +172,10 @@ class EditProductComponent extends Component {
                         <div className="col-4">
                             <div className="col">
                                 <div id="imgTest" >
-                                    <img src={'data:image/jpeg;base64,'+this.state.picture} width='250' heigt='250' alt={this.state.name} />
+                                    <img src={'data:image/jpeg;base64,'+ this.state.picture} width='250' heigt='250' alt={this.state.name} />
                                 </div>
                                 <input id="inputFileToLoad" type="file" accept="image/jpeg" onChange={this.encodeImageFileAsURL}/>
+                                <p>Maximum image size 2MB</p>
                             </div>
                         </div>
                     </div>

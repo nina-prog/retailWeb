@@ -33,7 +33,7 @@ class UserService {
     handleUserRespones(response){
         let username = AuthenticationService.getLoggedInUsername()
         console.log('response: '+ JSON.stringify(response.data))
-        sessionStorage.setItem('authenticatedUserRole', (response.data.find(el => el.username == username)).role)
+        sessionStorage.setItem('authenticatedUserRole', (response.data.find(el => el.username === username)).role)
     }    
 }
 

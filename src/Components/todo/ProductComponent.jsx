@@ -1,5 +1,4 @@
 import React, {Component } from 'react'
-import Tomatos from '../../img/Tomatos.jpeg'
 import WishListService from '../../API/todo/WishListService';
 import NotifyWhenInStock from './NotifyWhenInStock';
 import ProductService from '../../API/todo/ProductService.js'

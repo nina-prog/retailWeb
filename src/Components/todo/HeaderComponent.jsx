@@ -21,7 +21,7 @@ class HeaderComponent extends Component {
     render(){
         const isUserLoggedIn = AuthentificationService.isUserLoggedIn();
         const username = AuthentificationService.getLoggedInUsername();
-        const isUserAdmin = AuthentificationService.isUserAdmin();
+        /* const isUserAdmin = AuthentificationService.isUserAdmin(); */
         /* const storeId = AuthentificationService.getStoreId(); */
         return (
             <header>

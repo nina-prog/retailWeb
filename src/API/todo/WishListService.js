@@ -37,8 +37,7 @@ class WishListService {
     getProductsfromWishlist () {
         var products
         if ('wishlist' in sessionStorage){
-            products = sessionStorage.getItem('wishlist').split(' ');
-            console.log('passt')            
+            products = sessionStorage.getItem('wishlist').split(' ');            
         } else {
             products = null
         }

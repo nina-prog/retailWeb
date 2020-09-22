@@ -1,4 +1,5 @@
 import Axios from "axios";
+import UserService from '../../API/todo/UserService.js'
 
 class AuthenticationService {
     /* registerSuccessfulLogin(username,password){
@@ -8,12 +9,19 @@ class AuthenticationService {
     } */
     logout(){
         sessionStorage.removeItem('authenticatedUser');
+        sessionStorage.removeItem('authenticatedUserRole');
     }
 
     isUserLoggedIn() {
         let user = sessionStorage.getItem('authenticatedUser');
         if(user===null) return false
         return true
+    }
+    isUserAdmin() {
+        let role = sessionStorage.getItem('authenticatedUserRole');
+        if(role===null) return false
+        if(role=='ADMIN') return true
+        return null
     }
     getLoggedInUsername(){
         return sessionStorage.getItem('authenticatedUser');
@@ -26,6 +34,7 @@ class AuthenticationService {
     }
     registerSuccessfulLoginForJwt(username, token){
         sessionStorage.setItem('authenticatedUser', username)
+        /* UserService.storeUserRole() */        
         this.setupAxiosInterceptors(this.createJWTToken(token))
     }
     createJWTToken(token) {

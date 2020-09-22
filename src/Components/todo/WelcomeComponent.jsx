@@ -1,11 +1,10 @@
 import React, {Component } from 'react'
+import UserService from '../../API/todo/UserService.js'
 import ProductService from '../../API/todo/ProductService.js'
-
 class WelcomeComponent extends Component {
     constructor(props) {
         super(props)
-        this.retriveWelcomeMessage = this.retriveWelcomeMessage.bind(this)
-        this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
+        
         this.state = {
             welcomeMessage : ''
         }
@@ -18,26 +17,17 @@ class WelcomeComponent extends Component {
                 {/* <div className="container">
                     Welcome {this.props.match.params.name} You can manage your products <Link to="/todos">here</Link>
                 </div> */}
-                
                 <div className="container">
                     {this.state.welcomeMessage}
                 </div>
-                <div className="container">
-
-                </div>
+                
             </>
         )
-        
     }
-    retriveWelcomeMessage(){
-        ProductService.getProducts()
-        .then(response => this.handleSuccessfulResponse(response))
-        .catch(response => alert("REST API Error"))
-    }
+    
+    
 
-    handleSuccessfulResponse(response){
-        this.setState({welcomeMessage: response.data})
-    }
+    
 }
 
 export default WelcomeComponent;

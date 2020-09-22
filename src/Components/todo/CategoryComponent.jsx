@@ -1,23 +1,23 @@
 import React, {Component } from 'react'
 import UserService from '../../API/todo/UserService.js'
+import CreateNewCategoryComponent from './CreateNewCategoryComponent.jsx'
 
-import CreateNewUserComponent from './CreateNewUserComponent.jsx'
-
-class AdminComponent extends Component {
+class CategoryComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
+              
             data: null,
             isDataFetched: false
         }
-        this.deleteStoreClicked = this.deleteStoreClicked.bind(this)
+        this.deleteCategoryClicked = this.deleteCategoryClicked.bind(this)
       }    
       componentDidMount(){
-        UserService.getUser ()
+        UserService.getCategories()
             .then(response => this.handleSuccessfulResponse(response))
             .catch( () => alert("REST API Error"))
 
-        /* console.log('GetUserRole1: '+ UserService.getUserRole(1)) */
+        
     }
     handleSuccessfulResponse(res) {
         this.setState({
@@ -25,14 +25,14 @@ class AdminComponent extends Component {
             isDataFetched : true
         })
     }
-    deleteStoreClicked(e){
+    deleteCategoryClicked(e){
         let id = e.currentTarget.value
         console.log(id)
-        if (window.confirm(`Do you really want to delete user ${id}?`)) {
+        if (window.confirm(`Do you really want to delete Category ${id}?`)) {
             console.log("You pressed OK!");
-            UserService.deleteUser(id)
+            UserService.deleteCategories(id)
                 .then(response => {
-                    alert(`Product ${id} is deleted!`)
+                    alert(`Category ${id} is deleted!`)
                     this.props.history.goBack()
                 })
                 .catch(response => alert("An Error occured while deleting, please try again."))
@@ -45,29 +45,24 @@ class AdminComponent extends Component {
             return (
               <div> 
                   <h1>Admin Page</h1>
-                  <CreateNewUserComponent role="ADMIN"/>
-                  <br/>
-                  <CreateNewUserComponent role="STORE"/>
+                  <CreateNewCategoryComponent />
                   <div className="container">
                       <table className="table">
                         <thead>
                             <tr>
-                                <th>User id</th>
-                                <th>Username</th>
-                                <th>Role</th>
-                                <th>Delet User</th>
+                                <th>CategoryId</th>
+                                <th>Category Name</th>
+                                <th>Delete?</th>
                             </tr>
                         </thead>
-                        <tbody>
+                          <tbody>
                               {
                                   this.state.data.map(
-                                  user =>
-                                      <tr key={user.userId}>
-                                          <td>{user.userId}</td>
-                                          <td>{user.username}</td>
-                                          <td>{user.role}</td>
-                                          {/* <td><button type="button" className="btn btn-primary">reset Password</button></td> */}
-                                          <td><button type="button" value={user.userId} className="btn btn-danger" onClick={this.deleteStoreClicked}>delete Store</button></td>
+                                  cat =>
+                                      <tr key={cat.categoryId}>
+                                          <td>{cat.categoryId}</td>
+                                          <td>{cat.catName}</td>
+                                          <td><button type="button" value={cat.categoryId} className="btn btn-danger" onClick={this.deleteCategoryClicked}>delete Category</button></td>
                                       </tr>
                                   )
                               }
@@ -81,4 +76,4 @@ class AdminComponent extends Component {
 
 
 
-export default AdminComponent;
+export default CategoryComponent;

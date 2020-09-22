@@ -25,10 +25,10 @@ class StoreEditComponent extends Component {
     } 
     componentDidMount(){
         /* HelloWordService.getStoreProducts(this.props.match.params.id) */
-        /* ProductService.getProducts()
+        ProductService.getProducts()
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
- */
+ 
         /*  */
     }
     handleSuccessfulResponse(res) {

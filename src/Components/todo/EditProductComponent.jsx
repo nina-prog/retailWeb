@@ -1,7 +1,10 @@
 import React, {Component } from 'react'
-import TomatoTestComponent from './old components/TomatoTestComponent.jsx'
 import ProductService from '../../API/todo/ProductService.js'
+import UserService from '../../API/todo/UserService.js'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
+
 
 class EditProductComponent extends Component {
     constructor(props) {
@@ -15,9 +18,11 @@ class EditProductComponent extends Component {
             description: null,
             limitations: null,
             remainingStock: null,
+            allCategories: null,
 
             data: null,
-            isDataFetched: false
+            isDataFetched: false,
+            categoriesFetched: false
         }
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
         this.handleChange = this.handleChange.bind(this);
@@ -29,6 +34,14 @@ class EditProductComponent extends Component {
         ProductService.getProductInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
+        UserService.getCategories()
+            .then(response => {
+                this.setState({
+                    allCategories: response.data,
+                    categoriesFetched: true
+                })
+            })
+            .catch(() => alert("Couln't load Categories."))
     }
     handleSuccessfulResponse(res) {
         console.log(res.data)
@@ -55,12 +68,13 @@ class EditProductComponent extends Component {
     
     handleSave(event) {
         this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
+            console.log(this.state.picture)
             let updateProduct = {
                 category: {
                     categoryId: 2,
                     catName: "sweets"
                   },
-                  picture: null,    // <----------- IMG
+                  picture: this.state.picture.slice(33, this.state.picture.length-2),    // <----------- IMG 24
                   name: this.state.name,
                   price: this.state.price,
                   retailStore: this.state.retailStore,
@@ -73,7 +87,7 @@ class EditProductComponent extends Component {
             ProductService.updateProductInformation(AuthentificationService.getLoggedInUsername(), this.state.productId, updateProduct)
                 .then(response => {
                     alert("Product updated!")
-                    this.props.history.goBack()
+                    /* this.props.history.goBack() */
                     })
                 .catch(response => alert("API PUT Error"))
         });
@@ -95,6 +109,7 @@ class EditProductComponent extends Component {
         var filesSelected = document.getElementById("inputFileToLoad").files;
 	    console.log(filesSelected);
         
+        /* let exportData; */
         if (filesSelected.length > 0) {
           var fileToLoad = filesSelected[0];
           var fileReader = new FileReader();
@@ -104,18 +119,17 @@ class EditProductComponent extends Component {
             
             var newImage = document.createElement('img');
             newImage.src = srcData;
-            this.setState({picture: srcData}, function (){
-                document.getElementById("imgTest").innerHTML = newImage.outerHTML;
-            })
-            
-            //console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                        
+            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            /* exportData = srcData.slice(24, srcData.length)
+            console.log(exportData) */
           }
           fileReader.readAsDataURL(fileToLoad);
         }
     }
     
     render(){
-        if (!this.state.isDataFetched) return null;
+        if (!this.state.isDataFetched && !this.state.categoriesFetched) return null;
         return (
             <>
                 <h1>Edit Product #{this.props.match.params.id}</h1>
@@ -139,6 +153,16 @@ class EditProductComponent extends Component {
                                 <div className="col-sm mb-2 text-left"> <input type="text" name="limitations" value={this.state.limitations} onChange={this.handleChange}/></div>
                             </div>
                             <div className="row">
+                                <div className="col-sm mb-2 text-left">Category: </div>
+                                <DropdownButton alignRight title="Dropdown right" id="dropdown-menu-align-right">
+                                    <Dropdown.Item eventKey="option-1">option-1</Dropdown.Item>
+                                    <Dropdown.Item eventKey="option-2">option-2</Dropdown.Item>
+                                </DropdownButton>
+
+
+                                <div className="col-sm mb-2 text-left"> <input type="text" name="category" value={this.state.limitations} onChange={this.handleChange}/></div>
+                            </div>
+                            <div className="row">
                                 <div className="col-sm mb-2 text-left"> Product Description:</div>
                                 <div className="col-sm mb-2 text-left"> <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></div>
                             </div>
@@ -146,9 +170,9 @@ class EditProductComponent extends Component {
                         <div className="col-4">
                             <div className="col">
                                 <div id="imgTest" >
-                                    <TomatoTestComponent />
+                                    <img src={'data:image/jpeg;base64,'+this.state.picture} width='250' heigt='250' alt={this.state.name} />
                                 </div>
-                                <input id="inputFileToLoad" type="file" onChange={this.encodeImageFileAsURL}/>
+                                <input id="inputFileToLoad" type="file" accept="image/jpeg" onChange={this.encodeImageFileAsURL}/>
                             </div>
                         </div>
                     </div>

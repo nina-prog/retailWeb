@@ -17,7 +17,7 @@ class ProductComponent extends Component {
             description: `This is the description of a cucumber. It is realy tasty and you gonne like it. It's fresh. Come and buy it today!`,
             limitations: 0.99,
             remainingStock: null,
-            
+
             data: null,
             isProductInWishlist: false
         }
@@ -76,13 +76,14 @@ class ProductComponent extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-sm">
-                                <img src={Tomatos} width='250' heigt='250' />
+                                <img src={'data:image/jpeg;base64,'+this.state.data.picture} width='450' heigt='350' alt={this.state.data.name}/>
                                 </div>
                                 <div className="col-sm align-self-center">
                                     <h1>{this.state.data.name}</h1>
                                     <div>
-                                        Price: {this.state.data.price} <br/>
-                                        Remaining stock: {this.state.data.name}
+                                        <h4>Price: {this.state.data.price}</h4>
+                                        Remaining stock: {this.state.data.remainingStock}<br/>
+                                        Limitations: {this.state.data.limitations}
                                     </div>
                                     <NotifyWhenInStock/>
                                     {/* <p><button type="button" class="btn btn-success" onClick={this.NotificationStock}>Notify when in Stock</button> </p>    */}                               
@@ -96,6 +97,8 @@ class ProductComponent extends Component {
                     <div className ="row-sm">
                         <h3>Product Description</h3>
                         <p id="description">{this.state.data.description} </p>
+                        {/* <img src={'data:image/jpeg;base64,'+this.state.data.picture}/>
+                        <p> {this.state.data.picture} </p> */}
                     </div>    
                     
                     

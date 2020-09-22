@@ -39,13 +39,6 @@ class StoreSettingComponent extends Component {
     }
     render () {
         if (!this.state.isDataFetched) return null;
-        /* let productCards = this.state.data.map(product => {
-            return (
-                <Col sm="4" className="jtColMagin" key={product.productId}>
-                    <BlockComponent  product={product} view="Edit" />
-                </Col>
-            )
-        }); */
         
         return (
             <>

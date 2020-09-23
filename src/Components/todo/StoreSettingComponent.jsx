@@ -80,6 +80,8 @@ class StoreSettingComponent extends Component {
         delete newData.isDataFetched;
 
         console.log(newData)
+        console.log(AuthentificationService.getLoggedInUsername())
+        console.log(this.props.match.params.id)
         StoreService.updateStoreInformation(AuthentificationService.getLoggedInUsername(), this.props.match.params.id, newData)
             .then( () => alert("StoreInformation updated!"))
             .catch( () => alert("API PUT Error"))

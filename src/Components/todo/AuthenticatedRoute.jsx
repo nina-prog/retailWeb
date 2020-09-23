@@ -4,7 +4,7 @@ import Axios from "axios"
 import AuthenticationService from '../../API/todo/AuthenticationService.js'
 
 class AuthenticatedRoute extends Component {
-    componentWillMount(){
+    /* UNSAVE_componentWillMount(){
         this.setupAxiosInterceptors()
     }
     setupAxiosInterceptors(token) {
@@ -16,7 +16,7 @@ class AuthenticatedRoute extends Component {
                 return config
             }
         )
-    }
+    } */
     render() {
         if(AuthenticationService.isUserLoggedIn()) {
             return <Route {...this.props}/>

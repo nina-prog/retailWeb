@@ -7,6 +7,7 @@ class StoreService {
     }
 
     updateStoreInformation(username, storeId, data) {
+        return Axios.put(`https://localhost:8443/store/username_2/storeInfo/1`, data)
         return Axios.put(`https://localhost:8433/store/${username}/storeInfo/${storeId}`, data)
     }
 }

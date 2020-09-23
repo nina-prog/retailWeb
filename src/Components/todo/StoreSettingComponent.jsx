@@ -7,13 +7,11 @@ class StoreSettingComponent extends Component {
         super(props)
         this.state = {
             storeName: '',
-            address: {
-                streetName:"Kreuzstraße",
-                houseNumber:"29",
-                district: "Karlsruhe",
-                postalCode:"76133",
-                country:"Germany"
-              },
+            streetName: '',
+            houseNumber: '',
+            district: '',
+            postalCode: '',
+            country: '',
             openingHours: '',
             customerService: '',
             phoneNumber: '',
@@ -30,19 +28,31 @@ class StoreSettingComponent extends Component {
         StoreService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch( () => alert("REST API Error"))
+            
     }
     handleSuccessfulResponse(res) {
         console.log(res.data)
+        if (res.data.address!==null){
+            this.setState({address: null})
+            this.setState({
+                streetName: res.data.address.streetName,
+                houseNumber: res.data.address.houseNumber,
+                district: res.data.address.district,
+                postalCode: res.data.address.postalCode,
+                country: res.data.address.country
+            })
+        }
+        
         this.setState({
-            /* data: res.data, */
+            storeId: res.data.storeId,
             storeName: res.data.storeName,
-            address: res.data.address,
             openingHours: res.data.openingHours,
             customerService: res.data.customerService,
             phoneNumber: res.data.phoneNumber,
             email: res.data.email,
             importantNotifications: res.data.importantNotifications,
             limitations: res.data.limitations,
+            products: res.data.products,
             isDataFetched : true
         })
     }
@@ -54,12 +64,27 @@ class StoreSettingComponent extends Component {
     }
     handleSave(){
         let newData = this.state
+        newData.address = 
+         {
+            streetName: this.state.streetName,
+            houseNumber: this.state.houseNumber,
+            district: this.state.district,
+            postalCode: this.state.postalCode,
+            country: this.state.country
+        }
+        delete newData.streetName;
+        delete newData.houseNumber;
+        delete newData.district;
+        delete newData.postalCode;
+        delete newData.country;
         delete newData.isDataFetched;
+
         console.log(newData)
         StoreService.updateStoreInformation(AuthentificationService.getLoggedInUsername(), this.props.match.params.id, newData)
             .then( () => alert("StoreInformation updated!"))
             .catch( () => alert("API PUT Error"))
     }
+    
     render () {
         if (!this.state.isDataFetched) return null;
         
@@ -73,24 +98,24 @@ class StoreSettingComponent extends Component {
                             <div className="col-sm mb-2 text-left"> <input type="text" name="storeName" value={this.state.storeName} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
-                            <div className="col-sm mb-2 text-left">Address: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.streetName" value={this.state.address.streetName} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left">Street: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="streetName" value={this.state.streetName} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
-                            <div className="col-sm mb-2 text-left">Address: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.houseNumber" value={this.state.address.houseNumber} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left">House Number: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="houseNumber" value={this.state.houseNumber} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
-                            <div className="col-sm mb-2 text-left">Address: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.district" value={this.state.address.district} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left">District / City: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="district" value={this.state.district} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
-                            <div className="col-sm mb-2 text-left">Address: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.postalCode" value={this.state.address.postalCode} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left">Post Code: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="postalCode" value={this.state.postalCode} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
-                            <div className="col-sm mb-2 text-left">Address: </div>
-                            <div className="col-sm mb-2 text-left"> <input type="text" name="address.country" value={this.state.address.country} onChange={this.handleChange}/></div>
+                            <div className="col-sm mb-2 text-left">Country: </div>
+                            <div className="col-sm mb-2 text-left"> <input type="text" name="country" value={this.state.country} onChange={this.handleChange}/></div>
                         </div>
                         <div className="row">
                             <div className="col-sm mb-2 text-left">Opening Hours: </div>

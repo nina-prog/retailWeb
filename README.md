@@ -39,9 +39,9 @@ Column names are given in the first line of the csv files, make sure these are c
 
 1. **Build frontend**: $PathToWhereFrontendIsLocated `npm run build`
 2. Put frontend build in PRIS/src/main/resources/public in order to bundle it together with the backend.
-3. **Run backend**
+3. **Run backend**    
 a) Via Command Line: $PathToWhereBackendIsLocated `java -jar pris.jar`    
-b) Via IDE: Open/Clone retailWeb, run Backend as Spring Boot Application  
+b) Via IDE: Open/Clone retailWeb, run Backend as Spring Boot Application      
 There are three backends each has its own flags and arguments...
 
 Optional:

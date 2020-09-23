@@ -1,6 +1,6 @@
 # Crisis Information System for Retail Customers
-Backend is available at 'retailWeb/PRIS'?
-Frontend is available at 'retailWeb/pris-frontend'?
+Backend is located at 'retailWeb/PRIS'
+Frontend is located at 'retailWeb/PRIS-frontend'?
 
 ## Requirements
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  or later
@@ -36,11 +36,15 @@ Column names are given in the first line of the csv files, make sure these are c
 - `mysql> use database pris;`   
 
 ## Start Application
- 1. **Run Backend** jar file located at ....:  
- a) Via Command Line: $PathToWhereJarFileIsLocated `java -jar pris.jar` oderso  
- b) Via IDE: Open/Pull Backend, run as Spring Boot Application  
- 2. **Run Frontend** jar file located at ...:  
- a) Via Command Line:$PathToWhereJarFileIsLocated `npm ci` and then `npm start` oderso  
- b) Via IDE: Open/Pull Frontend, run 
+
+1. **Build frontend**: $PathToWhereFrontendIsLocated `npm run build`
+2. Put frontend build in PRIS/src/main/resources/public in order to bundle it together with the backend.
+3. **Run backend**
+a) Via Command Line: $PathToWhereBackendIsLocated `java -jar pris.jar`
+b) Via IDE: Open/Clone retailWeb, run Backend as Spring Boot Application  
+There are three backends each has its own flags and arguments...
+
+Optional:
+Run backend and frontend jar files themself
  
  **Note:** If the frontend does not appear in the browser, enter: http://localhost:4200/ in your browser

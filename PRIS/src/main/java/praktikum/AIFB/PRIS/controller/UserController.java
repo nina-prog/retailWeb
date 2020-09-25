@@ -50,16 +50,6 @@ public class UserController {
     return userService.findAllUser();
   }
 
-  /**
-   * View all categories.
-   *
-   * @return list of categories
-   */
-  @GetMapping("/categories")
-  public List<Category> viewAllCat() {
-    return categoryService.findAllCategories();
-  }
-
   // Single Item
 
   /**
@@ -89,7 +79,7 @@ public class UserController {
   @DeleteMapping("/user/{user_id}")
   public ResponseEntity<Void> deleteUser(@PathVariable("user_id") Long userId) {
     userService.deleteUser(userId);
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.noContent().build();
   }
 
   /**
@@ -101,7 +91,7 @@ public class UserController {
   @DeleteMapping("/categories/{category_id}")
   public ResponseEntity<Void> deleteCat(@PathVariable("category_id") Integer categoryId) {
     categoryService.deleteCategory(categoryId);
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.noContent().build();
   }
 
   /**

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import praktikum.AIFB.PRIS.entity.Category;
 import praktikum.AIFB.PRIS.entity.Product;
+import praktikum.AIFB.PRIS.service.CategoryService;
 import praktikum.AIFB.PRIS.service.ProductService;
 
 /**
@@ -33,6 +35,9 @@ public class ProductController {
 
   @Autowired
   private ProductService productService;
+
+  @Autowired
+  private CategoryService categoryService;
 
   // Aggregate root.
 
@@ -51,6 +56,16 @@ public class ProductController {
       @RequestParam("postalCode") Optional<String> postalCode,
       @RequestParam("retailStore_id") Optional<Long> retailStoreId) {
     return productService.filterProducts(keyword, category, postalCode, retailStoreId);
+  }
+
+  /**
+   * View all categories.
+   *
+   * @return list of categories
+   */
+  @GetMapping("/categories")
+  public List<Category> viewAllCat() {
+    return categoryService.findAllCategories();
   }
 
   // Single item
@@ -75,7 +90,7 @@ public class ProductController {
   @DeleteMapping("store/{username}/products/{product_id}")
   public ResponseEntity<Void> deleteProduct(@PathVariable("product_id") Long productId) {
     productService.deleteProduct(productId);
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.noContent().build();
   }
 
   /**

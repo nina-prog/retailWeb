@@ -23,6 +23,11 @@ class AdminComponent extends Component {
 
         /* console.log('GetUserRole1: '+ UserService.getUserRole(1)) */
     }
+
+    /**
+     * method which handles the response
+     * @param {object} res object with the needed data
+     */
     handleSuccessfulResponse(res) {
         this.setState({
             data: res.data,
@@ -31,7 +36,8 @@ class AdminComponent extends Component {
     }
 
     /**
-     * This method is being called if the admin wants to delete a specific store 
+     * method which is responsible to delete a store
+     * @param {event} e Event which is happening when a user clicks "delete store"
      */
     deleteStoreClicked(e){
         let id = e.currentTarget.value

@@ -2,6 +2,10 @@ import React, {Component } from 'react'
 import StoreService from '../../API/todo/StoreService.js'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
+/**
+ * This component is responsible for all the settings of stores 
+ */
+
 class StoreSettingComponent extends Component {
      constructor(props) {
         super(props)
@@ -31,6 +35,12 @@ class StoreSettingComponent extends Component {
             .then(response => this.handleSuccessfulResponse(response))
             .catch( () => alert("REST API Error"))
     }
+
+    /**
+     * Method which handles sucessful responses
+     * @param {object} res object with all settings of the shop
+     */
+
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({
@@ -46,12 +56,22 @@ class StoreSettingComponent extends Component {
             isDataFetched : true
         })
     }
+
+      /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange(event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+
+    /**
+     *  Method which handles if data should be saved
+     */
     handleSave(){
         let newData = this.state
         delete newData.isDataFetched;

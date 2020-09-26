@@ -6,7 +6,6 @@ import emailjs from 'emailjs-com';
  * This component enables visitors of the retail web shop to get in contact with the admin
  */
 
-
 class ContactAdmin extends Component {
 
     constructor(props) {
@@ -15,16 +14,19 @@ class ContactAdmin extends Component {
     }
 
     /**
-     * This method works with emailjs which allows to send emails directly from JavaScript. 
-     * Therefore the customer can enter the own mail address and a message for the admin.
+     * Method which is responisble for sending an Email
+     * @param {event} e event if user clicks on "send Email"
      */
-
 
     sendEmail(e) {
       e.preventDefault();
       
       /**
        * This method uses the form which can be filled in by the visitor 
+       * @param {string} gmail the mail will be sent to an gmail address
+       * @param {string} template_DeU8gZM5 this template is used in emailjs
+       * @param {event} target event to send mail
+       * @param {string} user_Xr1eI54Svnwet49d92YE9 user id for emailjs
        */
 
       emailjs.sendForm('gmail', 'template_DeU8gZM5', e.target, 'user_Xr1eI54Svnwet49d92YE9')

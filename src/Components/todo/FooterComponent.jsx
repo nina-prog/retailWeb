@@ -1,6 +1,10 @@
 import React, {Component } from 'react'
 import{Link} from 'react-router-dom'
 
+/**
+ * This Component is responsible for the footer on the interface
+ */
+
 class FooterComponent extends Component {
     render(){
         return (

@@ -1,6 +1,10 @@
 import React, {Component } from 'react'
 import UserService from '../../API/todo/UserService.js'
 
+/**
+ * This component enables the user to create a new category for a product 
+ */
+
 class CreateNewCategoryComponent extends Component {
     constructor(props) {
         super(props)
@@ -12,15 +16,31 @@ class CreateNewCategoryComponent extends Component {
         this.handleClickNewCategory = this.handleClickNewCategory.bind(this);
         this.createNewCategory = this.createNewCategory.bind(this)
     }
+
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange (event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+    /**
+     * Method which handles if new category is clicked
+     * @param {event} event event if new category is etablished 
+     */
     handleClickNewCategory (event) {
         this.setState({ isNewCategoryClicked: true })
     }
+
+    /**
+     * Method which creates a new product category
+     * @param {event} event event if new product category is created 
+     */
+
     createNewCategory (event) {
         UserService.createCategories(this.state.catname)
             .then(response => {

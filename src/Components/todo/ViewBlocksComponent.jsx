@@ -3,6 +3,10 @@ import { Container, Row, Col } from 'reactstrap';
 import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
 
+/**
+ * This component is responsible for the overview of the products
+ */
+
 class ViewBlockComponent extends Component {
      constructor(props) {
         super(props)
@@ -27,6 +31,12 @@ class ViewBlockComponent extends Component {
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
+
+    /**
+     * Method which handles sucessful responses
+     * @param {object} res object with all products 
+     */
+
     handleSuccessfulResponse(res) {
         this.setState({
             data: res.data,

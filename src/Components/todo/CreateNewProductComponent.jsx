@@ -2,6 +2,10 @@ import React, {Component } from 'react'
 import ProductService from '../../API/todo/ProductService.js'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
+/**
+ * This components is responsible to create new products 
+ */
+
 class CreateNewProductComponent extends Component {
     constructor(props) {
         super(props)
@@ -14,15 +18,31 @@ class CreateNewProductComponent extends Component {
         this.handleClickNewProduct = this.handleClickNewProduct.bind(this);
         this.createNewProduct = this.createNewProduct.bind(this)
     }
+
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange (event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+    /**
+     * Method which is responsible to handle new products
+     * @param {event} event event if a new product is created 
+     */
     handleClickNewProduct (event) {
         this.setState({ isNewProductClicked: true })
     }
+
+    /**
+     * Method which creates a new product
+     * @param {event} event event if a new product is created
+     */
+
     createNewProduct (event) {
         let newProduct = {
             category: {
@@ -56,11 +76,22 @@ class CreateNewProductComponent extends Component {
             </>
         )
     }
+
+    /**
+     * Method which retrieves the welcome message
+     */
+
     retriveWelcomeMessage(){
         ProductService.getProducts()
         .then(response => this.handleSuccessfulResponse(response))
         .catch(response => alert("REST API Error"))
     }
+
+    /**
+     * Method which handles the new product data
+     * @param {object} response new product data
+     */
+
     handleSuccessfulResponse(response){
         this.setState({welcomeMessage: response.data})
     }

@@ -4,6 +4,10 @@ import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
 import CreateNewProductComponent from './CreateNewProductComponent.jsx'
 
+/**
+ * This component is responsible for shop changes
+ */
+
 class StoreEditComponent extends Component {
      constructor(props) {
         super(props)
@@ -31,6 +35,11 @@ class StoreEditComponent extends Component {
  
         /*  */
     }
+    /**
+     * Method which handles sucessful responses
+     * @param {object} res object with all data of the shop
+     */
+
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({

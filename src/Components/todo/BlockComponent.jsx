@@ -2,6 +2,10 @@ import React, {Component } from 'react'
 import { withRouter } from 'react-router'
 import {Card} from 'react-bootstrap'
 
+/**
+ * This component displays all products 
+ */
+
 class BlockComponent extends Component {
     render () {
         return (

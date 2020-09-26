@@ -2,6 +2,10 @@ import React, {Component } from 'react'
 import UserService from '../../API/todo/UserService.js'
 import CreateNewCategoryComponent from './CreateNewCategoryComponent.jsx'
 
+/**
+ * This component is responsible for the information about the category of each product 
+ */
+
 class CategoryComponent extends Component {
     constructor(props) {
         super(props)
@@ -25,6 +29,10 @@ class CategoryComponent extends Component {
             isDataFetched : true
         })
     }
+
+    /**
+     * This method is being called if a category of a specific product should be deleted 
+     */
     deleteCategoryClicked(e){
         let id = e.currentTarget.value
         console.log(id)

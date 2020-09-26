@@ -3,6 +3,10 @@ import UserService from '../../API/todo/UserService.js'
 
 import CreateNewUserComponent from './CreateNewUserComponent.jsx'
 
+/**
+ * This component describes what the admin can do 
+ */
+
 class AdminComponent extends Component {
     constructor(props) {
         super(props)
@@ -25,6 +29,10 @@ class AdminComponent extends Component {
             isDataFetched : true
         })
     }
+
+    /**
+     * This method is being called if the admin wants to delete a specific store 
+     */
     deleteStoreClicked(e){
         let id = e.currentTarget.value
         console.log(id)

@@ -2,6 +2,9 @@ import React, {Component } from 'react'
 import AuthentificationService from './AuthenticationService.js'
 import ViewBlockComponent from './ViewBlocksComponent.jsx'
 
+/**
+ * This component enables a shop to change the password for their login
+ */
 
 class ChangePasswordComponent extends Component {
     constructor(props) {
@@ -16,12 +19,22 @@ class ChangePasswordComponent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
     }
+
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
     handleChange(event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+
+    /**
+     * Method which is called if a user clicks on login
+     */
+
     loginClicked() {
         //in28minutes,dummy
         if(this.state.username==='in28minutes' && this.state.password==='dummy'){

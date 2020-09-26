@@ -1,6 +1,9 @@
 import React, {Component } from 'react'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
+/**
+ * This component is responsible for the login function to the interface 
+ */
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -13,12 +16,22 @@ class LoginComponent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
     }
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange(event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+
+    /**
+     * Method which handles if a user clicks on login 
+     */
+
     loginClicked() {
         AuthentificationService.executeJwtAuthenticationService(this.state.username, this.state.password)
             .then((response) => {

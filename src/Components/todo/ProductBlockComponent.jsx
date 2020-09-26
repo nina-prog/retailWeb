@@ -1,6 +1,10 @@
 import React, {Component } from 'react'
 import HelloWorldService from '../../API/todo/HelloWordService.js'
 
+/**
+ * This component is responsible to see all procuts on the products page
+ */
+
 class ProductBlockComponent extends Component {
      constructor(props) {
         super(props)
@@ -19,6 +23,10 @@ class ProductBlockComponent extends Component {
         this.loadProduct ()
         
     } 
+    /**
+     * This method loads the product
+     */
+
     loadProduct(){
         
         HelloWorldService.getProductInformation(2)
@@ -32,6 +40,11 @@ class ProductBlockComponent extends Component {
             
         }) */
     } 
+
+    /**
+     * This method handles a successful response
+     * @param {object} response object with all needed data
+     */
     handleSuccessfulResponse(response) {
         console.log(response.data)
         

@@ -4,6 +4,9 @@ import AuthentificationService from '../../API/todo/AuthenticationService.js'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 
+/**
+ * This component is responsible to edit procuts
+ */
 
 class EditProductComponent extends Component {
     constructor(props) {
@@ -42,6 +45,12 @@ class EditProductComponent extends Component {
             })
             .catch(() => alert("Couln't load Categories.")) */
     }
+
+    /**
+     * Method which handles successful responses
+     * @param {object} res object with new data
+     */
+
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({
@@ -58,12 +67,23 @@ class EditProductComponent extends Component {
             isDataFetched: true
         })
     }
+
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange(event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+
+    /**
+     * Method which encodes the image of the product
+     */
+
     encodeImageFileAsURL() {        
         var filesSelected = document.getElementById("inputFileToLoad").files;
 	    console.log(filesSelected);
@@ -87,6 +107,11 @@ class EditProductComponent extends Component {
           fileReader.readAsDataURL(fileToLoad);
         }
     }
+
+    /**
+     * Method which handles if new data should be saved
+     * @param {event} event if new data is being saved
+     */
 
     handleSave(event) {
         this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
@@ -115,6 +140,10 @@ class EditProductComponent extends Component {
                 .catch(response => alert("API PUT Error"))
         });
     }
+
+    /**
+     * Method which deletes a specific product 
+     */
     handleDelete(){
         if (window.confirm("Do you really want to delete this Product?")) {
             console.log("You pressed OK!");

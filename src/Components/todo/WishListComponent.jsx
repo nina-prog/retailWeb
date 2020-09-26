@@ -3,6 +3,11 @@ import { Container, Row, Col } from 'reactstrap';
 import  WishListService from '../../API/todo/WishListService';
 import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
+
+/**
+ * This component is responsible for the WishList
+ */
+
 class WishListComponent extends Component {
     constructor(props) {
         super(props)
@@ -39,19 +44,41 @@ class WishListComponent extends Component {
             });
         }
     }
-         
+
+    /**
+    * This Method gets products from the WishList
+    */
+
     getProductsfromWishlistClicked () {
         console.log(this.state.data)
     } 
+
+    /**
+     * This Method adds products to the WishList
+     */
     addToWhishListClicked() {
         WishListService.addToWhishList(this.state.product_id)
     }
+
+    /**
+     * This Method delets products from the WishList
+     */
+
     deleteFromWhishListClicked() {
         WishListService.deleteFromWishList(this.state.product_id)
     }
+
+    /**
+     * This Method deletes the whole WishList
+     */
     deleteWhishListClicked() {
         WishListService.deleteWishList()
     } 
+
+     /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
     handleChange(event) {
         this.setState({
             [event.target.name]

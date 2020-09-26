@@ -3,6 +3,10 @@ import UserService from '../../API/todo/UserService.js'
 
 import CreateNewUserComponent from './CreateNewUserComponent.jsx'
 
+/**
+ * This component describes what the admin can do 
+ */
+
 class AdminComponent extends Component {
     constructor(props) {
         super(props)
@@ -19,12 +23,22 @@ class AdminComponent extends Component {
 
         /* console.log('GetUserRole1: '+ UserService.getUserRole(1)) */
     }
+
+    /**
+     * method which handles the response
+     * @param {object} res object with the needed data
+     */
     handleSuccessfulResponse(res) {
         this.setState({
             data: res.data,
             isDataFetched : true
         })
     }
+
+    /**
+     * method which is responsible to delete a store
+     * @param {event} e Event which is happening when a user clicks "delete store"
+     */
     deleteStoreClicked(e){
         let id = e.currentTarget.value
         console.log(id)

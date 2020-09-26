@@ -3,6 +3,10 @@ import { Container, Row, Col } from 'reactstrap';
 import ProductService from '../../API/todo/ProductService.js'
 import BlockComponent from './BlockComponent'
 
+/**
+ * This component is responsible for the product search
+ */
+
 class SearchComponent extends Component {
      constructor(props) {
         super(props)
@@ -28,6 +32,12 @@ class SearchComponent extends Component {
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error")) 
     }
+    
+    /**
+     * Method which handles sucessful responses
+     * @param {object} res object with all data of the product
+     */
+    
     handleSuccessfulResponse(res) {
         if (typeof res.data !== 'undefined' && res.data.length > 0) {
             // the array is defined and has at least one element

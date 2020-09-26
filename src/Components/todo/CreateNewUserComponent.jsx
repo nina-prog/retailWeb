@@ -1,6 +1,10 @@
 import React, {Component } from 'react'
 import UserService from '../../API/todo/UserService.js'
 
+/**
+ * This component is responsible for creating new users 
+ */
+
 class CreateNewUserComponent extends Component {
     constructor(props) {
         super(props)
@@ -14,15 +18,31 @@ class CreateNewUserComponent extends Component {
         this.handleClickNewUser = this.handleClickNewUser.bind(this);
         this.createNewUser = this.createNewUser.bind(this)
     }
+
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange (event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+
+    /**
+     * Method which handles if new user is clicked
+     * @param {event} event event if new user is created
+     */
     handleClickNewUser (event) {
         this.setState({ isNewProductClicked: true })
     }
+
+    /**
+     * Method which creates a new user
+     * @param {event} event if new user is created
+     */
     createNewUser (event) {
         let newUser
         if (this.props.role === 'ADMIN'){

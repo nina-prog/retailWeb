@@ -3,6 +3,10 @@ import {withRouter} from 'react-router';
 import{Link} from 'react-router-dom'
 import AuthentificationService from '../../API/todo/AuthenticationService.js'
 
+/**
+ * This component is responsible for the header in the interface 
+ */
+
 class HeaderComponent extends Component {
     constructor(props){
         super(props)
@@ -11,6 +15,11 @@ class HeaderComponent extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
     }
+    /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange(event) {
         this.setState({
             [event.target.name]

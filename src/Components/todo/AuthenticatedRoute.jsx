@@ -3,10 +3,20 @@ import {Route, Redirect} from 'react-router-dom'
 import Axios from "axios"
 import AuthenticationService from '../../API/todo/AuthenticationService.js'
 
+/**
+ * This component is responsible for the authenticated route
+ */
+
 class AuthenticatedRoute extends Component {
     /* UNSAVE_componentWillMount(){
         this.setupAxiosInterceptors()
     }
+
+    /**
+     * Token is initialised for authentication route
+     * @param {token} token token for authentication route
+     */
+
     setupAxiosInterceptors(token) {
         Axios.interceptors.request.use(
             (config) => {

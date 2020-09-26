@@ -2,6 +2,11 @@ import React, {Component } from 'react'
 import WishListService from '../../API/todo/WishListService';
 import NotifyWhenInStock from './NotifyWhenInStock';
 import ProductService from '../../API/todo/ProductService.js'
+
+/**
+ * This component is responsible for all product information 
+ */
+
 class ProductComponent extends Component {
 
     constructor(props) {
@@ -36,6 +41,12 @@ class ProductComponent extends Component {
             this.setState({isProductInWishlist: false})
         }
     }
+
+      /**
+     * Method which handles changes 
+     *  @param {event} event event if something changes 
+     */
+
     handleChange(event) {
         this.setState({
             [event.target.name]
@@ -43,14 +54,28 @@ class ProductComponent extends Component {
         })
     }
 
+    /**
+     * Method which adds a product to the WhishList
+     */
+
     addToWhishListClicked() {
         this.setState({ isProductInWishlist: true})
         WishListService.addToWhishList(this.props.match.params.id)
     }
+
+    /**
+     * Method which deletes a product from the WhishList
+     */
+
     deleteFromWhishListClicked() {
         this.setState({ isProductInWishlist: false})
         WishListService.deleteFromWishList(this.props.match.params.id)
     }
+
+    /**
+     * Method which handles sucessful responses
+     * @param {object} res object with all data of the product
+     */
 
     handleSuccessfulResponse(res) {
         console.log(res.data)

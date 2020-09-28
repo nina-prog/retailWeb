@@ -45,7 +45,7 @@ public class Address {
   /**
    * Constructor.
    */
-  protected Address() {
+  public Address() {
 
   }
 

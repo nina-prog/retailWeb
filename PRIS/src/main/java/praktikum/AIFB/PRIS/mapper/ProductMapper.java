@@ -3,12 +3,11 @@ package praktikum.AIFB.PRIS.mapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import praktikum.AIFB.PRIS.dto.ProductDto;
 import praktikum.AIFB.PRIS.entity.Product;
+import praktikum.AIFB.PRIS.entity.RetailStore;
 
-//need to add mapper for retailStore, category because they are used in this lists and in this transfer! add mapping classes as mapper (uses = ....)
 /**
  * This interface declares any required mapping method to map between product
  * entity and product DTO.
@@ -21,7 +20,7 @@ import praktikum.AIFB.PRIS.entity.Product;
  * @author merti
  *
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { StoreMapper.class, CategoryMapper.class })
 public interface ProductMapper {
 
   /**
@@ -30,8 +29,8 @@ public interface ProductMapper {
    * @param product entity product
    * @return dto product
    */
-  @Mappings({ @Mapping(source = "category.catName", target = "categoryName"),
-      @Mapping(source = "retailStore.storeId", target = "storeId") })
+  @Mappings({ @Mapping(source = "product.category", target = "category"),
+      @Mapping(source = "product.retailStore.storeId", target = "storeId") })
   ProductDto productToProductDto(Product product);
 
   /**
@@ -40,19 +39,9 @@ public interface ProductMapper {
    * @param productDto dto product
    * @return entity product
    */
-  @Mappings({ @Mapping(source = "categoryName", target = "category.catName"),
-      @Mapping(source = "storeId", target = "retailStore.storeId") })
-  Product productDtoToProduct(ProductDto productDto);
-
-  /**
-   * Update product with the latest values from a product DTO.
-   *
-   * @param productDto dto product
-   * @param product    entity product
-   */
-  @Mappings({ @Mapping(source = "categoryName", target = "category.catName"),
-      @Mapping(source = "storeId", target = "retailStore.storeId") })
-  void updateModel(ProductDto productDto, @MappingTarget Product product);
+  @Mappings({ @Mapping(source = "store", target = "retailStore"),
+      @Mapping(source = "productDto.limitations", target = "limitations") })
+  Product productDtoToProduct(ProductDto productDto, RetailStore store);
 
   // aggregated root
 
@@ -62,8 +51,6 @@ public interface ProductMapper {
    * @param products List of product entities
    * @return list of product dto`s
    */
-  @Mappings({ @Mapping(source = "category.catName", target = "categoryName"),
-      @Mapping(source = "retailStore.storeId", target = "storeId") })
   List<ProductDto> toProductDtos(List<Product> products);
 
 }

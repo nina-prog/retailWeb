@@ -2,12 +2,13 @@ package praktikum.AIFB.PRIS.dto;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import praktikum.AIFB.PRIS.entity.Category;
 
 @Data
 public class ProductDto {
   private Long productId;
   private String name;
-  private String categoryName;
+  private Category category;
   private Long storeId;
   private BigDecimal price;
   private byte[] picture;

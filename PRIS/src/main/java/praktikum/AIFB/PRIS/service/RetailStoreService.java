@@ -24,8 +24,7 @@ public class RetailStoreService {
    * @param retailStoreId id of retail store
    * @return retail store
    */
-  public RetailStore findStore(String retailStoreId) {
-    Long id = Long.parseLong(retailStoreId);
+  public RetailStore findStore(Long id) {
     return repo.findById(id).orElseThrow(() -> new StoreNotFoundException(id));
   }
 

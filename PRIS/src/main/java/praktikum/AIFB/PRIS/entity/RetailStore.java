@@ -74,7 +74,7 @@ public class RetailStore {
   /**
    * Constructor.
    */
-  protected RetailStore() {
+  public RetailStore() {
 
   }
 

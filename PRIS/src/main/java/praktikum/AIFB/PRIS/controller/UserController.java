@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import praktikum.AIFB.PRIS.dto.AccountDto;
-import praktikum.AIFB.PRIS.entity.Category;
+import praktikum.AIFB.PRIS.dto.Account;
+import praktikum.AIFB.PRIS.dto.CategoryDto;
+import praktikum.AIFB.PRIS.dto.UserDto;
 import praktikum.AIFB.PRIS.entity.User;
+import praktikum.AIFB.PRIS.mapper.CategoryMapper;
+import praktikum.AIFB.PRIS.mapper.UserMapper;
 import praktikum.AIFB.PRIS.service.CategoryService;
 import praktikum.AIFB.PRIS.service.JwtUserDetailsService;
 
@@ -38,6 +41,12 @@ public class UserController {
   @Autowired
   private CategoryService categoryService;
 
+  @Autowired
+  private UserMapper userMapper;
+
+  @Autowired
+  private CategoryMapper categoryMapper;
+
   // Aggregated root
 
   /**
@@ -46,8 +55,9 @@ public class UserController {
    * @return list of users
    */
   @GetMapping("/user")
-  public List<User> viewAllUser() {
-    return userService.findAllUser();
+  public List<UserDto> viewAllUser() {
+    List<User> user = userService.findAllUser();
+    return userMapper.toUserDtos(user);
   }
 
   // Single Item
@@ -60,8 +70,8 @@ public class UserController {
    * @return http status created
    */
   @PostMapping("/user")
-  public ResponseEntity<Void> addNewUser(@RequestBody AccountDto newAccount) {
-    AccountDto account = userService.addUser(newAccount);
+  public ResponseEntity<Void> addNewUser(@RequestBody Account newAccount) {
+    Account account = userService.addUser(newAccount);
     // Location
     // Get current resource URL and change path
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -101,8 +111,8 @@ public class UserController {
    * @return http status created
    */
   @PostMapping("/categories")
-  public ResponseEntity<Void> addNewCat(@RequestBody Category newCategory) {
-    categoryService.addCategory(newCategory);
+  public ResponseEntity<Void> addNewCat(@RequestBody CategoryDto newCategoryDto) {
+    categoryService.addCategory(categoryMapper.categoryDtoToCategory(newCategoryDto));
     return ResponseEntity.ok().build();
   }
 

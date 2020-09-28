@@ -37,7 +37,7 @@ public class Category {
   /**
    * Constructor.
    */
-  protected Category() {
+  public Category() {
 
   }
 

@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import praktikum.AIFB.PRIS.dto.CategoryDto;
+import praktikum.AIFB.PRIS.dto.ProductDto;
 import praktikum.AIFB.PRIS.entity.Category;
 import praktikum.AIFB.PRIS.entity.Product;
+import praktikum.AIFB.PRIS.mapper.CategoryMapper;
+import praktikum.AIFB.PRIS.mapper.ProductMapper;
 import praktikum.AIFB.PRIS.service.CategoryService;
 import praktikum.AIFB.PRIS.service.ProductService;
+import praktikum.AIFB.PRIS.service.RetailStoreService;
 
 /**
  * This class handles the https requests regarding the product data.
@@ -39,6 +44,15 @@ public class ProductController {
   @Autowired
   private CategoryService categoryService;
 
+  @Autowired
+  private RetailStoreService storeService;
+
+  @Autowired
+  private ProductMapper productMapper;
+
+  @Autowired
+  private CategoryMapper categoryMapper;
+
   // Aggregate root.
 
   /**
@@ -51,11 +65,13 @@ public class ProductController {
    * @return list of products which match selected filters
    */
   @GetMapping("/products")
-  public List<Product> keywordSearchProducts(@RequestParam("keyword") Optional<String> keyword,
+  public List<ProductDto> keywordSearchProducts(@RequestParam("keyword") Optional<String> keyword,
       @RequestParam("category") Optional<String> category,
       @RequestParam("postalCode") Optional<String> postalCode,
       @RequestParam("retailStore_id") Optional<Long> retailStoreId) {
-    return productService.filterProducts(keyword, category, postalCode, retailStoreId);
+    List<Product> products = productService.filterProducts(keyword, category, postalCode,
+        retailStoreId);
+    return productMapper.toProductDtos(products);
   }
 
   /**
@@ -64,8 +80,9 @@ public class ProductController {
    * @return list of categories
    */
   @GetMapping("/categories")
-  public List<Category> viewAllCat() {
-    return categoryService.findAllCategories();
+  public List<CategoryDto> viewAllCat() {
+    List<Category> categories = categoryService.findAllCategories();
+    return categoryMapper.toCategoryDtos(categories);
   }
 
   // Single item
@@ -96,27 +113,33 @@ public class ProductController {
   /**
    * Update a product.
    *
-   * @param newProduct updated product info
-   * @param productId  id of product being updated
+   * @param newProductDto updated product info
+   * @param productId     id of product being updated
    * @return http response ok an also updated product
    */
   @PutMapping("store/{username}/products/{product_id}")
-  public ResponseEntity<Product> updateProduct(@RequestBody Product newProduct,
+  public ResponseEntity<Product> updateProduct(@RequestBody ProductDto newProductDto,
       @PathVariable("product_id") Long productId) {
-    Product productUpdated = productService.updateProduct(newProduct, productId);
-    return new ResponseEntity<Product>(productUpdated, HttpStatus.OK);
+    Product newProduct = productMapper.productDtoToProduct(newProductDto,
+        storeService.findStore(newProductDto.getStoreId()));
+    return new ResponseEntity<Product>(productService.updateProduct(newProduct, productId),
+        HttpStatus.OK);
   }
 
   /**
    * Add a product.
    *
-   * @param newProduct new product which should be added to the database
+   * @param newProductDto new product which should be added to the database
    * @return http response created
    */
   @PostMapping("store/{username}/products")
   @ResponseStatus(HttpStatus.CREATED)
-  public ResponseEntity<Void> addProduct(@RequestBody Product newProduct,
+  public ResponseEntity<Void> addProduct(@RequestBody ProductDto newProductDto,
       @PathVariable("username") String username) {
+    // mapping
+    Product newProduct = productMapper.productDtoToProduct(newProductDto,
+        storeService.findStore(newProductDto.getStoreId()));
+    // actual build
     Product product = productService.addProduct(newProduct, username);
     // Location (self reference)
     // Get current ressource URL and change path

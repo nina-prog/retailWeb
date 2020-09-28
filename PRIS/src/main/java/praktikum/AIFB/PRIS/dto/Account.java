@@ -12,7 +12,7 @@ import praktikum.AIFB.PRIS.entity.User;
  *
  */
 @Data
-public class AccountDto {
+public class Account {
   // possible since id can be null so request can also have no id
   private User user;
   private RetailStore store;

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import praktikum.AIFB.PRIS.dto.StoreDto;
 import praktikum.AIFB.PRIS.entity.RetailStore;
+import praktikum.AIFB.PRIS.mapper.StoreMapper;
 import praktikum.AIFB.PRIS.service.RetailStoreService;
 
 /**
@@ -26,6 +28,9 @@ public class StoreController {
   @Autowired
   private RetailStoreService retailStoreService;
 
+  @Autowired
+  private StoreMapper storeMapper;
+
   /**
    * View all informations of a retail store.
    *
@@ -33,8 +38,9 @@ public class StoreController {
    * @return storeinfo
    */
   @GetMapping("/storeInfo/{retailStore_id}")
-  public RetailStore viewInfo(@PathVariable("retailStore_id") String retailStoreId) {
-    return retailStoreService.findStore(retailStoreId);
+  public StoreDto viewInfo(@PathVariable("retailStore_id") Long retailStoreId) {
+    RetailStore store = retailStoreService.findStore(retailStoreId);
+    return storeMapper.storeToStoreDto(store);
   }
 
   /**
@@ -45,10 +51,11 @@ public class StoreController {
    * @return http response ok an also updated store info
    */
   @PutMapping("store/{username}/storeInfo/{retailStore_id}")
-  public ResponseEntity<RetailStore> updateInfo(@RequestBody RetailStore newStore,
+  public ResponseEntity<RetailStore> updateInfo(@RequestBody StoreDto newStoreDto,
       @PathVariable("retailStore_id") Long retailStoreId) {
-    RetailStore storeUpdated = retailStoreService.replaceInfo(newStore, retailStoreId);
-    return new ResponseEntity<RetailStore>(storeUpdated, HttpStatus.OK);
+    RetailStore newStore = storeMapper.storeDtoToStore(newStoreDto);
+    return new ResponseEntity<RetailStore>(retailStoreService.replaceInfo(newStore, retailStoreId),
+        HttpStatus.OK);
   }
 
 }

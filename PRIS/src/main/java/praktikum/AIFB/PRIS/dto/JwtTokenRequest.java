@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author merti
  *
  */
-public class JwtTokenRequestDto implements Serializable {
+public class JwtTokenRequest implements Serializable {
   private static final long serialVersionUID = -5616176897013108345L;
 
   private String username;
@@ -18,7 +18,7 @@ public class JwtTokenRequestDto implements Serializable {
   /**
    * Cosntructor.
    */
-  public JwtTokenRequestDto() {
+  public JwtTokenRequest() {
     super();
   }
 
@@ -28,7 +28,7 @@ public class JwtTokenRequestDto implements Serializable {
    * @param username of user
    * @param password of user
    */
-  public JwtTokenRequestDto(String username, String password) {
+  public JwtTokenRequest(String username, String password) {
     this.setUsername(username);
     this.setPassword(password);
   }

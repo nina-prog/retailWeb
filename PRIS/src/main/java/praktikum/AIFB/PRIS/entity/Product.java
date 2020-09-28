@@ -62,7 +62,7 @@ public class Product {
   /**
    * Constructor.
    */
-  protected Product() {
+  public Product() {
   }
 
   /**

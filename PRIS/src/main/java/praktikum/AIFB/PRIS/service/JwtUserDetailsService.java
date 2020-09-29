@@ -49,6 +49,9 @@ public class JwtUserDetailsService implements UserDetailsService {
    * @return new user
    */
   public Account addUser(Account account) {
+    if (account.getUser() == null) {
+      throw new IllegalArgumentException("Given user must not be null!");
+    }
     String username = account.getUser().getUsername();
     // encode password (hashing)
     String code = bcryptEncoder.encode(account.getUser().getPassword()).toString();

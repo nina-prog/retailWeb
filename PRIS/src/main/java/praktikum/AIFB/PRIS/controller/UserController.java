@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import praktikum.AIFB.PRIS.dto.Account;
 import praktikum.AIFB.PRIS.dto.CategoryDto;
 import praktikum.AIFB.PRIS.dto.UserDto;
+import praktikum.AIFB.PRIS.entity.Role;
 import praktikum.AIFB.PRIS.entity.User;
 import praktikum.AIFB.PRIS.mapper.CategoryMapper;
 import praktikum.AIFB.PRIS.mapper.UserMapper;
@@ -74,10 +75,14 @@ public class UserController {
     Account account = userService.addUser(newAccount);
     // Location
     // Get current resource URL and change path
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-        .replacePath("/storeInfo/{retailStore_id}").buildAndExpand(account.getStore().getStoreId())
-        .toUri();
-    return ResponseEntity.created(uri).build();
+    if (account.getUser().getRole() == Role.STORE) {
+      URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+          .replacePath("/storeInfo/{retailStore_id}")
+          .buildAndExpand(account.getStore().getStoreId()).toUri();
+      return ResponseEntity.created(uri).build();
+    } else {
+      return ResponseEntity.ok().build();
+    }
   }
 
   /**
@@ -107,7 +112,7 @@ public class UserController {
   /**
    * Add new category.
    *
-   * @param newCategory info of new category
+   * @param newCategoryDto info of new category
    * @return http status created
    */
   @PostMapping("/categories")

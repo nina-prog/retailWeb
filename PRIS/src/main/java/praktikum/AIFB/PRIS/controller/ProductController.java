@@ -119,9 +119,9 @@ public class ProductController {
    */
   @PutMapping("store/{username}/products/{product_id}")
   public ResponseEntity<Product> updateProduct(@RequestBody ProductDto newProductDto,
-      @PathVariable("product_id") Long productId) {
+      @PathVariable("product_id") Long productId, @PathVariable("username") String username) {
     Product newProduct = productMapper.productDtoToProduct(newProductDto,
-        storeService.findStore(newProductDto.getStoreId()));
+        storeService.findByUsername(username));
     return new ResponseEntity<Product>(productService.updateProduct(newProduct, productId),
         HttpStatus.OK);
   }
@@ -138,12 +138,12 @@ public class ProductController {
       @PathVariable("username") String username) {
     // mapping
     Product newProduct = productMapper.productDtoToProduct(newProductDto,
-        storeService.findStore(newProductDto.getStoreId()));
+        storeService.findByUsername(username));
     // actual build
-    Product product = productService.addProduct(newProduct, username);
+    Product product = productService.addProduct(newProduct);
     // Location (self reference)
     // Get current ressource URL and change path
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/product/{product_id}")
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/products/{product_id}")
         .buildAndExpand(product.getProductId()).toUri();
 
     return ResponseEntity.created(uri).build();

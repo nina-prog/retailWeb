@@ -46,7 +46,7 @@ public class StoreController {
   /**
    * Update store info.
    *
-   * @param newStore      updated store info
+   * @param newStoreDto   updated store info
    * @param retailStoreId id of retail store which info is being updated
    * @return http response ok an also updated store info
    */

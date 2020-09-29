@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import praktikum.AIFB.PRIS.entity.Product;
-import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.exception.ProductNotFoundException;
 import praktikum.AIFB.PRIS.exception.StoreNotFoundException;
 import praktikum.AIFB.PRIS.repositories.ProductRepository;
@@ -65,12 +64,9 @@ public class ProductService {
    * Add new product to database.
    *
    * @param newProduct product which has to be stored
-   * @param username   username of store adding new product
    * @return added product
    */
-  public Product addProduct(Product newProduct, String username) {
-    RetailStore store = storerepo.findByUser_username(username);
-    newProduct.setRetailStore(store);
+  public Product addProduct(Product newProduct) {
     return productrepo.save(newProduct);
   }
 

@@ -21,7 +21,7 @@ public class RetailStoreService {
   /**
    * Find retail store of database by it`s id.
    *
-   * @param retailStoreId id of retail store
+   * @param id id of retail store
    * @return retail store
    */
   public RetailStore findStore(Long id) {
@@ -46,6 +46,10 @@ public class RetailStoreService {
     } else {
       throw new StoreNotFoundException(id);
     }
+  }
+
+  public RetailStore findByUsername(String username) {
+    return repo.findByUser_username(username);
   }
 
 }

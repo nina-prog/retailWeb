@@ -1,16 +1,10 @@
 package praktikum.AIFB.PRIS.service;
 
-import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
-import praktikum.AIFB.PRIS.entity.Category;
-import praktikum.AIFB.PRIS.entity.Product;
-import praktikum.AIFB.PRIS.entity.RetailStore;
-import praktikum.AIFB.PRIS.entity.Role;
-import praktikum.AIFB.PRIS.entity.User;
 import praktikum.AIFB.PRIS.repositories.CategoryRepository;
 import praktikum.AIFB.PRIS.repositories.ProductRepository;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
@@ -48,33 +42,33 @@ public class BuildExamples implements CommandLineRunner {
    */
   @Override
   public void run(String... args) throws Exception {
-    // add user
-    User user1 = new User("username_1", bcryptEncoder.encode("1"), Role.ADMIN);
-    userRepo.save(user1);
-    log.info("New User is created: " + user1);
-
-    User user2 = new User("username_2", bcryptEncoder.encode("2"), Role.STORE);
-    userRepo.save(user2);
-    log.info("New User is created: " + user2);
-    RetailStore store1 = new RetailStore(user2, "store", "1234", "store@example.prg");
-    storerepo.save(store1);
-    log.info("New store is created: " + store1);
-
-    // add categories
-    Category cat1 = new Category("vegetables");
-    categoryRepo.save(cat1);
-    log.info("New category is created: " + cat1);
-    Category cat2 = new Category("sweets");
-    categoryRepo.save(cat2);
-    log.info("New category is created: " + cat2);
-
-    // add products
-    Product p1 = new Product(cat1, "cucumber", new BigDecimal(0.99), store1);
-    productRepo.save(p1);
-    log.info("New product is created: " + p1);
-    Product p2 = new Product(cat2, "chocolate", new BigDecimal(1.99), store1);
-    productRepo.save(p2);
-    log.info("New product is created: " + p2);
+//    // add user
+//    User user1 = new User("username_1", bcryptEncoder.encode("1"), Role.ADMIN);
+//    userRepo.save(user1);
+//    log.info("New User is created: " + user1);
+//
+//    User user2 = new User("username_2", bcryptEncoder.encode("2"), Role.STORE);
+//    userRepo.save(user2);
+//    log.info("New User is created: " + user2);
+//    RetailStore store1 = new RetailStore(user2, "store", "1234", "store@example.prg");
+//    storerepo.save(store1);
+//    log.info("New store is created: " + store1);
+//
+//    // add categories
+//    Category cat1 = new Category("vegetables");
+//    categoryRepo.save(cat1);
+//    log.info("New category is created: " + cat1);
+//    Category cat2 = new Category("sweets");
+//    categoryRepo.save(cat2);
+//    log.info("New category is created: " + cat2);
+//
+//    // add products
+//    Product p1 = new Product(cat1, "cucumber", new BigDecimal(0.99), store1);
+//    productRepo.save(p1);
+//    log.info("New product is created: " + p1);
+//    Product p2 = new Product(cat2, "chocolate", new BigDecimal(1.99), store1);
+//    productRepo.save(p2);
+//    log.info("New product is created: " + p2);
   }
 
 }

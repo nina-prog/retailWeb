@@ -73,7 +73,7 @@ class EditProductComponent extends Component {
     }
 
     /**
-     * Method which handles changes 
+     * Method which handles changes of inputs
      *  @param {event} event event if something changes 
      */
 
@@ -83,7 +83,10 @@ class EditProductComponent extends Component {
                 :event.target.value
         })
     }
-
+    /**
+     * Method which handles changes of dropdown  
+     *  @param {event} event event if something changes 
+     */
     handleOptionChange(event){
         this.setState({category: event.target.value}, function(){
             console.log('Option value: '+ this.state.category)

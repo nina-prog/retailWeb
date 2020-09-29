@@ -77,24 +77,6 @@ class CreateNewProductComponent extends Component {
         )
     }
 
-    /**
-     * Method which retrieves the welcome message
-     */
-
-    retriveWelcomeMessage(){
-        ProductService.getProducts()
-        .then(response => this.handleSuccessfulResponse(response))
-        .catch(response => alert("REST API Error"))
-    }
-
-    /**
-     * Method which handles the new product data
-     * @param {object} response new product data
-     */
-
-    handleSuccessfulResponse(response){
-        this.setState({welcomeMessage: response.data})
-    }
 }
 
 export default CreateNewProductComponent;

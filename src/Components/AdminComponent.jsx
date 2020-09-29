@@ -15,13 +15,11 @@ class AdminComponent extends Component {
             isDataFetched: false
         }
         this.deleteStoreClicked = this.deleteStoreClicked.bind(this)
-      }    
-      componentDidMount(){
+    }    
+    componentDidMount(){
         UserService.getUser ()
             .then(response => this.handleSuccessfulResponse(response))
             .catch( () => alert("Please sign in with an admin account."))
-
-        /* console.log('GetUserRole1: '+ UserService.getUserRole(1)) */
     }
 
     /**
@@ -80,7 +78,6 @@ class AdminComponent extends Component {
                                           <td>{user.userId}</td>
                                           <td>{user.username}</td>
                                           <td>{user.role}</td>
-                                          {/* <td><button type="button" className="btn btn-primary">reset Password</button></td> */}
                                           <td><button type="button" value={user.userId} className="btn btn-danger" onClick={this.deleteStoreClicked}>delete Store</button></td>
                                       </tr>
                                   )
@@ -92,7 +89,4 @@ class AdminComponent extends Component {
           )
       }
   }
-
-
-
 export default AdminComponent;

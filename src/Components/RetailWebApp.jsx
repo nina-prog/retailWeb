@@ -41,7 +41,6 @@ class RetailWebApp extends Component {
                         <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/>
                         <AuthenticatedRoute path="/store/edit/:id" component={StoreEditComponent}/>
                         <AuthenticatedRoute path="/store/settings/:id" component={StoreSettingComponent}/>
-                        <AuthenticatedRoute path="/todos" component={ListTodosComponent}/>
                         <AuthenticatedRoute path="/logout" component={LogoutComponent}/>
                         <Route component={ErrorComponent}/>
                     </Switch>

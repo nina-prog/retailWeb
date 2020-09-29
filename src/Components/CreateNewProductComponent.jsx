@@ -40,9 +40,8 @@ class CreateNewProductComponent extends Component {
 
     /**
      * Method which creates a new product
-     * @param {event} event event if a new product is created
+     * @param {event} event event if a new product is clicked
      */
-
     createNewProduct (event) {
         let newProduct = {
             category: {

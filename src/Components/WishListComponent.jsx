@@ -7,7 +7,6 @@ import BlockComponent from './BlockComponent'
 /**
  * This component is responsible for the WishList
  */
-
 class WishListComponent extends Component {
     constructor(props) {
         super(props)
@@ -20,7 +19,6 @@ class WishListComponent extends Component {
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this)
         this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this)
         this.handleChange = this.handleChange.bind(this)
-    
     }  
     componentDidMount(){
         let response = WishListService.getProductsfromWishlist() 
@@ -48,7 +46,6 @@ class WishListComponent extends Component {
     /**
     * This Method gets products from the WishList
     */
-
     getProductsfromWishlistClicked () {
         console.log(this.state.data)
     } 
@@ -63,7 +60,6 @@ class WishListComponent extends Component {
     /**
      * This Method delets products from the WishList
      */
-
     deleteFromWhishListClicked() {
         WishListService.deleteFromWishList(this.state.product_id)
     }
@@ -86,14 +82,13 @@ class WishListComponent extends Component {
         })
     }
       
-      render () {
+    render () {
         if (!this.state.arrayIsEmpty) {
             if (this.state.isDataFetched) {
                 let productCards = this.state.data.map(product => {
                     return (
                         <Col sm="4" key={product.productId}>
                             <BlockComponent  product={product} />
-                            {/* {console.log(product)} */}
                         </Col>
                     )
                 });
@@ -102,11 +97,6 @@ class WishListComponent extends Component {
                         <h1>Wishlist</h1>
                         <div className="container">
                           <div className="container">
-                              {/* <input type="text" name="product_id" value={this.state.product_id} onChange={this.handleChange}/>   
-                              <button className="btn btn-success"onClick={this.addToWhishListClicked}> addToWhishList </button>
-                              <button className="btn btn-success"onClick={this.deleteFromWhishListClicked}> Delete from Whish List </button>
-                              <button className="btn btn-success"onClick={this.deleteWhishListClicked}> Delete Whish List </button>
-                              <button className="btn btn-success"onClick={this.getProductsfromWishlistClicked}> Get Items from Wishlist </button> */}
                               <button className="btn btn-info"onClick={() => window.print()}>PRINT</button>
                           </div>
                           <div className="overflow-auto">
@@ -133,7 +123,7 @@ class WishListComponent extends Component {
                 </>
             )
         } 
-      }
-  }
+    }
+}
 
 export default WishListComponent;

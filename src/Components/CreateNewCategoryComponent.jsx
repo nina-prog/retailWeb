@@ -2,9 +2,8 @@ import React, {Component } from 'react'
 import UserService from '../API/UserService.js'
 
 /**
- * This component enables the user to create a new category for a product 
+ * This component enables the user to create a new category
  */
-
 class CreateNewCategoryComponent extends Component {
     constructor(props) {
         super(props)
@@ -21,13 +20,13 @@ class CreateNewCategoryComponent extends Component {
      * Method which handles changes 
      *  @param {event} event event if something changes 
      */
-
     handleChange (event) {
         this.setState({
             [event.target.name]
                 :event.target.value
         })
     }
+
     /**
      * Method which handles if new category is clicked
      * @param {event} event event if new category is etablished 
@@ -37,10 +36,9 @@ class CreateNewCategoryComponent extends Component {
     }
 
     /**
-     * Method which creates a new product category
+     * Method which creates a new category
      * @param {event} event event if new product category is created 
      */
-
     createNewCategory (event) {
         UserService.createCategories(this.state.catname)
             .then(response => {

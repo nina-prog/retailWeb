@@ -10,18 +10,15 @@ class CategoryComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-              
             data: null,
             isDataFetched: false
         }
         this.deleteCategoryClicked = this.deleteCategoryClicked.bind(this)
-      }    
-      componentDidMount(){
+    }    
+    componentDidMount(){
         UserService.getCategories()
             .then(response => this.handleSuccessfulResponse(response))
             .catch( () => alert("Pleas sign in with admin account! [API Error]"))
-
-        
     }
     handleSuccessfulResponse(res) {
         this.setState({
@@ -48,37 +45,37 @@ class CategoryComponent extends Component {
             console.log("You pressed Cancel!")
           }
     }
-      render () {
-            if (!this.state.isDataFetched) return null;
-            return (
-              <div> 
-                  <h1>Admin Page</h1>
-                  <CreateNewCategoryComponent />
-                  <div className="container">
-                      <table className="table">
-                        <thead>
-                            <tr>
-                                <th>CategoryId</th>
-                                <th>Category Name</th>
-                                <th>Delete?</th>
-                            </tr>
-                        </thead>
-                          <tbody>
-                              {
-                                  this.state.data.map(
-                                  cat =>
-                                      <tr key={cat.categoryId}>
-                                          <td>{cat.categoryId}</td>
-                                          <td>{cat.catName}</td>
-                                          <td><button type="button" value={cat.categoryId} className="btn btn-danger" onClick={this.deleteCategoryClicked}>delete Category</button></td>
-                                      </tr>
-                                  )
-                              }
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-          )
+    render () {
+        if (!this.state.isDataFetched) return null;
+        return (
+            <div> 
+                <h1>Admin Page</h1>
+                <CreateNewCategoryComponent />
+                <div className="container">
+                    <table className="table">
+                    <thead>
+                        <tr>
+                            <th>CategoryId</th>
+                            <th>Category Name</th>
+                            <th>Delete?</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            {
+                                this.state.data.map(
+                                cat =>
+                                    <tr key={cat.categoryId}>
+                                        <td>{cat.categoryId}</td>
+                                        <td>{cat.catName}</td>
+                                        <td><button type="button" value={cat.categoryId} className="btn btn-danger" onClick={this.deleteCategoryClicked}>delete Category</button></td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
       }
   }
 

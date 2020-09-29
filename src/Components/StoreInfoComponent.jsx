@@ -1,10 +1,10 @@
 import React, {Component } from 'react'
-import { Container, Row, Col } from 'reactstrap';
-import BlockComponent from './BlockComponent';
 import StoreService from '../API/StoreService.js'
-import ProductService from '../API/ProductService.js'
 import StoreComponent from './StoreComponent';
 
+/**
+ * This component is showing the store infomation
+ */
 class StoreInfoComponent extends Component {
     constructor(props) {
         super(props)
@@ -16,11 +16,16 @@ class StoreInfoComponent extends Component {
         }
        this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
     }
+
     componentDidMount(){
         StoreService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(response => alert("REST API Error"))
     }
+    /**
+     * Method which handles sucessful responses
+     * @param {object} res object with all data of the shop
+     */
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({
@@ -31,7 +36,6 @@ class StoreInfoComponent extends Component {
 
     render() {
         if (!this.state.isDataFetched) return null;
-        
         return (
             <div className="jtScroll">
                 <div className="container">
@@ -51,5 +55,4 @@ class StoreInfoComponent extends Component {
         )
     }
 }
-
 export default StoreInfoComponent;

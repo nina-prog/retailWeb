@@ -1,5 +1,8 @@
 import React, {Component } from 'react'
 
+/**
+ * This component if for the logout functionality 
+ */
 class LogoutComponent extends Component {
     render(){
         return (

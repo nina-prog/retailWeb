@@ -13,7 +13,6 @@ class ViewBlockComponent extends Component {
      constructor(props) {
         super(props)
         this.state = {
-            
             data: null,
             isDataFetched: false
         }
@@ -29,13 +28,13 @@ class ViewBlockComponent extends Component {
      * Method which handles sucessful responses
      * @param {object} res object with all products 
      */
-
     handleSuccessfulResponse(res) {
         this.setState({
             data: res.data,
             isDataFetched : true
         })
     }
+    
     render () {
         if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {

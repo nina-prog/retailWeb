@@ -5,9 +5,8 @@ import AuthentificationService from '../API/AuthenticationService.js'
 import 'react-dropdown/style.css'
 
 /**
- * This component is responsible to edit procuts
+ * This component is responsible to edit a prodcut
  */
-
 class EditProductComponent extends Component {
     constructor(props) {
         super (props)
@@ -51,7 +50,6 @@ class EditProductComponent extends Component {
      * Method which handles successful responses
      * @param {object} res object with new data
      */
-
     handleSuccessfulResponse(res) {
         console.log(res.data)
         this.setState({
@@ -76,7 +74,6 @@ class EditProductComponent extends Component {
      * Method which handles changes of inputs
      *  @param {event} event event if something changes 
      */
-
     handleChange(event) {
         this.setState({
             [event.target.name]
@@ -95,7 +92,6 @@ class EditProductComponent extends Component {
     /**
      * Method which encodes the image in base64 and shows the loaded image
      */
-
     encodeImageFileAsURL() {        
         var filesSelected = document.getElementById("inputFileToLoad").files;
 	    console.log(filesSelected);
@@ -119,7 +115,6 @@ class EditProductComponent extends Component {
      * Method which handles if new data should be saved
      * @param {event} event if new data is being saved
      */
-
     handleSave(event) {
         this.setState({picture: document.getElementById("imgTest").innerHTML}, function () {
             console.log(this.state.category)
@@ -161,7 +156,6 @@ class EditProductComponent extends Component {
             console.log("You pressed Cancel!")
           }
     }
-    
     
     render(){
         if (!this.state.isDataFetched) return null;

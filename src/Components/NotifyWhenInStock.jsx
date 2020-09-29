@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import emailjs from 'emailjs-com';
 
-
 /**
  * This component is responsible to send product information to a customer
  */
-
 class NotifyWhenInStock extends Component {
 
     constructor(props) {
         super (props)
         this.sendEmail = this.sendEmail.bind(this);
     }
+
     /**
      * Method which sends product information to an user
      * @param {event} event event if user clicks on "send Email"
@@ -45,9 +44,6 @@ class NotifyWhenInStock extends Component {
       </form>
       )
     }
-
 }
-
-
 
   export default NotifyWhenInStock;

@@ -17,7 +17,6 @@ class ContactAdmin extends Component {
      * Method which is responisble for sending an Email
      * @param {event} e event if user clicks on "send Email"
      */
-
     sendEmail(e) {
       e.preventDefault();
       
@@ -28,7 +27,6 @@ class ContactAdmin extends Component {
        * @param {event} target event to send mail
        * @param {string} user_Xr1eI54Svnwet49d92YE9 user id for emailjs
        */
-
       emailjs.sendForm('gmail', 'template_DeU8gZM5', e.target, 'user_Xr1eI54Svnwet49d92YE9')
         .then((result) => {
           console.log(result.text);
@@ -39,7 +37,6 @@ class ContactAdmin extends Component {
         /**
          * If the message is sent successfully the following message is displayed 
          */
-
         alert ("Thank you for your request, we will contact you as soon as possible")
       }
 

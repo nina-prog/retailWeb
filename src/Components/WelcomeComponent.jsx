@@ -3,7 +3,6 @@ import React, {Component } from 'react'
 /**
  * This component is responsible for the welcome at the beginning 
  */
-
 class WelcomeComponent extends Component {
     constructor(props) {
         super(props)
@@ -27,10 +26,6 @@ class WelcomeComponent extends Component {
             </>
         )
     }
-    
-    
-
-    
 }
 
 export default WelcomeComponent;

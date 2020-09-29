@@ -5,7 +5,6 @@ import ViewBlockComponent from './ViewBlocksComponent.jsx'
 /**
  * This component enables a shop to change the password for their login
  */
-
 class ChangePasswordComponent extends Component {
     constructor(props) {
         super (props)
@@ -34,7 +33,6 @@ class ChangePasswordComponent extends Component {
     /**
      * Method which is called if a user clicks on login
      */
-
     loginClicked() {
         //in28minutes,dummy
         if(this.state.username==='in28minutes' && this.state.password==='dummy'){

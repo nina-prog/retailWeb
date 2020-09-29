@@ -4,9 +4,8 @@ import ProductService from '../API/ProductService.js'
 import BlockComponent from './BlockComponent'
 
 /**
- * This component is responsible for the product search
+ * This component is responsible for the product search and filters
  */
-
 class SearchComponent extends Component {
      constructor(props) {
         super(props)
@@ -37,7 +36,6 @@ class SearchComponent extends Component {
      * Method which handles sucessful responses
      * @param {object} res object with all data of the product
      */
-    
     handleSuccessfulResponse(res) {
         if (typeof res.data !== 'undefined' && res.data.length > 0) {
             // the array is defined and has at least one element
@@ -51,6 +49,7 @@ class SearchComponent extends Component {
         }
         
     }
+    
     render () {
         if (!this.state.isDataFetched) return null;
         let productCards = this.state.data.map(product => {

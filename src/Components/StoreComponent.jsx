@@ -1,10 +1,11 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import BlockComponent from './BlockComponent';
-import StoreInfoComponent from './StoreInfoComponent';
-import StoreService from '../API/StoreService.js'
 import ProductService from '../API/ProductService.js'
 
+/**
+ * This component is showing the infomation and products of one store
+ */
 class StoreComponent extends Component {
     constructor(props) {
         super(props)
@@ -25,7 +26,6 @@ class StoreComponent extends Component {
      * @param {object} res object with all products 
      */
     handleSuccessfulResponse(res) {
-        /* if (res.data.) */
         this.setState({
             data: res.data,
             isDataFetched : true

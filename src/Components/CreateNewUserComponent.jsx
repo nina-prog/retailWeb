@@ -4,7 +4,6 @@ import UserService from '../API/UserService.js'
 /**
  * This component is responsible for creating new users 
  */
-
 class CreateNewUserComponent extends Component {
     constructor(props) {
         super(props)
@@ -23,7 +22,6 @@ class CreateNewUserComponent extends Component {
      * Method which handles changes 
      *  @param {event} event event if something changes 
      */
-
     handleChange (event) {
         this.setState({
             [event.target.name]

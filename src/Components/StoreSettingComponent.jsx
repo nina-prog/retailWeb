@@ -5,7 +5,6 @@ import AuthentificationService from '../API/AuthenticationService.js'
 /**
  * This component is responsible for all the settings of stores 
  */
-
 class StoreSettingComponent extends Component {
      constructor(props) {
         super(props)
@@ -32,14 +31,12 @@ class StoreSettingComponent extends Component {
         StoreService.getStoreInformation(this.props.match.params.id)
             .then(response => this.handleSuccessfulResponse(response))
             .catch( () => alert("REST API Error"))
-            
     }
 
     /**
      * Method which handles sucessful responses
      * @param {object} res object with all settings of the shop
      */
-
     handleSuccessfulResponse(res) {
         console.log(res.data)
         if (res.data.address!==null){
@@ -52,7 +49,6 @@ class StoreSettingComponent extends Component {
                 country: res.data.address.country
             })
         }
-        
         this.setState({
             storeId: res.data.storeId,
             storeName: res.data.storeName,
@@ -71,7 +67,6 @@ class StoreSettingComponent extends Component {
      * Method which handles changes 
      *  @param {event} event event if something changes 
      */
-
     handleChange(event) {
         this.setState({
             [event.target.name]
@@ -98,10 +93,6 @@ class StoreSettingComponent extends Component {
         delete newData.postalCode;
         delete newData.country;
         delete newData.isDataFetched;
-
-        console.log(newData)
-        console.log(AuthentificationService.getLoggedInUsername())
-        console.log(this.props.match.params.id)
         StoreService.updateStoreInformation(AuthentificationService.getLoggedInUsername(), this.props.match.params.id, newData)
             .then( () => alert("StoreInformation updated!"))
             .catch( () => alert("API PUT Error"))
@@ -109,7 +100,6 @@ class StoreSettingComponent extends Component {
     
     render () {
         if (!this.state.isDataFetched) return null;
-        
         return (
             <>
                 <div className="jtScroll">
@@ -168,11 +158,9 @@ class StoreSettingComponent extends Component {
                         <button className="btn btn-success mr-2"onClick={this.handleSave}> Save </button>
                         <button className="btn btn-secondary"onClick={this.props.history.goBack}> Cancel </button>
                     </div>
-                </div>        
-                
+                </div>    
             </>
         );
     }
 }
-
 export default StoreSettingComponent;

@@ -17,7 +17,6 @@ class FilterComponent extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClickFilter = this.handleClickFilter.bind(this);
-        this.createClicked = this.createClicked.bind(this)
         this.handleOptionChange = this.handleOptionChange.bind(this)
     }
 
@@ -36,7 +35,6 @@ class FilterComponent extends Component {
      * Method which handles changes 
      *  @param {event} event event if something changes 
      */
-
     handleChange (event) {
         this.setState({
             [event.target.name]
@@ -58,16 +56,6 @@ class FilterComponent extends Component {
      */
     handleClickFilter (event) {
         this.setState({ isFilterClicked: true })
-    }
-
-    /**
-     * Method which creates a new product
-     * @param {event} event event if a new product is created
-     */
-
-    createClicked (event) {
-        
-        
     }
     
     render () {

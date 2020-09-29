@@ -94,8 +94,9 @@ public class ProductController {
    * @return product
    */
   @GetMapping("/products/{product_id}")
-  public Product viewOneProduct(@PathVariable("product_id") Long productId) {
-    return productService.findProduct(productId);
+  public ProductDto viewOneProduct(@PathVariable("product_id") Long productId) {
+    Product product = productService.findProduct(productId);
+    return productMapper.productToProductDto(product);
   }
 
   /**
@@ -119,10 +120,8 @@ public class ProductController {
    */
   @PutMapping("store/{username}/products/{product_id}")
   public ResponseEntity<Product> updateProduct(@RequestBody ProductDto newProductDto,
-      @PathVariable("product_id") Long productId, @PathVariable("username") String username) {
-    Product newProduct = productMapper.productDtoToProduct(newProductDto,
-        storeService.findByUsername(username));
-    return new ResponseEntity<Product>(productService.updateProduct(newProduct, productId),
+      @PathVariable("product_id") Long productId) {
+    return new ResponseEntity<Product>(productService.updateProduct(newProductDto, productId),
         HttpStatus.OK);
   }
 

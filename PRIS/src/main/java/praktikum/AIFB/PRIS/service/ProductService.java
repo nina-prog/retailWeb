@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import praktikum.AIFB.PRIS.dto.ProductDto;
 import praktikum.AIFB.PRIS.entity.Product;
 import praktikum.AIFB.PRIS.exception.ProductNotFoundException;
-import praktikum.AIFB.PRIS.exception.StoreNotFoundException;
+import praktikum.AIFB.PRIS.mapper.ProductMapper;
 import praktikum.AIFB.PRIS.repositories.ProductRepository;
 import praktikum.AIFB.PRIS.repositories.ProductSpecs;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
@@ -25,6 +26,9 @@ public class ProductService {
 
   @Autowired
   private RetailStoreRepository storerepo;
+
+  @Autowired
+  private ProductMapper productMapper;
 
   // Aggregated root
 
@@ -73,20 +77,19 @@ public class ProductService {
   /**
    * Update product in database.
    *
-   * @param newProduct new product info
-   * @param id         product id given in URL
+   * @param newProductDto new product info
+   * @param id            product id given in URL
    * @return updated product
    */
-  public Product updateProduct(Product newProduct, Long id) {
-    // make sure store already exists in database
-    if (productrepo.existsById(id)) {
-      // make sure to set correct id
-      newProduct.setProductId(id);
-      // save updated info in database
-      return productrepo.save(newProduct);
-    } else {
-      throw new StoreNotFoundException(id);
-    }
+  public Product updateProduct(ProductDto newProductDto, Long id) {
+    // make sure product already exists in database
+    Product updatedProduct = findProduct(id);
+    // update attributes
+    productMapper.updateModel(newProductDto, updatedProduct);
+    // make sure id is correct
+    updatedProduct.setProductId(id);
+    // save updated info in database
+    return productrepo.save(updatedProduct);
   }
 
   /**

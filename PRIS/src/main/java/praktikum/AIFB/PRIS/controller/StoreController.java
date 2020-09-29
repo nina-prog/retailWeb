@@ -53,9 +53,8 @@ public class StoreController {
   @PutMapping("store/{username}/storeInfo/{retailStore_id}")
   public ResponseEntity<RetailStore> updateInfo(@RequestBody StoreDto newStoreDto,
       @PathVariable("retailStore_id") Long retailStoreId) {
-    RetailStore newStore = storeMapper.storeDtoToStore(newStoreDto);
-    return new ResponseEntity<RetailStore>(retailStoreService.replaceInfo(newStore, retailStoreId),
-        HttpStatus.OK);
+    return new ResponseEntity<RetailStore>(
+        retailStoreService.replaceInfo(newStoreDto, retailStoreId), HttpStatus.OK);
   }
 
 }

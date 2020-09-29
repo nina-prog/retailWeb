@@ -72,13 +72,13 @@ public class UserController {
    */
   @PostMapping("/user")
   public ResponseEntity<Void> addNewUser(@RequestBody Account newAccount) {
-    Account account = userService.addUser(newAccount);
+    User user = userService.addUser(newAccount);
     // Location
     // Get current resource URL and change path
-    if (account.getUser().getRole() == Role.STORE) {
+    if (user.getRole() == Role.STORE) {
       URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
           .replacePath("/storeInfo/{retailStore_id}")
-          .buildAndExpand(account.getStore().getStoreId()).toUri();
+          .buildAndExpand(user.getRetailStore().getStoreId()).toUri();
       return ResponseEntity.created(uri).build();
     } else {
       return ResponseEntity.ok().build();

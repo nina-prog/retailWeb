@@ -48,23 +48,31 @@ public class JwtUserDetailsService implements UserDetailsService {
    * @param account information about new user
    * @return new user
    */
-  public Account addUser(Account account) {
+  public User addUser(Account account) {
     if (account.getUser() == null) {
       throw new IllegalArgumentException("Given user must not be null!");
     }
+
     String username = account.getUser().getUsername();
     // encode password (hashing)
     String code = bcryptEncoder.encode(account.getUser().getPassword()).toString();
     Role role = account.getUser().getRole();
     // create new user
     User user = new User(username, code, role);
-    // add new user to database
-    userrepo.save(user);
-    // check authorization and add store if needed
-    if (account.getUser().getRole().equals(Role.STORE) && account.getStore() != null) {
-      storerepo.save(account.getStore());
+
+    // Adding new Admin
+    if (user.getRole().equals(Role.ADMIN)) {
+      userrepo.save(user);
     }
-    return account;
+
+    // Adding new Store
+    else if (user.getRole().equals(Role.STORE) && account.getStore() != null) {
+      userrepo.save(user);
+      account.getStore().setUser(user);
+      storerepo.save(account.getStore());
+
+    }
+    return user;
   }
 
   /**
@@ -82,11 +90,9 @@ public class JwtUserDetailsService implements UserDetailsService {
         RetailStore trashStore = storerepo.findByUser_userId(userId);
         storerepo.delete(trashStore);
       }
-
     } else {
       throw new UserNotFoundException(userId);
     }
-
   }
 
   @Override

@@ -2,8 +2,10 @@ package praktikum.AIFB.PRIS.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import praktikum.AIFB.PRIS.dto.StoreDto;
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.exception.StoreNotFoundException;
+import praktikum.AIFB.PRIS.mapper.StoreMapper;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
 
 /**
@@ -16,7 +18,10 @@ import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
 public class RetailStoreService {
 
   @Autowired
-  public RetailStoreRepository repo;
+  private RetailStoreRepository repo;
+
+  @Autowired
+  private StoreMapper storeMapper;
 
   /**
    * Find retail store of database by it`s id.
@@ -31,21 +36,20 @@ public class RetailStoreService {
   /**
    * Update info of retail store.
    *
-   * @param newStore updated retail store(info)
-   * @param id       id of retail store whose info should be updated (given as
-   *                 variable in URL path)
+   * @param newStoreDto updated retail store(info)
+   * @param id          id of retail store whose info should be updated (given as
+   *                    variable in URL path)
    * @return updated retail store(info)
    */
-  public RetailStore replaceInfo(RetailStore newStore, Long id) {
+  public RetailStore replaceInfo(StoreDto newStoreDto, Long id) {
     // make sure store already exists in database
-    if (repo.existsById(id)) {
-      // make sure to set correct id
-      newStore.setStoreId(id);
-      // save updated info in database
-      return repo.save(newStore);
-    } else {
-      throw new StoreNotFoundException(id);
-    }
+    RetailStore updatedStore = findStore(id);
+    // update attributes
+    storeMapper.updateModel(newStoreDto, updatedStore);
+    // make sure id is correct
+    updatedStore.setStoreId(id);
+    // save updated info in database
+    return repo.save(updatedStore);
   }
 
   public RetailStore findByUsername(String username) {

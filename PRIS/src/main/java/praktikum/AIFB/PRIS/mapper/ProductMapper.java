@@ -3,6 +3,7 @@ package praktikum.AIFB.PRIS.mapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import praktikum.AIFB.PRIS.dto.ProductDto;
 import praktikum.AIFB.PRIS.entity.Product;
@@ -40,7 +41,8 @@ public interface ProductMapper {
    * @return entity product
    */
   @Mappings({ @Mapping(source = "store", target = "retailStore"),
-      @Mapping(source = "productDto.limitations", target = "limitations") })
+      @Mapping(source = "productDto.limitations", target = "limitations"),
+      @Mapping(target = "productId", ignore = true) })
   Product productDtoToProduct(ProductDto productDto, RetailStore store);
 
   // aggregated root
@@ -53,4 +55,12 @@ public interface ProductMapper {
    */
   List<ProductDto> toProductDtos(List<Product> products);
 
+  /**
+   * Update entity with attributes of a given dto.
+   *
+   * @param productDto product dto
+   * @param product    updated with values of dto
+   */
+  @Mapping(target = "productId", ignore = true)
+  void updateModel(ProductDto productDto, @MappingTarget Product product);
 }

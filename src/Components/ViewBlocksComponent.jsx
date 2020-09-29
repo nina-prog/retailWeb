@@ -2,7 +2,6 @@ import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import ProductService from '../API/ProductService.js'
 import BlockComponent from './BlockComponent'
-import{Link} from 'react-router-dom'
 import FilterComponent from './FilterComponent.jsx';
 
 /**

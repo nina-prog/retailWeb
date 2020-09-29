@@ -26,7 +26,6 @@ class HeaderComponent extends Component {
     }
     render(){
         const isUserLoggedIn = AuthentificationService.isUserLoggedIn();
-        const username = AuthentificationService.getLoggedInUsername();
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">

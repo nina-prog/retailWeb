@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import UserService from '../../API/todo/UserService.js'
+import UserService from '../API/UserService.js'
 
 /**
  * This component enables the user to create a new category for a product 
@@ -45,8 +45,8 @@ class CreateNewCategoryComponent extends Component {
         UserService.createCategories(this.state.catname)
             .then(response => {
                 console.log(response.headers)
-                alert("New User created!")
-                /* window.location.reload(false); */
+                alert("New Category created!")
+                window.location.reload(false);
                 })
             .catch(response => alert("An Error Occourt while creating the User! [API Error]"))
     }

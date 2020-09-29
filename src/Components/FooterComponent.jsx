@@ -13,7 +13,7 @@ class FooterComponent extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <span className="text-muted">All Right has Joel</span>
+                            <span className="text-muted">Copyright by the Web Retail Team</span>
                          </div>
                         <div className="col">
                         <Link className="nav-link" to="/ContactAdmin">Contact Admin</Link>

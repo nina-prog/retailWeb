@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import UserService from '../../API/todo/UserService.js'
+import UserService from '../API/UserService.js'
 
 import CreateNewUserComponent from './CreateNewUserComponent.jsx'
 
@@ -19,7 +19,7 @@ class AdminComponent extends Component {
       componentDidMount(){
         UserService.getUser ()
             .then(response => this.handleSuccessfulResponse(response))
-            .catch( () => alert("REST API Error"))
+            .catch( () => alert("Please sign in with an admin account."))
 
         /* console.log('GetUserRole1: '+ UserService.getUserRole(1)) */
     }
@@ -49,7 +49,7 @@ class AdminComponent extends Component {
                     alert(`Product ${id} is deleted!`)
                     this.props.history.goBack()
                 })
-                .catch(response => alert("An Error occured while deleting, please try again."))
+                .catch(response => alert("Please reload an check if the user is deleted."))
           } else {
             console.log("You pressed Cancel!")
           }

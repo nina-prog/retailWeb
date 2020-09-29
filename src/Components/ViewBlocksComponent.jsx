@@ -1,8 +1,9 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import ProductService from '../../API/todo/ProductService.js'
+import ProductService from '../API/ProductService.js'
 import BlockComponent from './BlockComponent'
 
+import{Link} from 'react-router-dom'
 /**
  * This component is responsible for the overview of the products
  */
@@ -11,16 +12,7 @@ class ViewBlockComponent extends Component {
      constructor(props) {
         super(props)
         this.state = {
-            productId: 3,
-            category: null,
-            picture: null,
-            name: "Default",
-            price: 4.90,
-            retailStore: null,
-            description: "gummi bears",
-            limitations: "Feb 45",
-            stock: 5,
-
+            
             data: null,
             isDataFetched: false
         }
@@ -54,7 +46,10 @@ class ViewBlockComponent extends Component {
         });
         return (
             <>
-                {/* <h6>ViewBlockComponent</h6> */}   
+                <h6>ViewBlockComponent</h6> 
+                add Filter:   
+                <Link className="btn btn-outline-success my-2 my-sm-0"  to={`/search?postalCode=${this.state.searchfield}`}>postal code</Link>
+                <Link className="btn btn-outline-success my-2 my-sm-0"  to={`/search?category=${this.state.searchfield}`}>category</Link>
                 <div className="jtScroll">
                     <Container>
                         <Row>

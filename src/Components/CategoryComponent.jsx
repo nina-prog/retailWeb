@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import UserService from '../../API/todo/UserService.js'
+import UserService from '../API/UserService.js'
 import CreateNewCategoryComponent from './CreateNewCategoryComponent.jsx'
 
 /**
@@ -19,7 +19,7 @@ class CategoryComponent extends Component {
       componentDidMount(){
         UserService.getCategories()
             .then(response => this.handleSuccessfulResponse(response))
-            .catch( () => alert("REST API Error"))
+            .catch( () => alert("Pleas sign in with admin account! [API Error]"))
 
         
     }
@@ -41,7 +41,7 @@ class CategoryComponent extends Component {
             UserService.deleteCategories(id)
                 .then(response => {
                     alert(`Category ${id} is deleted!`)
-                    this.props.history.goBack()
+                    window.location.reload(false)
                 })
                 .catch(response => alert("An Error occured while deleting, please try again."))
           } else {

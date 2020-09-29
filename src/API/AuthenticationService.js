@@ -1,5 +1,8 @@
 import Axios from "axios"
-
+import {API_URL} from '../constants.js'
+/**
+ * This class is for interacting with the API for authorization, user cookies and Axios Interceptor
+ */
 class AuthenticationService {
     /**
      * Logout User, Remove all User specific data in the Session Storage
@@ -18,12 +21,7 @@ class AuthenticationService {
         if(user===null) return false
         return true
     }
-    isUserAdmin() {
-        let role = sessionStorage.getItem('authenticatedUserRole');
-        if(role===null) return false
-        if(role==='ADMIN') return true
-        return null
-    }
+    
     /**
      * Get the Username from Session Storage
      * @returns {String} username
@@ -38,7 +36,7 @@ class AuthenticationService {
      * @returns {Promise} Promise for Jwt Token
      */
     executeJwtAuthenticationService(username, password){
-        return Axios.post('https://localhost:8443/authenticate', {
+        return Axios.post(`${API_URL}/authenticate`, {
             username,
             password
         })

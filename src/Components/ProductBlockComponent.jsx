@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import HelloWorldService from '../../API/todo/HelloWordService.js'
+import HelloWorldService from '../API/HelloWordService.js'
 
 /**
  * This component is responsible to see all procuts on the products page

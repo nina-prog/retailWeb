@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import AuthentificationService from '../../API/todo/AuthenticationService.js'
+import AuthentificationService from '../API/AuthenticationService.js'
 
 /**
  * This component is responsible for the login function to the interface 

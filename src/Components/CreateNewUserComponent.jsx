@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import UserService from '../../API/todo/UserService.js'
+import UserService from '../API/UserService.js'
 
 /**
  * This component is responsible for creating new users 

@@ -1,7 +1,7 @@
 import React, {Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import  WishListService from '../../API/todo/WishListService';
-import ProductService from '../../API/todo/ProductService.js'
+import  WishListService from '../API/WishListService';
+import ProductService from '../API/ProductService.js'
 import BlockComponent from './BlockComponent'
 
 /**

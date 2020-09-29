@@ -14,17 +14,17 @@ import WishListComponent from './WishListComponent.jsx'
 import AdminComponent from './AdminComponent.jsx'
 import StoreSettingComponent from './StoreSettingComponent.jsx'
 import StoreEditComponent from './StoreEditComponent.jsx'
-import StoreComponent from './StoreComponent.jsx'
+import StoreInfoComponent from './StoreInfoComponent.jsx'
 import ViewBlockComponent from './ViewBlocksComponent.jsx'
 import ContactAdmin from './ContactAdmin.jsx'
 import CategoryComponent from './CategoryComponent.jsx'
 import SearchComponent from './SearchComponent.jsx'
 
 
-class TodoApp extends Component {
+class RetailWebApp extends Component {
     render (){
         return(
-            <div className="TodoApp">
+            <div className="RetailWebApp">
                 <Router>
                     <HeaderComponent/>
                     <Switch>
@@ -32,7 +32,7 @@ class TodoApp extends Component {
                         <Route path="/login" component={LoginComponent}/>
                         <Route path="/wishlist" component={WishListComponent}/>
                         <Route path="/product/:id" exact component={ProductComponent}/>
-                        <Route path="/store/:id" exact component={StoreComponent}/>
+                        <Route path="/store/:id" exact component={StoreInfoComponent}/>
                         <Route path="/search" component={SearchComponent}/>
                         <Route path="/contactadmin" exact component={ContactAdmin}/>
                         <AuthenticatedRoute path="/admin" exact component={AdminComponent}/>
@@ -53,4 +53,4 @@ class TodoApp extends Component {
     }
 }
 
-export default TodoApp;
+export default RetailWebApp;

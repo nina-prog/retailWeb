@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
-import StoreService from '../../API/todo/StoreService.js'
-import AuthentificationService from '../../API/todo/AuthenticationService.js'
+import StoreService from '../API/StoreService.js'
+import AuthentificationService from '../API/AuthenticationService.js'
 
 /**
  * This component is responsible for all the settings of stores 

@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
-import ProductService from '../../API/todo/ProductService.js'
-import AuthentificationService from '../../API/todo/AuthenticationService.js'
+import ProductService from '../API/ProductService.js'
+import AuthentificationService from '../API/AuthenticationService.js'
 
 /**
  * This components is responsible to create new products 
@@ -61,7 +61,7 @@ class CreateNewProductComponent extends Component {
                 alert("New Product created!")
                 window.location.reload(false);
                 })
-            .catch(response => alert("API POST Error"))
+            .catch(response => alert("Session expired, please sign in again [API Error]"))
     }
     
     render () {

@@ -1,6 +1,6 @@
 # Crisis Information System for Retail Customers
-Backend is located at 'retailWeb/PRIS'
-Frontend is located at 'retailWeb/PRIS-frontend'?
+Backend is located at 'retailWeb/PRIS
+Frontend is located at 'retailWeb/pris-frontend
 
 ## Requirements
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  or later
@@ -25,7 +25,7 @@ IGNORE 1 LINES
 
 Column names are given in the first line of the csv files, make sure these are correct.
 
-**Note:** Make sure to follow this order by importing the files because of the primary and foreign keys: category, user, address, retail store, product  
+**Note:** Make sure to follow this order by importing the files because of the primary and foreign keys: category, user, address, retail store, product
 
 **If Error "Loading local data is disabled" (default in mysql)** occurs on CommandLine run following code before importing:  
 - `cd C:\Program Files\MySQL\MySQL Server 8.0\bin`
@@ -41,10 +41,6 @@ Column names are given in the first line of the csv files, make sure these are c
 2. Put frontend build in PRIS/src/main/resources/public in order to bundle it together with the backend.
 3. **Run backend**    
 a) Via Command Line: $PathToWhereBackendIsLocated `java -jar pris.jar`    
-b) Via IDE: Open/Clone retailWeb, run Backend as Spring Boot Application      
-There are three backends each has its own flags and arguments...
+b) Via IDE: Open/Clone retailWeb, run Backend as Spring Boot Application
 
-Optional:
-Run backend and frontend jar files themself
- 
- **Note:** If the frontend does not appear in the browser, enter: http://localhost:4200/ in your browser
+**Note:** Default database entries are build within backend (in BuildExamples.class). Since entires can not be duplicated after they are initialized once in database with the first run of backend this class has to be commmented out to prevent errors.

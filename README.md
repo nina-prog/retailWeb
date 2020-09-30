@@ -1,5 +1,5 @@
 # Crisis Information System for Retail Customers
-Backend is located at 'retailWeb/PRIS (master), also on backend branch
+Backend is located at 'retailWeb/PRIS (master), also on backend branch    
 Frontend is located at 'retailWeb/pris-frontend (master), also on frontend branch
 
 ## Requirements

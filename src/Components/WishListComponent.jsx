@@ -17,7 +17,7 @@ class WishListComponent extends Component {
         }
         this.addToWhishListClicked = this.addToWhishListClicked.bind(this)
         this.deleteFromWhishListClicked = this.deleteFromWhishListClicked.bind(this)
-        this.deleteWhishListClicked = this.deleteWhishListClicked.bind(this)
+        this.deleteWishListClicked = this.deleteWishListClicked.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }  
     componentDidMount(){
@@ -55,6 +55,7 @@ class WishListComponent extends Component {
      */
     addToWhishListClicked() {
         WishListService.addToWhishList(this.state.product_id)
+        window.location.reload(false)
     }
 
     /**
@@ -67,8 +68,9 @@ class WishListComponent extends Component {
     /**
      * This Method deletes the whole WishList
      */
-    deleteWhishListClicked() {
+    deleteWishListClicked() {
         WishListService.deleteWishList()
+        window.location.reload(false)
     } 
 
      /**
@@ -97,7 +99,8 @@ class WishListComponent extends Component {
                         <h1>Wishlist</h1>
                         <div className="container">
                           <div className="container">
-                              <button className="btn btn-info"onClick={() => window.print()}>PRINT</button>
+                              <button className="btn btn-info" onClick={() => window.print()}>PRINT</button>
+                              <button className="btn btn-danger" onClick={this.deleteWishListClicked}>Delete Wishlist</button>
                           </div>
                           <div className="overflow-auto">
                               <Container>

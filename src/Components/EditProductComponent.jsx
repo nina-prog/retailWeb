@@ -51,7 +51,6 @@ class EditProductComponent extends Component {
      * @param {object} res object with new data
      */
     handleSuccessfulResponse(res) {
-        console.log(res.data)
         this.setState({
             storeId: res.data.storeId, 
             category: res.data.category,

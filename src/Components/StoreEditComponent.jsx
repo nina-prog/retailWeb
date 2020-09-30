@@ -57,9 +57,8 @@ class StoreEditComponent extends Component {
         return (
             <>
                 <div className="jtScroll">
-                    <h1>Store Edit: List Products</h1>
+                    <h1>Store Edit: </h1>
                     <CreateNewProductComponent />
-                    <h6>ViewBlockComponent</h6>   
                     <Container>
                         <Row >
                             {productCards}

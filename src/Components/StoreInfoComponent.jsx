@@ -39,8 +39,8 @@ class StoreInfoComponent extends Component {
         return (
             <div className="jtScroll">
                 <div className="container">
-                    <h1>Store name: {this.state.data.name}</h1>
-                    Store Address: {JSON.stringify(this.state.data.address)} <br/>
+                    <h1>{this.state.data.storeName}</h1>
+                    Store Address:  {this.state.data.address.streetName} {this.state.data.address.houseNumber}, {this.state.data.address.postalCode} {this.state.data.address.district}, {this.state.data.address.country} <br/>
                     openingHours: {this.state.data.openingHours}<br/>
                     customer Serivce: {this.state.data.customerService}<br/>
                     phone: {this.state.data.phoneNumber}<br/>

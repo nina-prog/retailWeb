@@ -65,9 +65,7 @@ class ProductMapperTest {
     dto.setLimitations("limitations");
     dto.setName("cucumber");
     dto.setPrice(new BigDecimal(1.99));
-    dto.setProductId(1L);
     dto.setRemainingStock(1);
-    dto.setStoreId(1L);
     // when
     Product entity = productMapper.productDtoToProduct(dto, store);
     // then
@@ -77,9 +75,7 @@ class ProductMapperTest {
     assertEquals(entity.getLimitations(), dto.getLimitations());
     assertEquals(entity.getName(), dto.getName());
     assertEquals(entity.getPrice(), dto.getPrice());
-    assertEquals(entity.getProductId(), dto.getProductId());
     assertEquals(entity.getRemainingStock(), dto.getRemainingStock());
-    assertEquals(entity.getRetailStore().getStoreId(), dto.getStoreId());
   }
 
 }

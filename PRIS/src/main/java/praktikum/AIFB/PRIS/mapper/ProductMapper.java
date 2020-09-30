@@ -61,6 +61,7 @@ public interface ProductMapper {
    * @param productDto product dto
    * @param product    updated with values of dto
    */
-  @Mapping(target = "productId", ignore = true)
+  @Mappings({ @Mapping(target = "productId", ignore = true),
+      @Mapping(target = "retailStore", ignore = true) })
   void updateModel(ProductDto productDto, @MappingTarget Product product);
 }

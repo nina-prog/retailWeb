@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import praktikum.AIFB.PRIS.dto.StoreDto;
 import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.exception.StoreNotFoundException;
+import praktikum.AIFB.PRIS.mapper.AddressMapper;
 import praktikum.AIFB.PRIS.mapper.StoreMapper;
+import praktikum.AIFB.PRIS.repositories.AddressRepository;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
 
 /**
@@ -21,7 +23,13 @@ public class RetailStoreService {
   private RetailStoreRepository repo;
 
   @Autowired
+  private AddressRepository addressRepo;
+
+  @Autowired
   private StoreMapper storeMapper;
+
+  @Autowired
+  private AddressMapper addressMapper;
 
   /**
    * Find retail store of database by it`s id.

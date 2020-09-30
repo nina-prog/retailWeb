@@ -13,6 +13,7 @@ import praktikum.AIFB.PRIS.entity.RetailStore;
 import praktikum.AIFB.PRIS.entity.Role;
 import praktikum.AIFB.PRIS.entity.User;
 import praktikum.AIFB.PRIS.exception.UserNotFoundException;
+import praktikum.AIFB.PRIS.repositories.AddressRepository;
 import praktikum.AIFB.PRIS.repositories.RetailStoreRepository;
 import praktikum.AIFB.PRIS.repositories.UserRepository;
 
@@ -30,6 +31,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 
   @Autowired
   private RetailStoreRepository storerepo;
+
+  @Autowired
+  private AddressRepository addressrepo;
 
   @Autowired
   private PasswordEncoder bcryptEncoder;
@@ -67,11 +71,18 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     // Adding new Store
     else if (user.getRole().equals(Role.STORE) && account.getStore() != null) {
+      // save new user
+      user.setRetailStore(account.getStore());
       userrepo.save(user);
+      // save address
+      if (account.getStore().getAddress() != null) {
+        addressrepo.save(account.getStore().getAddress());
+      }
+      // save store
       account.getStore().setUser(user);
       storerepo.save(account.getStore());
-
     }
+
     return user;
   }
 

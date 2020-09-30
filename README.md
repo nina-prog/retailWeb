@@ -1,12 +1,12 @@
 # Crisis Information System for Retail Customers
-Backend is located at 'retailWeb/PRIS
-Frontend is located at 'retailWeb/pris-frontend
+Backend is located at 'retailWeb/PRIS (master), also on backend branch
+Frontend is located at 'retailWeb/pris-frontend (master), also on frontend branch
 
 ## Requirements
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  or later
 - [Gradle 4+](http://www.gradle.org/downloads)  or  [Maven 3.2+](https://maven.apache.org/download.cgi)
-- [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/installing.html) installed and created a database with followed characteristics:
 - [Node.js 12.18.3+](https://nodejs.org/en/) installed
+- [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/installing.html) installed and created a database with followed characteristics:  
 
 `database_name=PRIS on http://localhost:3306/PRIS;      
 username=root;     
